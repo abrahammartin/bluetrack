@@ -98,10 +98,6 @@ public class MainActivity extends ListActivity
                                       new int[] {android.R.id.text1,
                                                  android.R.id.text2}, 0);
     setListAdapter(mAdapter);
-    
-    // Prepare the loader. Either re-connect with an existing one, or start a
-    // new one.
-    getLoaderManager().initLoader(0, null, this);
   }
   
   @Override
@@ -154,6 +150,10 @@ public class MainActivity extends ListActivity
     // Cause the action bar menu to be updated so the button text can change.
     invalidateOptionsMenu();
     
+    // Prepare the loader. Either re-connect with an existing one, or start a
+    // new one.
+    getLoaderManager().initLoader(0, null, this);
+    
     mTracking = true;
   }
   
@@ -176,6 +176,10 @@ public class MainActivity extends ListActivity
     
     // Cause the action bar menu to be updated so the button text can change.
     invalidateOptionsMenu();
+    
+    // Remove the adapter cursor. Devices are only show devices when tracking
+    // is on.
+    mAdapter.swapCursor(null);
     
     mTracking = false;
   }
