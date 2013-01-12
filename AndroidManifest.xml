@@ -1,0 +1,42 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  package="org.jonblack.bluetrack"
+  android:versionCode="1"
+  android:versionName="1.0" >
+
+  <uses-sdk
+    android:minSdkVersion="8"
+    android:targetSdkVersion="17" />
+  
+  <uses-permission android:name="android.permission.BLUETOOTH"></uses-permission>
+  <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"></uses-permission>
+  
+  <application
+    android:allowBackup="true"
+    android:icon="@drawable/ic_launcher"
+    android:label="@string/app_name"
+    android:theme="@style/AppTheme" >
+    
+    <!-- Services -->
+    
+    <service android:name="org.jonblack.bluetrack.services.BluetoothLogService" />
+    
+    <!-- Activities -->
+    
+    <activity
+      android:name="org.jonblack.bluetrack.activities.MainActivity"
+      android:label="@string/app_name" >
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+    
+    <!-- Providers -->
+    
+    <provider
+      android:name="org.jonblack.bluetrack.storage.BluetrackContentProvider"
+      android:authorities="org.jonblack.bluetrack.storage.BluetrackContentProvider"
+      android:exported="false" />
+  </application>
+
+</manifest>

@@ -1,0 +1,12 @@
+<resources>
+  
+  <!-- General -->
+  
+  <string name="app_name">Bluetrack</string>
+  <string name="button_exit">Exit</string>
+  
+  <!-- Error messages -->
+  
+  <string name="error_bluetooth_not_supported">%1$s requires bluetooth to run, which your device doesn\'t support.</string>
+  
+</resources>
