@@ -18,12 +18,12 @@
     
     <!-- Services -->
     
-    <service android:name="org.jonblack.bluetrack.services.BluetoothLogService" />
+    <service android:name=".services.BluetoothLogService" />
     
     <!-- Activities -->
     
     <activity
-      android:name="org.jonblack.bluetrack.activities.MainActivity"
+      android:name=".activities.MainActivity"
       android:label="@string/app_name" >
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -34,7 +34,7 @@
     <!-- Providers -->
     
     <provider
-      android:name="org.jonblack.bluetrack.storage.BluetrackContentProvider"
+      android:name=".storage.BluetrackContentProvider"
       android:authorities="org.jonblack.bluetrack.storage.BluetrackContentProvider"
       android:exported="false" />
   </application>
