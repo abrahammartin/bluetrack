@@ -3,9 +3,14 @@ package org.jonblack.bluetrack.services;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.jonblack.bluetrack.BluetrackIdentifiers;
+import org.jonblack.bluetrack.R;
+import org.jonblack.bluetrack.activities.MainActivity;
 import org.jonblack.bluetrack.storage.DeviceDiscoveryTable;
 import org.jonblack.bluetrack.storage.DeviceTable;
 
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -19,6 +24,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 
@@ -204,6 +210,25 @@ public class BluetoothLogService extends Service
     // Bluetooth should be available and enabled at this point.
     assert(mLocalBtAdapter != null);
     assert(mLocalBtAdapter.isEnabled());
+    
+    // Start in the foreground so there is less chance of being killed; include
+    // permanent notification.
+    Intent notiIntent = new Intent(this, MainActivity.class);
+    notiIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                        Intent.FLAG_ACTIVITY_SINGLE_TOP);
+    PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
+                                                            notiIntent,
+                                                            PendingIntent.FLAG_UPDATE_CURRENT);
+    
+    // TODO: Use my own icon
+    Notification noti = new NotificationCompat.Builder(this)
+      .setSmallIcon(android.R.drawable.sym_def_app_icon)
+      .setContentTitle(getString(R.string.app_name))
+      .setContentText(getString(R.string.notification_tracking))
+      .setContentIntent(pendingIntent)
+      .build();
+    
+    startForeground(BluetrackIdentifiers.NOTIFICATION_ID_TRACKING, noti);
     
     // Discover devices immediately
     mPeriodicEventHandler.post(doPeriodicTask);

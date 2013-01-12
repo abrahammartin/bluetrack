@@ -17,7 +17,11 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
 
 public class MainActivity extends ListActivity
@@ -38,7 +42,12 @@ public class MainActivity extends ListActivity
   /**
    * SimpleCursorAdapter used by the list view to get data.
    */
-  private SimpleCursorAdapter mAdapter = null;
+  private SimpleCursorAdapter mAdapter;
+  
+  /**
+   * Whether or not tracking is in progress.
+   */
+  private boolean mTracking = false;
   
   @Override
   public void onCreate(Bundle savedInstanceState)
@@ -79,12 +88,6 @@ public class MainActivity extends ListActivity
       Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
       startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
     }
-    else
-    {
-      // TODO: The user should decide when logging starts. Use the action bar
-      // for this.
-      startBluetoothLogService();
-    }
     
     // Configure the ListView adapter, which will connect to the database.
     mAdapter= new SimpleCursorAdapter(getApplicationContext(),
@@ -123,8 +126,6 @@ public class MainActivity extends ListActivity
       if (resultCode == RESULT_OK)
       {
         Log.d(TAG, "Bluetooth enabled.");
-        
-        startBluetoothLogService();
       }
       else
       {
@@ -143,6 +144,17 @@ public class MainActivity extends ListActivity
     
     mBluetoothLogServiceIntent = new Intent(this, BluetoothLogService.class);
     startService(mBluetoothLogServiceIntent);
+    
+    // Toast starting the service
+    Toast toast = Toast.makeText(getApplicationContext(),
+                                 getString(R.string.toast_tracking_started),
+                                 Toast.LENGTH_SHORT);
+    toast.show();
+    
+    // Cause the action bar menu to be updated so the button text can change.
+    invalidateOptionsMenu();
+    
+    mTracking = true;
   }
   
   /**
@@ -155,7 +167,17 @@ public class MainActivity extends ListActivity
     if (mBluetoothLogServiceIntent != null)
     {
       stopService(mBluetoothLogServiceIntent);
+      
+      Toast toast = Toast.makeText(getApplicationContext(),
+                                   getString(R.string.toast_tracking_stopped),
+                                   Toast.LENGTH_SHORT);
+      toast.show();
     }
+    
+    // Cause the action bar menu to be updated so the button text can change.
+    invalidateOptionsMenu();
+    
+    mTracking = false;
   }
 
   @Override
@@ -182,5 +204,52 @@ public class MainActivity extends ListActivity
     // above is about to be closed.  We need to make sure we are no
     // longer using it.
     mAdapter.swapCursor(null);
+  }
+  
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu)
+  {
+    MenuInflater inflater = getMenuInflater();
+    inflater.inflate(R.menu.action_bar, menu);
+    return true;
+  }
+  
+  @Override
+  public boolean onPrepareOptionsMenu(Menu menu)
+  {
+    // Set the button text depending on the service state.
+    MenuItem menuItem = menu.findItem(R.id.menu_toggle_tracking);
+    if (mTracking)
+    {
+      menuItem.setTitle(getString(R.string.ab_stop_tracking));
+    }
+    else
+    {
+      menuItem.setTitle(getString(R.string.ab_start_tracking));
+    }
+    
+    return true;
+  }
+  
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item)
+  {
+    switch (item.getItemId())
+    {
+    case R.id.menu_toggle_tracking:
+      if (mTracking)
+      {
+        stopBluetoothLogService();
+      }
+      else
+      {
+        startBluetoothLogService();
+      }
+      break;
+    default:
+      assert(false);
+    }
+    
+    return true;
   }
 }

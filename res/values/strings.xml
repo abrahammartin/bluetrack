@@ -5,6 +5,19 @@
   <string name="app_name">Bluetrack</string>
   <string name="button_exit">Exit</string>
   
+  <!-- Action Bar -->
+  <string name="ab_start_tracking">Start Tracking</string>
+  <string name="ab_stop_tracking">Stop Tracking</string>
+  
+  <!-- Notifications -->
+  
+  <string name="notification_tracking">Currently tracking.</string>
+  
+  <!-- Toasts -->
+  
+  <string name="toast_tracking_started">Tracking started</string>
+  <string name="toast_tracking_stopped">Tracking stopped</string>
+  
   <!-- Error messages -->
   
   <string name="error_bluetooth_not_supported">%1$s requires bluetooth to run, which your device doesn\'t support.</string>
