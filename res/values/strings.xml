@@ -8,6 +8,7 @@
   <!-- Action Bar -->
   <string name="ab_start_tracking">Start Tracking</string>
   <string name="ab_stop_tracking">Stop Tracking</string>
+  <string name="ab_tab_live_tracking">Tracking</string>
   
   <!-- Notifications -->
   
