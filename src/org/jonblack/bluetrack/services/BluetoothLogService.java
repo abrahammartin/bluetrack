@@ -246,9 +246,8 @@ public class BluetoothLogService extends Service
                                                             notiIntent,
                                                             PendingIntent.FLAG_UPDATE_CURRENT);
     
-    // TODO: Use my own icon
     Notification noti = new NotificationCompat.Builder(this)
-      .setSmallIcon(android.R.drawable.sym_def_app_icon)
+      .setSmallIcon(R.drawable.logo)
       .setContentTitle(getString(R.string.app_name))
       .setContentText(getString(R.string.notification_tracking))
       .setContentIntent(pendingIntent)

@@ -119,8 +119,11 @@ public class LiveTrackingFragment extends ListFragment
       mSessionId = savedInstanceState.getLong("sessionId");
       mTracking = savedInstanceState.getBoolean("tracking");
       
-      // This should get the loader that was already created.
-      getLoaderManager().initLoader(0, null, this);
+      if (mTracking)
+      {
+        // This should get the loader that was already created.
+        getLoaderManager().initLoader(0, null, this);
+      }
     }
     
     // Register broadcast receiver for bluetooth status changes
