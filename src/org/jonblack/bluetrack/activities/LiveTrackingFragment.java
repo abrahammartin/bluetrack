@@ -12,10 +12,13 @@ import android.app.Activity;
 import android.app.ListFragment;
 import android.app.LoaderManager;
 import android.bluetooth.BluetoothAdapter;
+import android.content.BroadcastReceiver;
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
@@ -66,6 +69,27 @@ public class LiveTrackingFragment extends ListFragment
    */
   private SimpleCursorAdapter mAdapter;
   
+  /**
+   * Receiver used when bluetooth device status has changed.
+   */
+  private final BroadcastReceiver mBtStateChangedReceiver = new BroadcastReceiver() {
+    @Override
+    public void onReceive(Context context, Intent intent)
+    {
+      // Get the action that prompted the broadcast
+      String action = intent.getAction();
+      if (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED))
+      {
+        final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, -1);
+        if (state == BluetoothAdapter.STATE_TURNING_OFF ||
+            state == BluetoothAdapter.STATE_OFF)
+        {
+          stopBluetoothLogService();
+        }
+      }
+    }
+  };
+  
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState)
@@ -91,6 +115,10 @@ public class LiveTrackingFragment extends ListFragment
   public void onActivityCreated(Bundle savedInstanceState)
   {
     super.onActivityCreated(savedInstanceState);
+    
+    // Register broadcast receiver for bluetooth status changes
+    getActivity().registerReceiver(this.mBtStateChangedReceiver,
+                                   new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
     
     // Configure the ListView adapter, which will connect to the database.
     mAdapter= new SimpleCursorAdapter(getActivity(),
@@ -253,6 +281,10 @@ public class LiveTrackingFragment extends ListFragment
         {
           Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
           startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+        }
+        else
+        {
+          startBluetoothLogService();
         }
       }
       break;
