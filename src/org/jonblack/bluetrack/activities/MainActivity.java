@@ -60,15 +60,21 @@ public class MainActivity extends Activity
     actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
     
     ActionBar.Tab tab1 = actionBar.newTab().setText(r.getText(R.string.ab_tab_live_tracking));
-    tab1.setTabListener(new TabListener(new LiveTrackingFragment()));
+    tab1.setTag("tracking");
+    tab1.setTabListener(new TabListener(new LiveTrackingFragment(),
+                        "tracking"));
     actionBar.addTab(tab1);
     
     ActionBar.Tab tab2 = actionBar.newTab().setText(r.getText(R.string.ab_tab_sessions));
-    tab2.setTabListener(new TabListener(new SessionFragment()));
+    tab2.setTag("session");
+    tab2.setTabListener(new TabListener(new SessionFragment(),
+                        "session"));
     actionBar.addTab(tab2);
     
     ActionBar.Tab tab3 = actionBar.newTab().setText(r.getText(R.string.ab_tab_devices));
-    tab3.setTabListener(new TabListener(new DevicesFragment()));
+    tab3.setTag("devices");
+    tab3.setTabListener(new TabListener(new DevicesFragment(),
+                        "devices"));
     actionBar.addTab(tab3);
     
     if (savedInstanceState != null)
@@ -97,31 +103,46 @@ public class MainActivity extends Activity
   private class TabListener implements ActionBar.TabListener
   {
     private Fragment mFragment;
+    private String mTag;
     
-    public TabListener(Fragment fragment)
+    public TabListener(Fragment fragment, String tag)
     {
       mFragment = fragment;
+      mTag = tag;
     }
     
     @Override
-    public void onTabReselected(Tab tab, android.app.FragmentTransaction unused)
+    public void onTabReselected(Tab tab, android.app.FragmentTransaction ft)
     {
     }
     
     @Override
-    public void onTabSelected(Tab tab, android.app.FragmentTransaction unused)
+    public void onTabSelected(Tab tab, android.app.FragmentTransaction ft)
     {
       Log.i(TAG, String.format("'%s' tab selected.", tab.getText()));
       
-      FragmentManager fm = getFragmentManager();
-      FragmentTransaction ft = fm.beginTransaction();
-      ft.replace(R.id.tab_fragment_container, mFragment);
-      ft.commit();
+      if (!mFragment.isAdded())
+      {
+        ft.add(R.id.tab_fragment_container, mFragment, (String) tab.getTag());
+        Log.d(TAG, "Adding fragment " + mTag);
+      }
+      else
+      {
+        Log.d(TAG, "Attaching fragment " + mTag);
+        ft.show(mFragment);
+      }
     }
     
     @Override
-    public void onTabUnselected(Tab tab, android.app.FragmentTransaction unused)
+    public void onTabUnselected(Tab tab, android.app.FragmentTransaction ft)
     {
+      Log.i(TAG, String.format("'%s' tab unselected.", tab.getText()));
+      
+      String tag = (String) tab.getTag();
+      FragmentManager fm = getFragmentManager();
+      Fragment fragment = fm.findFragmentByTag(tag);
+      assert(fragment != null);
+      ft.hide(fragment);
     }
   }
 }
