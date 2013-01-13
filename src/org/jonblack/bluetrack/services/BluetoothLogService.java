@@ -22,7 +22,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Binder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -47,11 +46,6 @@ public class BluetoothLogService extends Service
    * Id of this tracking session.
    */
   private long mSessionId = -1;
-  
-  /**
-   * Binder given to clients.
-   */
-  private final IBinder mBinder = new LocalBinder();
   
   /**
    * Receiver used when bluetooth devices have been found during discovery.
@@ -235,8 +229,12 @@ public class BluetoothLogService extends Service
     assert(mLocalBtAdapter != null);
     assert(mLocalBtAdapter.isEnabled());
     
-    // The sessionId must have been set before starting the service. If it
-    // hasn't been set, assert.
+    Bundle extras = intent.getExtras(); 
+    if (extras != null)
+    {
+      mSessionId = extras.getLong("sessionId");
+      Log.d(TAG, "Started service with sessionId: " + mSessionId);
+    }
     assert(mSessionId != -1);
     
     // Start in the foreground so there is less chance of being killed; include
@@ -267,32 +265,12 @@ public class BluetoothLogService extends Service
   }
   
   /**
+   * Disables binding.
    * @see android.app.Service.onBind
    */
   @Override
   public IBinder onBind(Intent intent)
   {
-    Bundle extras = intent.getExtras(); 
-    if (extras != null)
-    {
-      mSessionId = extras.getLong("sessionId");
-      Log.d(TAG, "Bound with sessionId: " + mSessionId);
-    }
-    
-    return mBinder;
-  }
-  
-  /**
-   * Class used for the client Binder.  Because we know this service always
-   * runs in the same process as its clients, we don't need to deal with IPC.
-   */
-  public class LocalBinder extends Binder
-  {
-    public BluetoothLogService getService()
-    {
-      // Return this instance of LocalService so clients can call public
-      // methods
-      return BluetoothLogService.this;
-    }
+    return null;
   }
 }

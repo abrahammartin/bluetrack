@@ -5,24 +5,19 @@ import java.util.Date;
 
 import org.jonblack.bluetrack.R;
 import org.jonblack.bluetrack.services.BluetoothLogService;
-import org.jonblack.bluetrack.services.BluetoothLogService.LocalBinder;
 import org.jonblack.bluetrack.storage.DeviceTable;
 import org.jonblack.bluetrack.storage.SessionTable;
 
 import android.app.ListFragment;
 import android.app.LoaderManager;
-import android.content.ComponentName;
 import android.content.ContentUris;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
-import android.content.ServiceConnection;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -50,11 +45,6 @@ public class LiveTrackingFragment extends ListFragment
   private boolean mTracking = false;
   
   /**
-   * BluetoothLogService via binding
-   */
-  BluetoothLogService mService;
-  
-  /**
    * Whether or not we are currently bound to the service.
    */
   boolean mBound = false;
@@ -63,26 +53,6 @@ public class LiveTrackingFragment extends ListFragment
    * Id of this tracking session.
    */
   private long mSessionId = -1;
-  
-  /**
-   * BluetoothLogService bind connection
-   */
-  private ServiceConnection mConnection = new ServiceConnection() {
-    @Override
-    public void onServiceConnected(ComponentName className, IBinder service)
-    {
-      // We've bound to LocalService, cast the IBinder and get LocalService instance
-      LocalBinder binder = (LocalBinder) service;
-      mService = binder.getService();
-      mBound = true;
-    }
-
-    @Override
-    public void onServiceDisconnected(ComponentName arg0)
-    {
-      mBound = false;
-    }
-  };
   
   /**
    * SimpleCursorAdapter used by the list view to get data.
@@ -165,10 +135,6 @@ public class LiveTrackingFragment extends ListFragment
   
   /**
    * Starts the BluetoothLogService. This will continue to run until
-   * 
-   * The order of calls is important. Binding must happen before starting the
-   * service.
-   * 
    * stopBluetoothLogService() is called.
    */
   private void startBluetoothLogService()
@@ -177,15 +143,10 @@ public class LiveTrackingFragment extends ListFragment
     addSession();
     assert(mSessionId != -1);
     
-    // Bind to the service
-    Log.d(TAG, "Binding to BluetoothLogService.");
-    Intent intent = new Intent(getActivity(), BluetoothLogService.class);
-    intent.putExtra("sessionId", mSessionId);
-    getActivity().bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
-    
     // Start the service
     Log.d(TAG, "Starting BluetoothLogService.");
     mBluetoothLogServiceIntent = new Intent(getActivity(), BluetoothLogService.class);
+    mBluetoothLogServiceIntent.putExtra("sessionId", mSessionId);
     getActivity().startService(mBluetoothLogServiceIntent);
     
     // Toast starting the service
@@ -213,13 +174,6 @@ public class LiveTrackingFragment extends ListFragment
    */
   private void stopBluetoothLogService()
   {
-    // Unbind from service
-    if (mBound)
-    {
-      Log.d(TAG, "Unbinding from BluetoothLogService.");
-      getActivity().unbindService(mConnection);
-    }
-    
     // Stop service if it's running.
     if (mBluetoothLogServiceIntent != null)
     {
