@@ -107,6 +107,9 @@ public class LiveTrackingFragment extends ListFragment
     {
       stopBluetoothLogService();
     }
+    
+    // Unregister the broadcast receiver for finding bluetooth devices.
+    getActivity().unregisterReceiver(mBtStateChangedReceiver);
   }
   
   @Override
