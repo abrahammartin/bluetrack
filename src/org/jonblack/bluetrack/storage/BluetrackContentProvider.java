@@ -1,6 +1,8 @@
 package org.jonblack.bluetrack.storage;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import android.content.ContentProvider;
 import android.content.ContentUris;
@@ -42,12 +44,29 @@ public class BluetrackContentProvider extends ContentProvider
   public Cursor query(Uri uri, String[] projection, String selection,
                       String[] selectionArgs, String sortOrder)
   {
+    // Warn if the projection is null, which is inefficient.
+    if (projection == null)
+    {
+      Log.w(TAG, "Querying all columns is inefficient.");
+    }
+    
     SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
     
     switch (sUriMatcher.match(uri))
     {
     case DEVICE:
-      qb.setTables(DeviceTable.TABLE_NAME);
+      Map<String, String> columnMap = new HashMap<String, String>();
+      columnMap.put("_id", "device._id");
+      columnMap.put("name", "device.name");
+      columnMap.put("mac_address", "device.mac_address");
+      qb.setProjectionMap(columnMap);
+      
+      qb.setTables(DeviceTable.TABLE_NAME +
+                   " LEFT JOIN " + DeviceDiscoveryTable.TABLE_NAME + 
+                   " ON " +
+                   DeviceDiscoveryTable.TABLE_NAME + ".device_id = " +
+                   DeviceTable.TABLE_NAME + "." + DeviceTable.COL_ID);
+      qb.setDistinct(true);
       break;
     case DEVICE_ID:
       qb.setTables(DeviceTable.TABLE_NAME);
@@ -70,6 +89,9 @@ public class BluetrackContentProvider extends ContentProvider
     default:
       throw new IllegalArgumentException("Unknown URI: " + uri);
     }
+    
+    String sql = qb.buildQuery(projection, selection, null, null, sortOrder, null);
+    Log.d(TAG, "SQL: " + sql);
     
     Log.d(TAG, String.format("Quering '%s' where '%s' with args '%s'",
                              qb.getTables(), selection,
@@ -165,6 +187,15 @@ public class BluetrackContentProvider extends ContentProvider
     {
       Uri noteUri = ContentUris.withAppendedId(contentUri, rowId);
       getContext().getContentResolver().notifyChange(noteUri, null);
+      
+      // Also send notifications to anything listing devices. This is needed
+      // to show updates in live tracking.
+      // Is there a nicer way?
+      if (table.equals(DeviceDiscoveryTable.TABLE_NAME))
+      {
+        getContext().getContentResolver().notifyChange(DeviceTable.CONTENT_URI,
+                                                       null);
+      }
       
       return noteUri;
     }

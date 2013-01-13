@@ -64,8 +64,12 @@ public class DevicesFragment extends ListFragment
   {
     // Now create and return a CursorLoader that will take care of
     // creating a Cursor for the data being displayed.
-    return new CursorLoader(getActivity(), DeviceTable.CONTENT_URI, null, null,
-                            null, null);
+    return new CursorLoader(getActivity(),
+                            DeviceTable.CONTENT_URI,
+                            new String[] {DeviceTable.COL_ID,
+                                          "name",
+                                          "mac_address"},
+                            null, null, null);
   }
 
   @Override

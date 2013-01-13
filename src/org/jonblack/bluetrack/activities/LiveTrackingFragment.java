@@ -1,16 +1,28 @@
 package org.jonblack.bluetrack.activities;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.jonblack.bluetrack.R;
 import org.jonblack.bluetrack.services.BluetoothLogService;
+import org.jonblack.bluetrack.services.BluetoothLogService.LocalBinder;
 import org.jonblack.bluetrack.storage.DeviceTable;
+import org.jonblack.bluetrack.storage.SessionTable;
 
 import android.app.ListFragment;
 import android.app.LoaderManager;
+import android.content.ComponentName;
+import android.content.ContentUris;
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.ServiceConnection;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -36,6 +48,41 @@ public class LiveTrackingFragment extends ListFragment
    * Whether or not tracking is in progress.
    */
   private boolean mTracking = false;
+  
+  /**
+   * BluetoothLogService via binding
+   */
+  BluetoothLogService mService;
+  
+  /**
+   * Whether or not we are currently bound to the service.
+   */
+  boolean mBound = false;
+  
+  /**
+   * Id of this tracking session.
+   */
+  private long mSessionId = -1;
+  
+  /**
+   * BluetoothLogService bind connection
+   */
+  private ServiceConnection mConnection = new ServiceConnection() {
+    @Override
+    public void onServiceConnected(ComponentName className, IBinder service)
+    {
+      // We've bound to LocalService, cast the IBinder and get LocalService instance
+      LocalBinder binder = (LocalBinder) service;
+      mService = binder.getService();
+      mBound = true;
+    }
+
+    @Override
+    public void onServiceDisconnected(ComponentName arg0)
+    {
+      mBound = false;
+    }
+  };
   
   /**
    * SimpleCursorAdapter used by the list view to get data.
@@ -82,10 +129,21 @@ public class LiveTrackingFragment extends ListFragment
   @Override
   public Loader<Cursor> onCreateLoader(int id, Bundle args)
   {
+    Log.d(TAG, "Creating live tracker cursorloader with id: " + mSessionId);
+    
+    // Session id must have been set
+    assert(mSessionId != -1);
+    
     // Now create and return a CursorLoader that will take care of
     // creating a Cursor for the data being displayed.
-    return new CursorLoader(getActivity(), DeviceTable.CONTENT_URI, null, null,
-                            null, null);
+    return new CursorLoader(getActivity(),
+                            DeviceTable.CONTENT_URI,
+                            new String[] {DeviceTable.COL_ID,
+                                "name",
+                                "mac_address"},
+                            "device_discovery.session_id = ?",
+                            new String[] {Long.toString(mSessionId)},
+                            null);
   }
 
   @Override
@@ -107,12 +165,26 @@ public class LiveTrackingFragment extends ListFragment
   
   /**
    * Starts the BluetoothLogService. This will continue to run until
+   * 
+   * The order of calls is important. Binding must happen before starting the
+   * service.
+   * 
    * stopBluetoothLogService() is called.
    */
   private void startBluetoothLogService()
   {
-    Log.d(TAG, "Starting BluetoothLogService.");
+    // Create a new tracking session
+    addSession();
+    assert(mSessionId != -1);
     
+    // Bind to the service
+    Log.d(TAG, "Binding to BluetoothLogService.");
+    Intent intent = new Intent(getActivity(), BluetoothLogService.class);
+    intent.putExtra("sessionId", mSessionId);
+    getActivity().bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+    
+    // Start the service
+    Log.d(TAG, "Starting BluetoothLogService.");
     mBluetoothLogServiceIntent = new Intent(getActivity(), BluetoothLogService.class);
     getActivity().startService(mBluetoothLogServiceIntent);
     
@@ -141,10 +213,17 @@ public class LiveTrackingFragment extends ListFragment
    */
   private void stopBluetoothLogService()
   {
-    Log.d(TAG, "Stopping BluetoothLogService.");
+    // Unbind from service
+    if (mBound)
+    {
+      Log.d(TAG, "Unbinding from BluetoothLogService.");
+      getActivity().unbindService(mConnection);
+    }
     
+    // Stop service if it's running.
     if (mBluetoothLogServiceIntent != null)
     {
+      Log.d(TAG, "Stopping BluetoothLogService.");
       getActivity().stopService(mBluetoothLogServiceIntent);
       
       Toast toast = Toast.makeText(getActivity(),
@@ -163,6 +242,9 @@ public class LiveTrackingFragment extends ListFragment
     // Set the empty list view text
     TextView tv = (TextView) getActivity().findViewById(android.R.id.empty);
     tv.setText(R.string.live_tracking_off_list_empty);
+    
+    // Update the session
+    finalizeSession();
     
     mTracking = false;
   }
@@ -208,5 +290,43 @@ public class LiveTrackingFragment extends ListFragment
     }
     
     return true;
+  }
+  
+  /**
+   * Adds a tracking session to the database.
+   */
+  private void addSession()
+  {
+    Log.i(TAG, "Adding session.");
+    
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+    Date date = new Date();
+    
+    ContentValues values = new ContentValues();
+    values.put("start_date_time", dateFormat.format(date));
+    Uri uri = getActivity().getContentResolver().insert(SessionTable.CONTENT_URI, values);
+    
+    mSessionId = ContentUris.parseId(uri);
+    
+    assert(mSessionId != -1);
+  }
+  
+  /**
+   * Finalizes the tracking session by setting the end_date_time field.
+   */
+  private void finalizeSession()
+  {
+    Log.i(TAG, "Updating session end time.");
+    
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+    Date date = new Date();
+    
+    ContentValues values = new ContentValues();
+    values.put("end_date_time", dateFormat.format(date));
+    Uri uri = Uri.withAppendedPath(SessionTable.CONTENT_URI,
+                                   Long.toString(mSessionId));
+    int updated_rows = getActivity().getContentResolver().update(uri, values,
+                                                                 null, null);
+    assert(updated_rows == 1);
   }
 }

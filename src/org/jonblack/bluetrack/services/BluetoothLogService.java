@@ -8,7 +8,6 @@ import org.jonblack.bluetrack.R;
 import org.jonblack.bluetrack.activities.MainActivity;
 import org.jonblack.bluetrack.storage.DeviceDiscoveryTable;
 import org.jonblack.bluetrack.storage.DeviceTable;
-import org.jonblack.bluetrack.storage.SessionTable;
 
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -23,6 +22,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Binder;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
@@ -46,6 +47,11 @@ public class BluetoothLogService extends Service
    * Id of this tracking session.
    */
   private long mSessionId = -1;
+  
+  /**
+   * Binder given to clients.
+   */
+  private final IBinder mBinder = new LocalBinder();
   
   /**
    * Receiver used when bluetooth devices have been found during discovery.
@@ -170,6 +176,15 @@ public class BluetoothLogService extends Service
     }
   };
   
+  /**
+   * Allows clients to get the session id from the service via the binder.
+   * @return sessionId, -1 when no session is running.
+   */
+  public void setSessionId(long sessionId)
+  {
+    mSessionId = sessionId;
+  }
+  
   @Override
   public void onCreate()
   {
@@ -210,19 +225,6 @@ public class BluetoothLogService extends Service
       mLocalBtAdapter.cancelDiscovery();
     }
     
-    // Update the session with the end time
-    Log.i(TAG, "Updating session end time.");
-    
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
-    Date date = new Date();
-    
-    ContentValues values = new ContentValues();
-    values.put("end_date_time", dateFormat.format(date));
-    Uri uri = Uri.withAppendedPath(SessionTable.CONTENT_URI,
-                                   Long.toString(mSessionId));
-    int updated_rows = getContentResolver().update(uri, values, null, null);
-    assert(updated_rows == 1);
-    
     super.onDestroy();
   }
   
@@ -233,8 +235,9 @@ public class BluetoothLogService extends Service
     assert(mLocalBtAdapter != null);
     assert(mLocalBtAdapter.isEnabled());
     
-    // Create a new tracking session
-    addSession();
+    // The sessionId must have been set before starting the service. If it
+    // hasn't been set, assert.
+    assert(mSessionId != -1);
     
     // Start in the foreground so there is less chance of being killed; include
     // permanent notification.
@@ -264,28 +267,32 @@ public class BluetoothLogService extends Service
   }
   
   /**
-   * Disables the binding interface.
    * @see android.app.Service.onBind
    */
   @Override
   public IBinder onBind(Intent intent)
   {
-    return null;
+    Bundle extras = intent.getExtras(); 
+    if (extras != null)
+    {
+      mSessionId = extras.getLong("sessionId");
+      Log.d(TAG, "Bound with sessionId: " + mSessionId);
+    }
+    
+    return mBinder;
   }
   
-  private void addSession()
+  /**
+   * Class used for the client Binder.  Because we know this service always
+   * runs in the same process as its clients, we don't need to deal with IPC.
+   */
+  public class LocalBinder extends Binder
   {
-    Log.i(TAG, "Adding session.");
-    
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
-    Date date = new Date();
-    
-    ContentValues values = new ContentValues();
-    values.put("start_date_time", dateFormat.format(date));
-    Uri uri = getContentResolver().insert(SessionTable.CONTENT_URI, values);
-    
-    mSessionId = ContentUris.parseId(uri);
-    
-    assert(mSessionId != -1);
+    public BluetoothLogService getService()
+    {
+      // Return this instance of LocalService so clients can call public
+      // methods
+      return BluetoothLogService.this;
+    }
   }
 }
