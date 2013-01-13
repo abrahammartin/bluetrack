@@ -8,7 +8,6 @@ import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
@@ -61,20 +60,23 @@ public class MainActivity extends Activity
     
     ActionBar.Tab tab1 = actionBar.newTab().setText(r.getText(R.string.ab_tab_live_tracking));
     tab1.setTag("tracking");
-    tab1.setTabListener(new TabListener(new LiveTrackingFragment(),
-                        "tracking"));
+    tab1.setTabListener(new TabListener<LiveTrackingFragment>(this,
+                                                              "tracking",
+                                                              LiveTrackingFragment.class));
     actionBar.addTab(tab1);
     
     ActionBar.Tab tab2 = actionBar.newTab().setText(r.getText(R.string.ab_tab_sessions));
     tab2.setTag("session");
-    tab2.setTabListener(new TabListener(new SessionFragment(),
-                        "session"));
+    tab2.setTabListener(new TabListener<SessionFragment>(this,
+                                                         "session",
+                                                         SessionFragment.class));
     actionBar.addTab(tab2);
     
     ActionBar.Tab tab3 = actionBar.newTab().setText(r.getText(R.string.ab_tab_devices));
     tab3.setTag("devices");
-    tab3.setTabListener(new TabListener(new DevicesFragment(),
-                        "devices"));
+    tab3.setTabListener(new TabListener<DevicesFragment>(this,
+                                                         "devices",
+                                                         DevicesFragment.class));
     actionBar.addTab(tab3);
     
     if (savedInstanceState != null)
@@ -100,49 +102,61 @@ public class MainActivity extends Activity
     outState.putInt("selectedTabIdx", actionBar.getSelectedNavigationIndex());
   }
   
-  private class TabListener implements ActionBar.TabListener
+  // See http://developer.android.com/reference/android/app/ActionBar.html#newTab%28%29
+  public static class TabListener<T extends Fragment> implements ActionBar.TabListener
   {
+    private final Activity mActivity;
+    private final String mTag;
+    private final Class<T> mClass;
+    private final Bundle mArgs;
     private Fragment mFragment;
-    private String mTag;
     
-    public TabListener(Fragment fragment, String tag)
+    public TabListener(Activity activity, String tag, Class<T> clz) {
+        this(activity, tag, clz, null);
+    }
+    
+    public TabListener(Activity activity, String tag, Class<T> clz, Bundle args)
     {
-      mFragment = fragment;
+      mActivity = activity;
       mTag = tag;
-    }
-    
-    @Override
-    public void onTabReselected(Tab tab, android.app.FragmentTransaction ft)
-    {
-    }
-    
-    @Override
-    public void onTabSelected(Tab tab, android.app.FragmentTransaction ft)
-    {
-      Log.i(TAG, String.format("'%s' tab selected.", tab.getText()));
+      mClass = clz;
+      mArgs = args;
       
-      if (!mFragment.isAdded())
+      // Check to see if we already have a fragment for this tab, probably
+      // from a previously saved state.  If so, deactivate it, because our
+      // initial state is that a tab isn't shown.
+      mFragment = mActivity.getFragmentManager().findFragmentByTag(mTag);
+      if (mFragment != null && !mFragment.isDetached())
       {
-        ft.add(R.id.tab_fragment_container, mFragment, (String) tab.getTag());
-        Log.d(TAG, "Adding fragment " + mTag);
+        FragmentTransaction ft = mActivity.getFragmentManager().beginTransaction();
+        ft.detach(mFragment);
+        ft.commit();
+      }
+    }
+    
+    public void onTabSelected(Tab tab, FragmentTransaction ft)
+    {
+      if (mFragment == null)
+      {
+        mFragment = Fragment.instantiate(mActivity, mClass.getName(), mArgs);
+        ft.add(android.R.id.content, mFragment, mTag);
       }
       else
       {
-        Log.d(TAG, "Attaching fragment " + mTag);
-        ft.show(mFragment);
+        ft.attach(mFragment);
       }
     }
     
-    @Override
-    public void onTabUnselected(Tab tab, android.app.FragmentTransaction ft)
+    public void onTabUnselected(Tab tab, FragmentTransaction ft)
     {
-      Log.i(TAG, String.format("'%s' tab unselected.", tab.getText()));
-      
-      String tag = (String) tab.getTag();
-      FragmentManager fm = getFragmentManager();
-      Fragment fragment = fm.findFragmentByTag(tag);
-      assert(fragment != null);
-      ft.hide(fragment);
+      if (mFragment != null)
+      {
+        ft.detach(mFragment);
+      }
+    }
+    
+    public void onTabReselected(Tab tab, FragmentTransaction ft)
+    {
     }
   }
 }
