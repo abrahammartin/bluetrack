@@ -8,8 +8,10 @@ import org.jonblack.bluetrack.services.BluetoothLogService;
 import org.jonblack.bluetrack.storage.DeviceTable;
 import org.jonblack.bluetrack.storage.SessionTable;
 
+import android.app.Activity;
 import android.app.ListFragment;
 import android.app.LoaderManager;
+import android.bluetooth.BluetoothAdapter;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.CursorLoader;
@@ -33,6 +35,11 @@ public class LiveTrackingFragment extends ListFragment
                                   implements LoaderManager.LoaderCallbacks<Cursor>
 {
   private static final String TAG = "LiveTrackingFragment";
+  
+  /**
+   * Request code for handling calls to enable bluetooth."
+   */
+  private static final int REQUEST_ENABLE_BT = 1;
   
   /**
    * Intent used to communicate with the BluetoothLogService.
@@ -236,7 +243,17 @@ public class LiveTrackingFragment extends ListFragment
       }
       else
       {
-        startBluetoothLogService();
+        // Check that bluetooth is enabled. If it isn't, ask the user to
+        // enable it. If the user enables it, the BluetoothLogService will be
+        // started in the callback.
+        BluetoothAdapter localBtAdapter = BluetoothAdapter.getDefaultAdapter();
+        assert(localBtAdapter != null);
+        
+        if (!localBtAdapter.isEnabled())
+        {
+          Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+          startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+        }
       }
       break;
     default:
@@ -282,5 +299,26 @@ public class LiveTrackingFragment extends ListFragment
     int updated_rows = getActivity().getContentResolver().update(uri, values,
                                                                  null, null);
     assert(updated_rows == 1);
+  }
+  
+  /**
+   * @see android.app.Activity.onActivityResult
+   */
+  @Override
+  public void onActivityResult(int requestCode, int resultCode, Intent data)
+  {
+    // Handle result for starting "enable bluetooth" intent.
+    if (requestCode == REQUEST_ENABLE_BT)
+    {
+      if (resultCode == Activity.RESULT_OK)
+      {
+        Log.d(TAG, "Bluetooth enabled.");
+        startBluetoothLogService();
+      }
+      else
+      {
+        Log.d(TAG, "Bluetooth not enabled.");
+      }
+    }
   }
 }

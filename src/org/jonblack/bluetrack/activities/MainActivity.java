@@ -12,7 +12,6 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,11 +20,6 @@ import android.util.Log;
 public class MainActivity extends Activity
 {
   private static final String TAG = "MainActivity";
-  
-  /**
-   * Request code for handling calls to enable bluetooth."
-   */
-  private static final int REQUEST_ENABLE_BT = 1;
   
   @Override
   public void onCreate(Bundle savedInstanceState)
@@ -60,14 +54,6 @@ public class MainActivity extends Activity
       return;
     }
     
-    // If bluetooth is disabled, ask the user to enable it. Otherwise, start
-    // the BluetoothLogService.
-    if (!localBtAdapter.isEnabled())
-    {
-      Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-      startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-    }
-    
     // Configure the ActionBar tabs
     if (savedInstanceState == null)
     {
@@ -94,26 +80,6 @@ public class MainActivity extends Activity
   protected void onDestroy()
   {
     super.onDestroy();
-  }
-  
-  /**
-   * @see android.app.Activity.onActivityResult
-   */
-  @Override
-  protected void onActivityResult(int requestCode, int resultCode, Intent data)
-  {
-    // Handle result for starting "enable bluetooth" intent.
-    if (requestCode == REQUEST_ENABLE_BT)
-    {
-      if (resultCode == RESULT_OK)
-      {
-        Log.d(TAG, "Bluetooth enabled.");
-      }
-      else
-      {
-        Log.d(TAG, "Bluetooth not enabled.");
-      }
-    }
   }
   
   private class TabListener implements ActionBar.TabListener
