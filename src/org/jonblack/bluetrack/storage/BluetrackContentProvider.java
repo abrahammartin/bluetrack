@@ -26,6 +26,8 @@ public class BluetrackContentProvider extends ContentProvider
   private static final int DEVICE_ID    = 2;
   private static final int DISCOVERY    = 3;
   private static final int DISCOVERY_ID = 4;
+  private static final int SESSION      = 5;
+  private static final int SESSION_ID   = 6;
   
   private BluetrackOpenHelper mOpenHelper;
   
@@ -57,6 +59,13 @@ public class BluetrackContentProvider extends ContentProvider
     case DISCOVERY_ID:
       qb.setTables(DeviceDiscoveryTable.TABLE_NAME);
       selection = selection + DeviceDiscoveryTable.COL_ID + " = " + uri.getLastPathSegment();
+      break;
+    case SESSION:
+      qb.setTables(SessionTable.TABLE_NAME);
+      break;
+    case SESSION_ID:
+      qb.setTables(SessionTable.TABLE_NAME);
+      selection = selection + SessionTable.COL_ID + " = " + uri.getLastPathSegment();
       break;
     default:
       throw new IllegalArgumentException("Unknown URI: " + uri);
@@ -96,6 +105,14 @@ public class BluetrackContentProvider extends ContentProvider
       contentType = "vnd.android.cursor.item/vnd.org.jonblack.provider." +
                     DeviceDiscoveryTable.TABLE_NAME;
       break;
+    case SESSION:
+      contentType = "vnd.android.cursor.dir/vnd.org.jonblack.provider." +
+                    SessionTable.TABLE_NAME;
+      break;
+    case SESSION_ID:
+      contentType = "vnd.android.cursor.item/vnd.org.jonblack.provider." +
+                    SessionTable.TABLE_NAME;
+      break;
     default:
       throw new IllegalArgumentException("Unknown URI: " + uri);
     }
@@ -119,6 +136,10 @@ public class BluetrackContentProvider extends ContentProvider
     case DISCOVERY:
       table = DeviceDiscoveryTable.TABLE_NAME;
       contentUri = DeviceDiscoveryTable.CONTENT_URI;
+      break;
+    case SESSION:
+      table = SessionTable.TABLE_NAME;
+      contentUri = SessionTable.CONTENT_URI;
       break;
     default:
       throw new IllegalArgumentException("Unknown URI: " + uri);
@@ -167,6 +188,10 @@ public class BluetrackContentProvider extends ContentProvider
       table = DeviceDiscoveryTable.TABLE_NAME;
       selection = DeviceDiscoveryTable.COL_ID + " = " + uri.getLastPathSegment();
       break;
+    case SESSION_ID:
+      table = SessionTable.TABLE_NAME;
+      selection = DeviceDiscoveryTable.COL_ID + " = " + uri.getLastPathSegment();
+      break;
     default:
       throw new IllegalArgumentException("Unknown URI: " + uri);
     }
@@ -207,6 +232,14 @@ public class BluetrackContentProvider extends ContentProvider
         count = db.update(DeviceDiscoveryTable.TABLE_NAME, values, selection,
                           selectionArgs);
         break;
+      case SESSION_ID:
+        Log.d(TAG, String.format("Updating '%s' where '%s' with values '%s'",
+                                 SessionTable.TABLE_NAME, selection,
+                                 values.toString()));
+        selection = SessionTable.COL_ID + " = " + uri.getLastPathSegment();
+        count = db.update(SessionTable.TABLE_NAME, values, selection,
+                          selectionArgs);
+        break;
       default:
         throw new IllegalArgumentException("Unknown URI " + uri);
     }
@@ -225,9 +258,11 @@ public class BluetrackContentProvider extends ContentProvider
   static
   {
     sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-    sUriMatcher.addURI(AUTHORITY, "device",   DEVICE);
-    sUriMatcher.addURI(AUTHORITY, "device/#", DEVICE_ID);
+    sUriMatcher.addURI(AUTHORITY, "device",             DEVICE);
+    sUriMatcher.addURI(AUTHORITY, "device/#",           DEVICE_ID);
     sUriMatcher.addURI(AUTHORITY, "device_discovery",   DISCOVERY);
     sUriMatcher.addURI(AUTHORITY, "device_discovery/#", DISCOVERY_ID);
+    sUriMatcher.addURI(AUTHORITY, "session",            SESSION);
+    sUriMatcher.addURI(AUTHORITY, "session/#",          SESSION_ID);
   }
 }

@@ -8,6 +8,7 @@ import org.jonblack.bluetrack.R;
 import org.jonblack.bluetrack.activities.MainActivity;
 import org.jonblack.bluetrack.storage.DeviceDiscoveryTable;
 import org.jonblack.bluetrack.storage.DeviceTable;
+import org.jonblack.bluetrack.storage.SessionTable;
 
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -40,6 +41,11 @@ public class BluetoothLogService extends Service
    * The bluetooth adapter of this device.
    */
   private BluetoothAdapter mLocalBtAdapter;
+  
+  /**
+   * Id of this tracking session.
+   */
+  private long mSessionId = -1;
   
   /**
    * Receiver used when bluetooth devices have been found during discovery.
@@ -113,7 +119,7 @@ public class BluetoothLogService extends Service
     
     private long addDevice(BluetoothDevice device)
     {
-      Log.i(TAG, "Device is unknown. Adding device to database.");
+      Log.i(TAG, "Device is unknown. Adding device.");
       
       ContentValues values = new ContentValues();
       values.put("mac_address", device.getAddress());
@@ -126,7 +132,9 @@ public class BluetoothLogService extends Service
     
     private void addDeviceDiscovery(long id)
     {
-      Log.i(TAG, "Adding discovery to database.");
+      Log.i(TAG, "Adding discovery.");
+      
+      assert(mSessionId != -1);
       
       SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
       Date date = new Date();
@@ -134,6 +142,7 @@ public class BluetoothLogService extends Service
       ContentValues values = new ContentValues();
       values.put("date_time", dateFormat.format(date));
       values.put("device_id", id);
+      values.put("session_id", mSessionId);
       getContentResolver().insert(DeviceDiscoveryTable.CONTENT_URI, values);
     }
   };
@@ -201,6 +210,19 @@ public class BluetoothLogService extends Service
       mLocalBtAdapter.cancelDiscovery();
     }
     
+    // Update the session with the end time
+    Log.i(TAG, "Updating session end time.");
+    
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+    Date date = new Date();
+    
+    ContentValues values = new ContentValues();
+    values.put("end_date_time", dateFormat.format(date));
+    Uri uri = Uri.withAppendedPath(SessionTable.CONTENT_URI,
+                                   Long.toString(mSessionId));
+    int updated_rows = getContentResolver().update(uri, values, null, null);
+    assert(updated_rows == 1);
+    
     super.onDestroy();
   }
   
@@ -210,6 +232,9 @@ public class BluetoothLogService extends Service
     // Bluetooth should be available and enabled at this point.
     assert(mLocalBtAdapter != null);
     assert(mLocalBtAdapter.isEnabled());
+    
+    // Create a new tracking session
+    addSession();
     
     // Start in the foreground so there is less chance of being killed; include
     // permanent notification.
@@ -246,5 +271,21 @@ public class BluetoothLogService extends Service
   public IBinder onBind(Intent intent)
   {
     return null;
+  }
+  
+  private void addSession()
+  {
+    Log.i(TAG, "Adding session.");
+    
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+    Date date = new Date();
+    
+    ContentValues values = new ContentValues();
+    values.put("start_date_time", dateFormat.format(date));
+    Uri uri = getContentResolver().insert(SessionTable.CONTENT_URI, values);
+    
+    mSessionId = ContentUris.parseId(uri);
+    
+    assert(mSessionId != -1);
   }
 }

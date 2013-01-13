@@ -71,12 +71,18 @@ public class MainActivity extends Activity
     // Configure the ActionBar tabs
     if (savedInstanceState == null)
     {
+      Resources r = getResources();
+      
       ActionBar actionBar = getActionBar();
       actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-      ActionBar.Tab tab1 = actionBar.newTab()
-                                    .setText(getResources().getText(R.string.ab_tab_live_tracking));
+      
+      ActionBar.Tab tab1 = actionBar.newTab().setText(r.getText(R.string.ab_tab_live_tracking));
       tab1.setTabListener(new TabListener(new LiveTrackingFragment()));
       actionBar.addTab(tab1);
+      
+      ActionBar.Tab tab2 = actionBar.newTab().setText(r.getText(R.string.ab_tab_sessions));
+      tab2.setTabListener(new TabListener(new SessionFragment()));
+      actionBar.addTab(tab2);
     }
   }
   

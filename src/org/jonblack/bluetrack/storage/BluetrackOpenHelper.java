@@ -33,6 +33,7 @@ public class BluetrackOpenHelper extends SQLiteOpenHelper
   {
     Log.i(TAG, "Creating database");
     
+    SessionTable.onCreate(db);
     DeviceDiscoveryTable.onCreate(db);
     DeviceTable.onCreate(db);
   }
@@ -44,6 +45,7 @@ public class BluetrackOpenHelper extends SQLiteOpenHelper
                              oldVersion,
                              newVersion));
     
+    SessionTable.onUpgrade(db, oldVersion, newVersion);
     DeviceDiscoveryTable.onUpgrade(db, oldVersion, newVersion);
     DeviceTable.onUpgrade(db, oldVersion, newVersion);
   }

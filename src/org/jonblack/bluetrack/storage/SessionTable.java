@@ -1,33 +1,28 @@
 package org.jonblack.bluetrack.storage;
 
-import org.jonblack.bluetrack.DeviceDiscovery;
+import org.jonblack.bluetrack.Session;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.util.Log;
 
-
-public class DeviceDiscoveryTable
+public class SessionTable
 {
-  private static final String TAG = "DeviceDiscoveryTable";
+  private static final String TAG = "SessionTable";
   
   // Database table metadata
   // TODO: Some of this might be better off in a DeviceContract class.
-  public static final String TABLE_NAME = "device_discovery";
-  public static final String COL_ID = DeviceDiscovery._ID;
-  public static final Uri CONTENT_URI = Uri.parse("content://" + BluetrackContentProvider.AUTHORITY + "/device_discovery");
+  public static final String TABLE_NAME = "session";
+  public static final String COL_ID = Session._ID;
+  public static final Uri CONTENT_URI = Uri.parse("content://" + BluetrackContentProvider.AUTHORITY + "/session");
   
   // Database creation SQL statement
   private static final String DATABASE_CREATE = 
       "CREATE TABLE " + TABLE_NAME + 
       " (" +
       COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-      "date_time TEXT NOT NULL," +
-      "device_id INTEGER NOT NULL, " +
-      "session_id INTEGER NOT NULL, " +
-      "FOREIGN KEY(device_id) REFERENCES device(" + COL_ID  + " ) ON DELETE CASCADE " +
-      "FOREIGN KEY(session_id) REFERENCES session(" + COL_ID  + " ) ON DELETE CASCADE " +
-      ");";
+      "start_date_time TEXT NOT NULL," +
+      "end_date_time TEXT);";
   
   public static void onCreate(SQLiteDatabase db)
   {
