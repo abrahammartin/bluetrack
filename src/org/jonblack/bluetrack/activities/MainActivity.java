@@ -54,25 +54,28 @@ public class MainActivity extends Activity
       return;
     }
     
-    // Configure the ActionBar tabs
-    if (savedInstanceState == null)
+    Resources r = getResources();
+    
+    ActionBar actionBar = getActionBar();
+    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+    
+    ActionBar.Tab tab1 = actionBar.newTab().setText(r.getText(R.string.ab_tab_live_tracking));
+    tab1.setTabListener(new TabListener(new LiveTrackingFragment()));
+    actionBar.addTab(tab1);
+    
+    ActionBar.Tab tab2 = actionBar.newTab().setText(r.getText(R.string.ab_tab_sessions));
+    tab2.setTabListener(new TabListener(new SessionFragment()));
+    actionBar.addTab(tab2);
+    
+    ActionBar.Tab tab3 = actionBar.newTab().setText(r.getText(R.string.ab_tab_devices));
+    tab3.setTabListener(new TabListener(new DevicesFragment()));
+    actionBar.addTab(tab3);
+    
+    if (savedInstanceState != null)
     {
-      Resources r = getResources();
-      
-      ActionBar actionBar = getActionBar();
-      actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-      
-      ActionBar.Tab tab1 = actionBar.newTab().setText(r.getText(R.string.ab_tab_live_tracking));
-      tab1.setTabListener(new TabListener(new LiveTrackingFragment()));
-      actionBar.addTab(tab1);
-      
-      ActionBar.Tab tab2 = actionBar.newTab().setText(r.getText(R.string.ab_tab_sessions));
-      tab2.setTabListener(new TabListener(new SessionFragment()));
-      actionBar.addTab(tab2);
-      
-      ActionBar.Tab tab3 = actionBar.newTab().setText(r.getText(R.string.ab_tab_devices));
-      tab3.setTabListener(new TabListener(new DevicesFragment()));
-      actionBar.addTab(tab3);
+      // Restore last state for checked position.
+      int selectedTabIdx = savedInstanceState.getInt("selectedTabIdx", 0);
+      actionBar.setSelectedNavigationItem(selectedTabIdx);
     }
   }
   
@@ -80,6 +83,15 @@ public class MainActivity extends Activity
   protected void onDestroy()
   {
     super.onDestroy();
+  }
+  
+  @Override
+  public void onSaveInstanceState(Bundle outState)
+  {
+    super.onSaveInstanceState(outState);
+    
+    ActionBar actionBar = getActionBar();
+    outState.putInt("selectedTabIdx", actionBar.getSelectedNavigationIndex());
   }
   
   private class TabListener implements ActionBar.TabListener

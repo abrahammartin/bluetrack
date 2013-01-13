@@ -55,11 +55,6 @@ public class LiveTrackingFragment extends ListFragment
   private boolean mTracking = false;
   
   /**
-   * Whether or not we are currently bound to the service.
-   */
-  boolean mBound = false;
-  
-  /**
    * Id of this tracking session.
    */
   private long mSessionId = -1;
@@ -108,7 +103,10 @@ public class LiveTrackingFragment extends ListFragment
   {
     super.onDestroyView();
     
-    stopBluetoothLogService();
+    if (mTracking)
+    {
+      stopBluetoothLogService();
+    }
   }
   
   @Override
