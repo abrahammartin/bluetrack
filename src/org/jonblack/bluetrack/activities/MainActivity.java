@@ -78,13 +78,6 @@ public class MainActivity extends Activity
                                                          "devices",
                                                          DevicesFragment.class));
     actionBar.addTab(tab3);
-    
-    if (savedInstanceState != null)
-    {
-      // Restore last state for checked position.
-      int selectedTabIdx = savedInstanceState.getInt("selectedTabIdx", 0);
-      actionBar.setSelectedNavigationItem(selectedTabIdx);
-    }
   }
   
   @Override
@@ -100,6 +93,17 @@ public class MainActivity extends Activity
     
     ActionBar actionBar = getActionBar();
     outState.putInt("selectedTabIdx", actionBar.getSelectedNavigationIndex());
+  }
+  
+  @Override
+  public void onRestoreInstanceState(Bundle savedInstanceState)
+  {
+    super.onRestoreInstanceState(savedInstanceState);
+    
+    // Restore selected tab
+    Log.d(TAG, "Restoring selected tab.");
+    int selectedTabIdx = savedInstanceState.getInt("selectedTabIdx", 0);
+    getActionBar().setSelectedNavigationItem(selectedTabIdx);
   }
   
   // See http://developer.android.com/reference/android/app/ActionBar.html#newTab%28%29

@@ -13,6 +13,7 @@ import android.app.ListFragment;
 import android.app.LoaderManager;
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
@@ -103,11 +104,6 @@ public class LiveTrackingFragment extends ListFragment
   {
     super.onDestroyView();
     
-    if (mTracking)
-    {
-      stopBluetoothLogService();
-    }
-    
     // Unregister the broadcast receiver for finding bluetooth devices.
     getActivity().unregisterReceiver(mBtStateChangedReceiver);
   }
@@ -116,6 +112,16 @@ public class LiveTrackingFragment extends ListFragment
   public void onActivityCreated(Bundle savedInstanceState)
   {
     super.onActivityCreated(savedInstanceState);
+    
+    // Restore state
+    if (savedInstanceState != null)
+    {
+      mSessionId = savedInstanceState.getLong("sessionId");
+      mTracking = savedInstanceState.getBoolean("tracking");
+      
+      // This should get the loader that was already created.
+      getLoaderManager().initLoader(0, null, this);
+    }
     
     // Register broadcast receiver for bluetooth status changes
     getActivity().registerReceiver(this.mBtStateChangedReceiver,
@@ -183,7 +189,11 @@ public class LiveTrackingFragment extends ListFragment
     Log.d(TAG, "Starting BluetoothLogService.");
     mBluetoothLogServiceIntent = new Intent(getActivity(), BluetoothLogService.class);
     mBluetoothLogServiceIntent.putExtra("sessionId", mSessionId);
-    getActivity().startService(mBluetoothLogServiceIntent);
+    ComponentName cn = getActivity().startService(mBluetoothLogServiceIntent);
+    if (cn != null)
+    {
+      Log.d(TAG, "Using already running service.");
+    }
     
     // Toast starting the service
     Toast toast = Toast.makeText(getActivity(),
@@ -211,7 +221,7 @@ public class LiveTrackingFragment extends ListFragment
   private void stopBluetoothLogService()
   {
     // Stop service if it's running.
-    if (mBluetoothLogServiceIntent != null)
+    if (mTracking)
     {
       Log.d(TAG, "Stopping BluetoothLogService.");
       getActivity().stopService(mBluetoothLogServiceIntent);
@@ -294,6 +304,15 @@ public class LiveTrackingFragment extends ListFragment
     }
     
     return true;
+  }
+  
+  @Override
+  public void onSaveInstanceState(Bundle outState)
+  {
+    super.onSaveInstanceState(outState);
+    
+    outState.putLong("sessionId", mSessionId);
+    outState.putBoolean("tracking", mTracking);
   }
   
   /**

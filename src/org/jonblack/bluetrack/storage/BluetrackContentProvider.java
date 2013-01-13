@@ -90,9 +90,6 @@ public class BluetrackContentProvider extends ContentProvider
       throw new IllegalArgumentException("Unknown URI: " + uri);
     }
     
-    String sql = qb.buildQuery(projection, selection, null, null, sortOrder, null);
-    Log.d(TAG, "SQL: " + sql);
-    
     Log.d(TAG, String.format("Quering '%s' where '%s' with args '%s'",
                              qb.getTables(), selection,
                              Arrays.toString(selectionArgs)));
