@@ -4,13 +4,13 @@ import org.jonblack.bluetrack.R;
 import org.jonblack.bluetrack.services.BluetoothLogService;
 import org.jonblack.bluetrack.storage.DeviceTable;
 
+import android.app.ListFragment;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.app.ListFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class LiveTrackingFragment extends ListFragment
@@ -45,11 +46,13 @@ public class LiveTrackingFragment extends ListFragment
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState)
   {
-    View view = super.onCreateView(inflater, container, savedInstanceState);
+    super.onCreateView(inflater, container, savedInstanceState);
     
     setHasOptionsMenu(true);
     
-    return view;
+    // Create an return the custom ListView layout which also displays an
+    // 'empty list' message.
+    return inflater.inflate(R.layout.live_tracking_list, null);
   }
   
   @Override
@@ -126,6 +129,10 @@ public class LiveTrackingFragment extends ListFragment
     // new one.
     getLoaderManager().initLoader(0, null, this);
     
+    // Set the empty list view text
+    TextView tv = (TextView) getActivity().findViewById(android.R.id.empty);
+    tv.setText(R.string.live_tracking_on_list_empty);
+    
     mTracking = true;
   }
   
@@ -152,6 +159,10 @@ public class LiveTrackingFragment extends ListFragment
     // Remove the adapter cursor. Devices are only show devices when tracking
     // is on.
     mAdapter.swapCursor(null);
+    
+    // Set the empty list view text
+    TextView tv = (TextView) getActivity().findViewById(android.R.id.empty);
+    tv.setText(R.string.live_tracking_off_list_empty);
     
     mTracking = false;
   }
