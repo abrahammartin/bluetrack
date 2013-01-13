@@ -83,6 +83,10 @@ public class MainActivity extends Activity
       ActionBar.Tab tab2 = actionBar.newTab().setText(r.getText(R.string.ab_tab_sessions));
       tab2.setTabListener(new TabListener(new SessionFragment()));
       actionBar.addTab(tab2);
+      
+      ActionBar.Tab tab3 = actionBar.newTab().setText(r.getText(R.string.ab_tab_devices));
+      tab3.setTabListener(new TabListener(new DevicesFragment()));
+      actionBar.addTab(tab3);
     }
   }
   

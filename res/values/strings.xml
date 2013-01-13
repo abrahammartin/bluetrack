@@ -15,6 +15,7 @@
   <string name="ab_stop_tracking">Stop Tracking</string>
   <string name="ab_tab_live_tracking">Live Tracking</string>
   <string name="ab_tab_sessions">Sessions</string>
+  <string name="ab_tab_devices">Devices</string>
   
   <!-- Notifications -->
   
