@@ -11,6 +11,7 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
@@ -104,6 +105,19 @@ public class MainActivity extends Activity
     Log.d(TAG, "Restoring selected tab.");
     int selectedTabIdx = savedInstanceState.getInt("selectedTabIdx", 0);
     getActionBar().setSelectedNavigationItem(selectedTabIdx);
+  }
+  
+  /**
+   * Do not let the back key call finish on our activity.
+   */
+  @Override
+  public void onBackPressed()
+  {
+    Log.d(TAG, "onBackPressed Called");
+    Intent setIntent = new Intent(Intent.ACTION_MAIN);
+    setIntent.addCategory(Intent.CATEGORY_HOME);
+    setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    startActivity(setIntent);
   }
   
   // See http://developer.android.com/reference/android/app/ActionBar.html#newTab%28%29
