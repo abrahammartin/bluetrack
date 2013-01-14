@@ -121,9 +121,15 @@ public class BluetoothLogService extends Service
     {
       Log.i(TAG, "Device is unknown. Adding device.");
       
+      String name = device.getName();
+      if (name == null)
+      {
+        name = "";
+      }
+      
       ContentValues values = new ContentValues();
       values.put("mac_address", device.getAddress());
-      values.put("name", device.getName());
+      values.put("name", name);
       Uri uri = getContentResolver().insert(DeviceTable.CONTENT_URI, values);
       
       // Get the id of the new row
