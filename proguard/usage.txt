@@ -730,7 +730,7 @@ org.jonblack.bluetrack.activities.MainActivity:
     private static final java.lang.String TAG
 org.jonblack.bluetrack.services.BluetoothLogService:
     private static final java.lang.String TAG
-    179:180:public void setSessionId(long)
+    185:186:public void setSessionId(long)
 org.jonblack.bluetrack.storage.BluetrackContentProvider:
     private static final java.lang.String TAG
     public static final java.lang.String AUTHORITY
