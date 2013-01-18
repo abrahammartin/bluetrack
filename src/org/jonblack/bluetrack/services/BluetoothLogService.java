@@ -37,11 +37,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -50,8 +52,9 @@ public class BluetoothLogService extends Service
 {
   private static final String TAG = "BluetoothLogService";
   
-  private final int PERIODIC_EVENT_TIMEOUT = 30000;
-  
+  /**
+   * Handler that periodically fires.
+   */
   private Handler mPeriodicEventHandler;
   
   /**
@@ -122,13 +125,17 @@ public class BluetoothLogService extends Service
       
       // If the discovery process has finished, setup the handler to trigger
       // again after a delay.
+      SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(BluetoothLogService.this);
+      String scanDelayString = sharedPrefs.getString("pref_tracking_scan_delay", null);
+      assert(scanDelayString != null);
+      int scanDelay = Integer.parseInt(scanDelayString);
+      
       if (action.equals(BluetoothAdapter.ACTION_DISCOVERY_FINISHED))
       {
         Log.d(TAG, "Discovery process finished.");
         Log.d(TAG, String.format("Set handler to discover again in %d ms.",
-                                 PERIODIC_EVENT_TIMEOUT));
-        mPeriodicEventHandler.postDelayed(doPeriodicTask,
-                                          PERIODIC_EVENT_TIMEOUT);
+                                 scanDelay * 1000));
+        mPeriodicEventHandler.postDelayed(doPeriodicTask, scanDelay * 5000);
         
         return;
       }

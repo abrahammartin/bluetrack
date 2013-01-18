@@ -23,11 +23,13 @@
   <string name="button_exit">Exit</string>
   
   <!-- Fragments -->
+  
   <string name="live_tracking_on_list_empty">No devices found.</string>
   <string name="live_tracking_off_list_empty">Tracking disabled.</string>
   
   <!-- Action Bar -->
   
+  <string name="ab_settings">Settings</string>
   <string name="ab_start_tracking">Start Tracking</string>
   <string name="ab_stop_tracking">Stop Tracking</string>
   <string name="ab_tab_live_tracking">Live Tracking</string>
@@ -46,5 +48,10 @@
   <!-- Error messages -->
   
   <string name="error_bluetooth_not_supported">%1$s requires bluetooth to run, which your device doesn\'t support.</string>
+  
+  <!-- Settings -->
+  
+  <string name="pref_tracking_title">Tracking</string>
+  <string name="pref_tracking_scan_delay">%1$d seconds between scans</string>
   
 </resources>
