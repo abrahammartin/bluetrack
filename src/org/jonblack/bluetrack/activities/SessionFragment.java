@@ -28,7 +28,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SimpleCursorAdapter;
 
 public class SessionFragment extends ListFragment
                              implements LoaderManager.LoaderCallbacks<Cursor>
@@ -36,7 +35,7 @@ public class SessionFragment extends ListFragment
   /**
    * SimpleCursorAdapter used by the list view to get data.
    */
-  private SimpleCursorAdapter mAdapter;
+  private SessionListCursorAdapter mAdapter;
   
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,11 +56,7 @@ public class SessionFragment extends ListFragment
     super.onActivityCreated(savedInstanceState);
     
     // Configure the ListView adapter, which will connect to the database.
-    mAdapter= new SimpleCursorAdapter(getActivity(),
-                                      android.R.layout.simple_list_item_1,
-                                      null,
-                                      new String[] {"start_date_time"},
-                                      new int[] {android.R.id.text1}, 0);
+    mAdapter = new SessionListCursorAdapter(getActivity(), null, 0);
     setListAdapter(mAdapter);
     
     // Prepare the loader. Either re-connect with an existing one, or start a
