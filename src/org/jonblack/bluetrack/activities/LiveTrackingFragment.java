@@ -293,6 +293,7 @@ public class LiveTrackingFragment extends ListFragment
   @Override
   public boolean onOptionsItemSelected(MenuItem item)
   {
+    // TODO: Bit odd that the LiveTrackingFragment is responsible for this.
     switch (item.getItemId())
     {
     case R.id.menu_toggle_tracking:
@@ -318,6 +319,10 @@ public class LiveTrackingFragment extends ListFragment
           startBluetoothLogService();
         }
       }
+      break;
+    case R.id.menu_settings:
+      Intent intent = new Intent(getActivity(), SettingsActivity.class);
+      startActivity(intent);
       break;
     default:
       assert(false);
