@@ -128,6 +128,8 @@ public class LiveTrackingFragment extends ListFragment
   @Override
   public void onActivityCreated(Bundle savedInstanceState)
   {
+    Log.d(TAG, "onActivityCreated");
+    
     super.onActivityCreated(savedInstanceState);
     
     // Restore state
@@ -135,6 +137,9 @@ public class LiveTrackingFragment extends ListFragment
     {
       mSessionId = savedInstanceState.getLong("sessionId");
       mTracking = savedInstanceState.getBoolean("tracking");
+      
+      Log.v(TAG, String.format("Restoring state: mSessionId=%d mTracking=%s",
+                               mSessionId, mTracking));
       
       if (mTracking)
       {
@@ -148,20 +153,20 @@ public class LiveTrackingFragment extends ListFragment
                                    new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
     
     // Configure the ListView adapter, which will connect to the database.
-    mAdapter= new SimpleCursorAdapter(getActivity(),
-                                      android.R.layout.two_line_list_item,
-                                      null,
-                                      new String[] {"name",
-                                                    "mac_address"},
-                                      new int[] {android.R.id.text1,
-                                                 android.R.id.text2}, 0);
+    mAdapter = new SimpleCursorAdapter(getActivity(),
+                                       android.R.layout.two_line_list_item,
+                                       null,
+                                       new String[] {"name",
+                                                     "mac_address"},
+                                       new int[] {android.R.id.text1,
+                                                  android.R.id.text2}, 0);
     setListAdapter(mAdapter);
   }
   
   @Override
   public Loader<Cursor> onCreateLoader(int id, Bundle args)
   {
-    Log.d(TAG, "Creating live tracker cursorloader with id: " + mSessionId);
+    Log.d(TAG, "onCreateLoader");
     
     // Session id must have been set
     assert(mSessionId != -1);
@@ -181,14 +186,28 @@ public class LiveTrackingFragment extends ListFragment
   @Override
   public void onLoadFinished(Loader<Cursor> loader, Cursor data)
   {
-    // Swap the new cursor in. (The framework will take care of closing the
-    // old cursor once we return.)
-    mAdapter.swapCursor(data);
+    Log.d(TAG, "onLoadFinished");
+    
+    // Fixes #9
+    // When the tabs are changed and the cursor is re-initialised, the old
+    // loader is re-used, which still has data, causing this function to be
+    // called even though tracking might be disabled. This results in the list
+    // being udpated with the results of the previous scan.
+    //
+    // Only update when tracking is in progress.
+    if (mTracking)
+    {
+      // Swap the new cursor in. (The framework will take care of closing the
+      // old cursor once we return.)
+      mAdapter.swapCursor(data);
+    }
   }
 
   @Override
   public void onLoaderReset(Loader<Cursor> loader)
   {
+    Log.d(TAG, "onLoaderReset");
+    
     // This is called when the last Cursor provided to onLoadFinished()
     // above is about to be closed.  We need to make sure we are no
     // longer using it.
