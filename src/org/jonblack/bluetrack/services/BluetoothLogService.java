@@ -71,6 +71,16 @@ public class BluetoothLogService extends Service
    * Receiver used when bluetooth devices have been found during discovery.
    */
   private final BroadcastReceiver mBtDiscoveryReceiver = new BroadcastReceiver() {
+    
+    /**
+     * The date and time a device was discovered.
+     * 
+     * Although scanning lasts for approx. 12 seconds, the date time of the
+     * discovery is only set once to the date/time of the discovery of the
+     * first device.
+     */
+    private Date discoveryDate = null;
+    
     @Override
     public void onReceive(Context context, Intent intent)
     {
@@ -81,6 +91,13 @@ public class BluetoothLogService extends Service
       // database.
       if (action.equals(BluetoothDevice.ACTION_FOUND))
       {
+        // Set the discovery date if not yet set.
+        if (discoveryDate == null)
+        {
+          discoveryDate = new Date();
+        }
+        
+        // Get the device that was found
         BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
         Log.d(TAG, String.format("Found device: %s (%s)",
                                  device.getName(),
@@ -133,9 +150,14 @@ public class BluetoothLogService extends Service
       if (action.equals(BluetoothAdapter.ACTION_DISCOVERY_FINISHED))
       {
         Log.d(TAG, "Discovery process finished.");
+        
+        // Reset the periodic handler
         Log.d(TAG, String.format("Set handler to discover again in %d ms.",
                                  scanDelay * 1000));
         mPeriodicEventHandler.postDelayed(doPeriodicTask, scanDelay * 5000);
+        
+        // Reset the discovery date
+        discoveryDate = null;
         
         return;
       }
@@ -167,10 +189,9 @@ public class BluetoothLogService extends Service
       assert(mSessionId != -1);
       
       SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
-      Date date = new Date();
       
       ContentValues values = new ContentValues();
-      values.put("date_time", dateFormat.format(date));
+      values.put("date_time", dateFormat.format(discoveryDate));
       values.put("device_id", id);
       values.put("session_id", mSessionId);
       getContentResolver().insert(DeviceDiscoveryTable.CONTENT_URI, values);
