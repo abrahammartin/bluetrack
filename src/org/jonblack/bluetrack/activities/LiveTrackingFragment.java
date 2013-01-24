@@ -22,6 +22,7 @@ import java.util.Date;
 
 import org.jonblack.bluetrack.R;
 import org.jonblack.bluetrack.services.BluetoothLogService;
+import org.jonblack.bluetrack.storage.DeviceDiscoveryTable;
 import org.jonblack.bluetrack.storage.DeviceTable;
 import org.jonblack.bluetrack.storage.SessionTable;
 
@@ -174,7 +175,7 @@ public class LiveTrackingFragment extends ListFragment
     // Now create and return a CursorLoader that will take care of
     // creating a Cursor for the data being displayed.
     return new CursorLoader(getActivity(),
-                            DeviceTable.CONTENT_URI,
+                            DeviceDiscoveryTable.CONTENT_URI,
                             new String[] {DeviceTable.COL_ID,
                                 "name",
                                 "mac_address"},
