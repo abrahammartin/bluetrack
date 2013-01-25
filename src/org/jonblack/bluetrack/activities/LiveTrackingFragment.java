@@ -155,12 +155,15 @@ public class LiveTrackingFragment extends ListFragment
     
     // Configure the ListView adapter, which will connect to the database.
     mAdapter = new SimpleCursorAdapter(getActivity(),
-                                       android.R.layout.two_line_list_item,
+                                       R.layout.live_tracking_row,
                                        null,
-                                       new String[] {"name",
-                                                     "mac_address"},
-                                       new int[] {android.R.id.text1,
-                                                  android.R.id.text2}, 0);
+                                       new String[] {"mac_address",
+                                                     "name",
+                                                     "rssi"},
+                                       new int[] {R.id.live_tracking_row_mac,
+                                                  R.id.live_tracking_row_name,
+                                                  R.id.live_tracking_signal_strength},
+                                                  0);
     setListAdapter(mAdapter);
   }
   
@@ -177,8 +180,9 @@ public class LiveTrackingFragment extends ListFragment
     return new CursorLoader(getActivity(),
                             DeviceDiscoveryTable.CONTENT_URI,
                             new String[] {DeviceTable.COL_ID,
-                                "name",
-                                "mac_address"},
+                                          "name",
+                                          "mac_address",
+                                          "rssi"},
                             "device_discovery.session_id = ?",
                             new String[] {Long.toString(mSessionId)},
                             null);

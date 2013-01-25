@@ -94,6 +94,7 @@ public class BluetrackContentProvider extends ContentProvider
       columnMap.put("_id", "device._id");
       columnMap.put("name", "device.name");
       columnMap.put("mac_address", "device.mac_address");
+      columnMap.put("rssi", "device_discovery.rssi");
       qb.setProjectionMap(columnMap);
       qb.appendWhere(DeviceDiscoveryTable.TABLE_NAME + ".date_time = (" +
                      "select max(date_time) from " +
