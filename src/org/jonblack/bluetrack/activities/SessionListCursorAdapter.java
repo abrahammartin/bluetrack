@@ -32,28 +32,31 @@ public class SessionListCursorAdapter extends CursorAdapter
   @Override
   public void bindView(View view, Context context, Cursor cursor)
   {
-    int idStartDateTime = cursor.getColumnIndexOrThrow("start_date_time");
-    int idEndDateTime = cursor.getColumnIndexOrThrow("end_date_time");
-    
-    String startDateTimeStr = cursor.getString(idStartDateTime);
-    String endDateTimeStr = cursor.getString(idEndDateTime);
-    
-    // Format start date time for locale
     DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
     
-    DateTime startDateTime = fmt.parseDateTime(startDateTimeStr);
-    DateTime endDateTime = fmt.parseDateTime(endDateTimeStr);
+    // Format start date time for locale
+    int idStartDateTime = cursor.getColumnIndexOrThrow("start_date_time");
     
+    String startDateTimeStr = cursor.getString(idStartDateTime);
+    assert(startDateTimeStr != null);
+    
+    DateTime startDateTime = fmt.parseDateTime(startDateTimeStr);
     assert(startDateTime != null);
-    assert(endDateTime != null);
     
     TextView tvStartDateTime = (TextView) view.findViewById(R.id.session_row_start_date_time);
     tvStartDateTime.setText(startDateTime.toString("EEE dd MMM, YYYY @ HH:mm:ss", null));
     
     // Calculate duration
-    Period period = new Period(startDateTime, endDateTime);
-    
-    TextView tvDuration = (TextView) view.findViewById(R.id.session_row_duration);
-    tvDuration.setText(period.toString(PeriodFormat.getDefault()));
+    int idEndDateTime = cursor.getColumnIndexOrThrow("end_date_time");
+    String endDateTimeStr = cursor.getString(idEndDateTime);
+    if (endDateTimeStr != null)
+    {
+      DateTime endDateTime = fmt.parseDateTime(endDateTimeStr);
+      assert(endDateTime != null);
+      Period period = new Period(startDateTime, endDateTime);
+      
+      TextView tvDuration = (TextView) view.findViewById(R.id.session_row_duration);
+      tvDuration.setText(period.toString(PeriodFormat.getDefault()));
+    }
   }
 }
