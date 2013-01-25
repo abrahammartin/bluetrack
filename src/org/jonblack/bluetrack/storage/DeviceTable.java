@@ -53,7 +53,5 @@ public class DeviceTable
   {
     Log.i(TAG, String.format("Upgrading table '%s' version from %d to %d",
                              TABLE_NAME, oldVersion, newVersion));
-    
-    assert(false);
   }
 }

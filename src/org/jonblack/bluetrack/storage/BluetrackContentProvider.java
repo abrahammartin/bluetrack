@@ -94,6 +94,7 @@ public class BluetrackContentProvider extends ContentProvider
       columnMap.put("_id", "device._id");
       columnMap.put("name", "device.name");
       columnMap.put("mac_address", "device.mac_address");
+      columnMap.put("rssi", "device_discovery.rssi");
       qb.setProjectionMap(columnMap);
       qb.appendWhere(DeviceDiscoveryTable.TABLE_NAME + ".date_time = (" +
                      "select max(date_time) from " +
@@ -221,7 +222,7 @@ public class BluetrackContentProvider extends ContentProvider
       
       // Also send notifications to anything listing devices. This is needed
       // to show updates in live tracking.
-      // Is there a nicer way?
+      // TODO: Is there a nicer way?
       if (table.equals(DeviceDiscoveryTable.TABLE_NAME))
       {
         getContext().getContentResolver().notifyChange(DeviceTable.CONTENT_URI,
