@@ -32,7 +32,7 @@
   <TextView android:id="@id/android:empty"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/live_tracking_off_list_empty"
+            android:text="@string/devices_list_empty"
             android:gravity="center"
             android:layout_gravity="center"
             android:textColor="#8C8C8C"
