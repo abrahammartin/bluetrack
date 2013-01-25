@@ -37,11 +37,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -50,8 +52,9 @@ public class BluetoothLogService extends Service
 {
   private static final String TAG = "BluetoothLogService";
   
-  private final int PERIODIC_EVENT_TIMEOUT = 30000;
-  
+  /**
+   * Handler that periodically fires.
+   */
   private Handler mPeriodicEventHandler;
   
   /**
@@ -68,6 +71,16 @@ public class BluetoothLogService extends Service
    * Receiver used when bluetooth devices have been found during discovery.
    */
   private final BroadcastReceiver mBtDiscoveryReceiver = new BroadcastReceiver() {
+    
+    /**
+     * The date and time a device was discovered.
+     * 
+     * Although scanning lasts for approx. 12 seconds, the date time of the
+     * discovery is only set once to the date/time of the discovery of the
+     * first device.
+     */
+    private Date discoveryDate = null;
+    
     @Override
     public void onReceive(Context context, Intent intent)
     {
@@ -78,6 +91,13 @@ public class BluetoothLogService extends Service
       // database.
       if (action.equals(BluetoothDevice.ACTION_FOUND))
       {
+        // Set the discovery date if not yet set.
+        if (discoveryDate == null)
+        {
+          discoveryDate = new Date();
+        }
+        
+        // Get the device that was found
         BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
         Log.d(TAG, String.format("Found device: %s (%s)",
                                  device.getName(),
@@ -114,21 +134,39 @@ public class BluetoothLogService extends Service
         assert(id != -1);
         c.close();
         
+        // Get the rssi value (signal strength)
+        Short rssi = intent.getShortExtra(BluetoothDevice.EXTRA_RSSI,
+                                          Short.MIN_VALUE);
+        if (rssi == Short.MIN_VALUE)
+        {
+          rssi = null;
+        }
+        Log.d(TAG, "RSSI: " + rssi);
+        
         // Add discovery of device to database.
-        addDeviceDiscovery(id);
+        addDeviceDiscovery(id, rssi);
         
         return;
       }
       
       // If the discovery process has finished, setup the handler to trigger
       // again after a delay.
+      SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(BluetoothLogService.this);
+      String scanDelayString = sharedPrefs.getString("pref_tracking_scan_delay", null);
+      assert(scanDelayString != null);
+      int scanDelay = Integer.parseInt(scanDelayString);
+      
       if (action.equals(BluetoothAdapter.ACTION_DISCOVERY_FINISHED))
       {
         Log.d(TAG, "Discovery process finished.");
+        
+        // Reset the periodic handler
         Log.d(TAG, String.format("Set handler to discover again in %d ms.",
-                                 PERIODIC_EVENT_TIMEOUT));
-        mPeriodicEventHandler.postDelayed(doPeriodicTask,
-                                          PERIODIC_EVENT_TIMEOUT);
+                                 scanDelay * 1000));
+        mPeriodicEventHandler.postDelayed(doPeriodicTask, scanDelay * 5000);
+        
+        // Reset the discovery date
+        discoveryDate = null;
         
         return;
       }
@@ -153,19 +191,19 @@ public class BluetoothLogService extends Service
       return ContentUris.parseId(uri);
     }
     
-    private void addDeviceDiscovery(long id)
+    private void addDeviceDiscovery(long id, short rssi)
     {
       Log.i(TAG, "Adding discovery.");
       
       assert(mSessionId != -1);
       
       SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
-      Date date = new Date();
       
       ContentValues values = new ContentValues();
-      values.put("date_time", dateFormat.format(date));
+      values.put("date_time", dateFormat.format(discoveryDate));
       values.put("device_id", id);
       values.put("session_id", mSessionId);
+      values.put("rssi", rssi);
       getContentResolver().insert(DeviceDiscoveryTable.CONTENT_URI, values);
     }
   };

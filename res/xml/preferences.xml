@@ -17,15 +17,20 @@
  along with bluetrack.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
-  <item
-    android:id="@+id/menu_toggle_tracking"
-    android:showAsAction="ifRoom"
-    android:title="@string/ab_start_tracking">
-  </item>
-  <item
-    android:id="@+id/menu_settings"
-    android:showAsAction="never"
-    android:title="@string/ab_settings">
-  </item>
-</menu>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+  
+  <PreferenceCategory
+    android:title="@string/pref_tracking_title"
+    android:key="pref_key_tracking_settings">
+    
+    <EditTextPreference
+      android:key="pref_tracking_scan_delay"
+      android:title="Scan delay"
+      android:summary="@string/pref_tracking_scan_delay"
+      android:defaultValue="5"
+      android:inputType="number"
+      android:selectAllOnFocus="true" />
+  
+  </PreferenceCategory>
+  
+</PreferenceScreen>

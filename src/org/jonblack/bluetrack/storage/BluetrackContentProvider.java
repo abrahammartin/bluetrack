@@ -33,6 +33,12 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.util.Log;
 
+/**
+ * ContentProvider for Bluetrack.
+ * 
+ * TODO: This class should be cleaned up. I'm not pleased with the hackish SQL
+ *       statments. Replace with an ORM library when it really gets too much.
+ */
 public class BluetrackContentProvider extends ContentProvider
 {
   private static final String TAG = "BluetrackContentProvider";
@@ -72,25 +78,33 @@ public class BluetrackContentProvider extends ContentProvider
     switch (sUriMatcher.match(uri))
     {
     case DEVICE:
-      Map<String, String> columnMap = new HashMap<String, String>();
-      columnMap.put("_id", "device._id");
-      columnMap.put("name", "device.name");
-      columnMap.put("mac_address", "device.mac_address");
-      qb.setProjectionMap(columnMap);
-      
-      qb.setTables(DeviceTable.TABLE_NAME +
-                   " LEFT JOIN " + DeviceDiscoveryTable.TABLE_NAME + 
-                   " ON " +
-                   DeviceDiscoveryTable.TABLE_NAME + ".device_id = " +
-                   DeviceTable.TABLE_NAME + "." + DeviceTable.COL_ID);
-      qb.setDistinct(true);
+      qb.setTables(DeviceTable.TABLE_NAME);
       break;
     case DEVICE_ID:
       qb.setTables(DeviceTable.TABLE_NAME);
       selection = selection + DeviceTable.COL_ID + " = " + uri.getLastPathSegment();
       break;
     case DISCOVERY:
-      qb.setTables(DeviceDiscoveryTable.TABLE_NAME);
+      // Shows the most recent devices discovered.
+      // select * from device_discovery
+      // where date_time = (select max(date_time) from device_discovery)
+      // and session_id = 2;
+      
+      Map<String, String> columnMap = new HashMap<String, String>();
+      columnMap.put("_id", "device._id");
+      columnMap.put("name", "device.name");
+      columnMap.put("mac_address", "device.mac_address");
+      columnMap.put("rssi", "device_discovery.rssi");
+      qb.setProjectionMap(columnMap);
+      qb.appendWhere(DeviceDiscoveryTable.TABLE_NAME + ".date_time = (" +
+                     "select max(date_time) from " +
+                     DeviceDiscoveryTable.TABLE_NAME + ")");
+      qb.setTables(DeviceTable.TABLE_NAME +
+                   " LEFT JOIN " + DeviceDiscoveryTable.TABLE_NAME + 
+                   " ON " +
+                   DeviceDiscoveryTable.TABLE_NAME + ".device_id = " +
+                   DeviceTable.TABLE_NAME + "." + DeviceTable.COL_ID);
+      qb.setDistinct(true);
       break;
     case DISCOVERY_ID:
       qb.setTables(DeviceDiscoveryTable.TABLE_NAME);
@@ -106,6 +120,10 @@ public class BluetrackContentProvider extends ContentProvider
     default:
       throw new IllegalArgumentException("Unknown URI: " + uri);
     }
+    
+    String sql = qb.buildQuery(projection, selection, null, null, sortOrder,
+                               null);
+    Log.v(TAG, "SQL: " + sql);
     
     Log.d(TAG, String.format("Quering '%s' where '%s' with args '%s'",
                              qb.getTables(), selection,
@@ -204,7 +222,7 @@ public class BluetrackContentProvider extends ContentProvider
       
       // Also send notifications to anything listing devices. This is needed
       // to show updates in live tracking.
-      // Is there a nicer way?
+      // TODO: Is there a nicer way?
       if (table.equals(DeviceDiscoveryTable.TABLE_NAME))
       {
         getContext().getContentResolver().notifyChange(DeviceTable.CONTENT_URI,
