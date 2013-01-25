@@ -221,7 +221,7 @@ public class BluetrackContentProvider extends ContentProvider
       
       // Also send notifications to anything listing devices. This is needed
       // to show updates in live tracking.
-      // Is there a nicer way?
+      // TODO: Is there a nicer way?
       if (table.equals(DeviceDiscoveryTable.TABLE_NAME))
       {
         getContext().getContentResolver().notifyChange(DeviceTable.CONTENT_URI,

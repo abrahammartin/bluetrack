@@ -134,8 +134,17 @@ public class BluetoothLogService extends Service
         assert(id != -1);
         c.close();
         
+        // Get the rssi value (signal strength)
+        Short rssi = intent.getShortExtra(BluetoothDevice.EXTRA_RSSI,
+                                          Short.MIN_VALUE);
+        if (rssi == Short.MIN_VALUE)
+        {
+          rssi = null;
+        }
+        Log.d(TAG, "RSSI: " + rssi);
+        
         // Add discovery of device to database.
-        addDeviceDiscovery(id);
+        addDeviceDiscovery(id, rssi);
         
         return;
       }
@@ -182,7 +191,7 @@ public class BluetoothLogService extends Service
       return ContentUris.parseId(uri);
     }
     
-    private void addDeviceDiscovery(long id)
+    private void addDeviceDiscovery(long id, short rssi)
     {
       Log.i(TAG, "Adding discovery.");
       
@@ -194,6 +203,7 @@ public class BluetoothLogService extends Service
       values.put("date_time", dateFormat.format(discoveryDate));
       values.put("device_id", id);
       values.put("session_id", mSessionId);
+      values.put("rssi", rssi);
       getContentResolver().insert(DeviceDiscoveryTable.CONTENT_URI, values);
     }
   };

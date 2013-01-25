@@ -42,7 +42,7 @@ public class DeviceDiscoveryTable
       "date_time TEXT NOT NULL," +
       "device_id INTEGER NOT NULL, " +
       "session_id INTEGER NOT NULL, " +
-      "signal_strength INTEGER, " +
+      "rssi INTEGER, " +
       "FOREIGN KEY(device_id) REFERENCES device(" + COL_ID  + " ) ON DELETE CASCADE " +
       "FOREIGN KEY(session_id) REFERENCES session(" + COL_ID  + " ) ON DELETE CASCADE " +
       ");";
@@ -77,7 +77,7 @@ public class DeviceDiscoveryTable
   private static void upgradeF1T2(SQLiteDatabase db)
   {
     String sql = "ALTER TABLE " + TABLE_NAME +
-                 " ADD COLUMN signal_strength INTEGER";
+                 " ADD COLUMN rssi INTEGER";
     db.execSQL(sql);
   }
 }
