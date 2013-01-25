@@ -42,6 +42,7 @@ public class DeviceDiscoveryTable
       "date_time TEXT NOT NULL," +
       "device_id INTEGER NOT NULL, " +
       "session_id INTEGER NOT NULL, " +
+      "signal_strength INTEGER, " +
       "FOREIGN KEY(device_id) REFERENCES device(" + COL_ID  + " ) ON DELETE CASCADE " +
       "FOREIGN KEY(session_id) REFERENCES session(" + COL_ID  + " ) ON DELETE CASCADE " +
       ");";
@@ -59,6 +60,24 @@ public class DeviceDiscoveryTable
     Log.i(TAG, String.format("Upgrading table '%s' version from %d to %d",
                              TABLE_NAME, oldVersion, newVersion));
     
-    assert(false);
+    switch (oldVersion)
+    {
+    case 1:
+      upgradeF1T2(db);
+      break;
+    default:
+      assert(false);
+    }
+  }
+  
+  /**
+   * Upgrades the database from version 1 to version 2.
+   * @param db
+   */
+  private static void upgradeF1T2(SQLiteDatabase db)
+  {
+    String sql = "ALTER TABLE " + TABLE_NAME +
+                 " ADD COLUMN signal_strength INTEGER";
+    db.execSQL(sql);
   }
 }
