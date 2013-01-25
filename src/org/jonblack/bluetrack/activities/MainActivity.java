@@ -31,6 +31,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 
@@ -43,6 +44,12 @@ public class MainActivity extends Activity
   {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main_activity);
+    
+    // Load default preference values.
+    // The defaults are only loaded if they haven't been done before. It will
+    // not overwrite changes.
+    // @see PreferenceManager.setDefaultValues
+    PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
     
     // Get the local bluetooth adapter and check if bluetooth is supported.
     BluetoothAdapter localBtAdapter = BluetoothAdapter.getDefaultAdapter();
