@@ -64,6 +64,8 @@ public class DeviceDiscoveryTable
     {
     case 1:
       upgradeF1T2(db);
+    case 2:
+      // No upgrade necessary
       break;
     default:
       assert(false);
