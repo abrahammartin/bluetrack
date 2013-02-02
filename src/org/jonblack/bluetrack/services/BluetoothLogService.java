@@ -30,6 +30,7 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.ContentUris;
@@ -99,9 +100,12 @@ public class BluetoothLogService extends Service
         
         // Get the device that was found
         BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-        Log.d(TAG, String.format("Found device: %s (%s)",
+        BluetoothClass deviceClass = intent.getParcelableExtra(BluetoothDevice.EXTRA_CLASS);
+        Log.d(TAG, String.format("Found device: %s (%s) class=%d, majorClass=%d",
                                  device.getName(),
-                                 device.getAddress()));
+                                 device.getAddress(),
+                                 deviceClass.getDeviceClass(),
+                                 deviceClass.getMajorDeviceClass()));
         
         // If the device is unknown, add it to the database.
         Log.i(TAG, "Checking if the device is new.");
@@ -120,7 +124,7 @@ public class BluetoothLogService extends Service
         if (c.getCount() < 1)
         {
           // No device found, add it to the database
-          id = addDevice(device);
+          id = addDevice(device, deviceClass);
         }
         else
         {
@@ -172,7 +176,7 @@ public class BluetoothLogService extends Service
       }
     }
     
-    private long addDevice(BluetoothDevice device)
+    private long addDevice(BluetoothDevice device, BluetoothClass deviceClass)
     {
       Log.i(TAG, "Device is unknown. Adding device.");
       
@@ -185,6 +189,8 @@ public class BluetoothLogService extends Service
       ContentValues values = new ContentValues();
       values.put("mac_address", device.getAddress());
       values.put("name", name);
+      values.put("minor_class", deviceClass.getDeviceClass());
+      values.put("major_class", deviceClass.getMajorDeviceClass());
       Uri uri = getContentResolver().insert(DeviceTable.CONTENT_URI, values);
       
       // Get the id of the new row

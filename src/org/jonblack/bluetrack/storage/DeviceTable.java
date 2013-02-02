@@ -39,7 +39,9 @@ public class DeviceTable
       " (" +
       COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
       "mac_address TEXT NOT NULL UNIQUE," +
-      "name TEXT NOT NULL);";
+      "name TEXT NOT NULL," +
+      "minor_class INTEGER," +
+      "major_class INTEGER);";
   
   public static void onCreate(SQLiteDatabase db)
   {
