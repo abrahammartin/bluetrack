@@ -21,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.jonblack.bluetrack.R;
+import org.jonblack.bluetrack.adapters.LiveTrackingCursorAdapter;
 import org.jonblack.bluetrack.services.BluetoothLogService;
 import org.jonblack.bluetrack.storage.DeviceDiscoveryTable;
 import org.jonblack.bluetrack.storage.DeviceTable;
@@ -49,7 +50,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -79,9 +79,9 @@ public class LiveTrackingFragment extends ListFragment
   private long mSessionId = -1;
   
   /**
-   * SimpleCursorAdapter used by the list view to get data.
+   * LiveTrackingCursorAdapter used by the list view to get data.
    */
-  private SimpleCursorAdapter mAdapter;
+  private LiveTrackingCursorAdapter mAdapter;
   
   /**
    * Receiver used when bluetooth device status has changed.
@@ -154,16 +154,7 @@ public class LiveTrackingFragment extends ListFragment
                                    new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
     
     // Configure the ListView adapter, which will connect to the database.
-    mAdapter = new SimpleCursorAdapter(getActivity(),
-                                       R.layout.live_tracking_row,
-                                       null,
-                                       new String[] {"mac_address",
-                                                     "name",
-                                                     "rssi"},
-                                       new int[] {R.id.live_tracking_row_mac,
-                                                  R.id.live_tracking_row_name,
-                                                  R.id.live_tracking_signal_strength},
-                                                  0);
+    mAdapter = new LiveTrackingCursorAdapter(getActivity(), null, 0);
     setListAdapter(mAdapter);
   }
   
@@ -182,7 +173,8 @@ public class LiveTrackingFragment extends ListFragment
                             new String[] {DeviceTable.COL_ID,
                                           "name",
                                           "mac_address",
-                                          "rssi"},
+                                          "rssi",
+                                          "major_class"},
                             "device_discovery.session_id = ?",
                             new String[] {Long.toString(mSessionId)},
                             null);

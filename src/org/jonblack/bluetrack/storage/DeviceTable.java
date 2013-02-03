@@ -39,7 +39,9 @@ public class DeviceTable
       " (" +
       COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
       "mac_address TEXT NOT NULL UNIQUE," +
-      "name TEXT NOT NULL);";
+      "name TEXT NOT NULL," +
+      "minor_class INTEGER," +
+      "major_class INTEGER);";
   
   public static void onCreate(SQLiteDatabase db)
   {
@@ -53,5 +55,34 @@ public class DeviceTable
   {
     Log.i(TAG, String.format("Upgrading table '%s' version from %d to %d",
                              TABLE_NAME, oldVersion, newVersion));
+    
+    switch (oldVersion)
+    {
+    case 1:
+      // No upgrade from 1 to 2
+    case 2:
+      upgradeF2T3(db);
+      break;
+    default:
+      assert(false);
+    }
+  }
+  
+  /**
+   * Upgrades the table from database version 1 to version 2.
+   * 
+   * Adds two new fields:
+   *   - minor_class
+   *   - major_class
+   * 
+   * @param db
+   */
+  private static void upgradeF2T3(SQLiteDatabase db)
+  {
+    String sql = "ALTER TABLE " + TABLE_NAME +
+                 " ADD COLUMN minor_class INTEGER;\n";
+    sql += "ALTER TABLE " + TABLE_NAME +
+           " ADD COLUMN major_class INTEGER;\n";
+    db.execSQL(sql);
   }
 }

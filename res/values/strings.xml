@@ -55,4 +55,8 @@
   <string name="pref_tracking_title">Tracking</string>
   <string name="pref_tracking_scan_delay">%1$d seconds between scans</string>
   
+  <!-- List -->
+  <string name="live_tracking_row_class_desc">Device class</string>
+  <string name="device_row_class_desc">Device class</string>
+  
 </resources>
