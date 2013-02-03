@@ -18,6 +18,7 @@
 package org.jonblack.bluetrack.activities;
 
 import org.jonblack.bluetrack.R;
+import org.jonblack.bluetrack.adapters.DeviceCursorAdapter;
 import org.jonblack.bluetrack.storage.DeviceTable;
 
 import android.app.ListFragment;
@@ -29,15 +30,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SimpleCursorAdapter;
 
 public class DevicesFragment extends ListFragment
                              implements LoaderManager.LoaderCallbacks<Cursor>
 {
   /**
-   * SimpleCursorAdapter used by the list view to get data.
+   * DeviceCursorAdapter used by the list view to get data.
    */
-  private SimpleCursorAdapter mAdapter;
+  private DeviceCursorAdapter mAdapter;
   
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,13 +62,7 @@ public class DevicesFragment extends ListFragment
     super.onActivityCreated(savedInstanceState);
     
     // Configure the ListView adapter, which will connect to the database.
-    mAdapter= new SimpleCursorAdapter(getActivity(),
-                                      android.R.layout.two_line_list_item,
-                                      null,
-                                      new String[] {"name",
-                                                    "mac_address"},
-                                      new int[] {android.R.id.text1,
-                                                 android.R.id.text2}, 0);
+    mAdapter = new DeviceCursorAdapter(getActivity(), null, 0);
     setListAdapter(mAdapter);
     
     // Prepare the loader. Either re-connect with an existing one, or start a
@@ -85,7 +79,8 @@ public class DevicesFragment extends ListFragment
                             DeviceTable.CONTENT_URI,
                             new String[] {DeviceTable.COL_ID,
                                           "name",
-                                          "mac_address"},
+                                          "mac_address",
+                                          "major_class"},
                             null, null, null);
   }
 

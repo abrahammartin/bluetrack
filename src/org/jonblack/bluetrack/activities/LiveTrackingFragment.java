@@ -154,19 +154,7 @@ public class LiveTrackingFragment extends ListFragment
                                    new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
     
     // Configure the ListView adapter, which will connect to the database.
-    //mAdapter = new SimpleCursorAdapter(getActivity(),
-    //                                  R.layout.live_tracking_row,
-    //                                   null,
-    //                                   new String[] {"mac_address",
-    //                                                 "name",
-    //                                                 "rssi"},
-    //                                   new int[] {R.id.live_tracking_row_mac,
-    //                                             R.id.live_tracking_row_name,
-    //                                              R.id.live_tracking_signal_strength},
-    //                                              0);
-    
     mAdapter = new LiveTrackingCursorAdapter(getActivity(), null, 0);
-    
     setListAdapter(mAdapter);
   }
   
