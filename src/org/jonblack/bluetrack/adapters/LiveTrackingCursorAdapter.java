@@ -46,7 +46,7 @@ public class LiveTrackingCursorAdapter extends CursorAdapter
   public View newView(Context context, Cursor cursor, ViewGroup parent)
   {
     LayoutInflater inflater = LayoutInflater.from(context);
-    final View view = inflater.inflate(R.layout.live_tracking_row, parent,
+    final View view = inflater.inflate(R.layout.live_tracking_list_row, parent,
                                        false);
     
     return view;

@@ -47,7 +47,7 @@ public class DevicesFragment extends ListFragment
     
     // Create an return the custom ListView layout which also displays an
     // 'empty list' message.
-    return inflater.inflate(R.layout.devices_list, null);
+    return inflater.inflate(R.layout.device_list, null);
   }
   
   @Override

@@ -1,4 +1,4 @@
-package org.jonblack.bluetrack.activities;
+package org.jonblack.bluetrack.adapters;
 
 import org.joda.time.DateTime;
 import org.joda.time.Period;
@@ -15,9 +15,9 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
 
-public class SessionListCursorAdapter extends CursorAdapter
+public class SessionCursorAdapter extends CursorAdapter
 {
-  public SessionListCursorAdapter(Context context, Cursor c, int flags)
+  public SessionCursorAdapter(Context context, Cursor c, int flags)
   {
     super(context, c, flags);
   }
