@@ -75,8 +75,11 @@ public class SessionFragment extends ListFragment
   {
     // Now create and return a CursorLoader that will take care of
     // creating a Cursor for the data being displayed.
-    return new CursorLoader(getActivity(), SessionTable.CONTENT_URI, null, null,
-                            null, null);
+    return new CursorLoader(getActivity(), SessionTable.CONTENT_URI,
+                            new String[] {SessionTable.COL_ID,
+                                          "start_date_time",
+                                           "end_date_time"},
+                            null, null, null);
   }
 
   @Override
