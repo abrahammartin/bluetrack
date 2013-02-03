@@ -27,6 +27,7 @@
   <string name="live_tracking_on_list_empty">No devices found.</string>
   <string name="live_tracking_off_list_empty">Tracking disabled.</string>
   <string name="devices_list_empty">No devices have been found.</string>
+  <string name="session_list_empty">No tracking session have been recorded.</string>
   
   <!-- Action Bar -->
   

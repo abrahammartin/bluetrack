@@ -17,6 +17,7 @@
 
 package org.jonblack.bluetrack.activities;
 
+import org.jonblack.bluetrack.R;
 import org.jonblack.bluetrack.adapters.SessionCursorAdapter;
 import org.jonblack.bluetrack.storage.SessionTable;
 
@@ -42,7 +43,11 @@ public class SessionFragment extends ListFragment
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState)
   {
-    return super.onCreateView(inflater, container, savedInstanceState);
+    super.onCreateView(inflater, container, savedInstanceState);
+    
+    // Create an return the custom ListView layout which also displays an
+    // 'empty list' message.
+    return inflater.inflate(R.layout.session_list, null);
   }
   
   @Override
