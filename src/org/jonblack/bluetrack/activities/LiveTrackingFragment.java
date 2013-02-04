@@ -271,16 +271,15 @@ public class LiveTrackingFragment extends ListFragment
     // Cause the action bar menu to be updated so the button text can change.
     getActivity().invalidateOptionsMenu();
     
-    // Remove the adapter cursor. Devices are only show devices when tracking
-    // is on.
-    mAdapter.swapCursor(null);
-    
     // Set the empty list view text
     TextView tv = (TextView) getActivity().findViewById(android.R.id.empty);
     tv.setText(R.string.live_tracking_off_list_empty);
     
     // Update the session
     finalizeSession();
+    
+    // Destroy the loader. This is no longer needed.
+    getLoaderManager(). destroyLoader(0);
     
     mTracking = false;
   }
