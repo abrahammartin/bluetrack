@@ -8,55 +8,93 @@ public class BluetoothClassLookup
   private static final String TAG = "BluetoothClassLookup";
   
   /**
-   * Returns the drawable to the icon that represents the bluetooth class id.
-   * @param classId
-   * @return
+   * Id when no icon exists for the bluetooth class.
    */
-  public static int getMajorIconId(Integer classId)
+  private static final int INVALID_CLASS_ICON = -1;
+  
+  /**
+   * Returns the drawable to the icon that represents the bluetooth class id.
+   * 
+   * First checks the minor class id, and if no icon is available, then checks
+   * the major class id.
+   * 
+   * A valid icon id is always returned from this function.
+   */
+  public static int getIconId(int majorClassId, int minorClassId)
   {
-    int classIconId = -1;
-    switch (classId)
+    int classIconId = INVALID_CLASS_ICON;
+    
+    classIconId = getMinorIconId(minorClassId);
+    if (classIconId == INVALID_CLASS_ICON)
+    {
+      classIconId = getMajorIconId(majorClassId);
+    }
+    assert(classIconId != INVALID_CLASS_ICON);
+    
+    return classIconId;
+  }
+  
+  private static int getMajorIconId(int majorClassId)
+  {
+    switch (majorClassId)
     {
     case BluetoothClass.Device.Major.AUDIO_VIDEO:
-      classIconId = R.drawable.bt_audio_video;
-      break;
+      return R.drawable.bt_audio_video;
     case BluetoothClass.Device.Major.COMPUTER:
-      classIconId = R.drawable.bt_computer;
-      break;
+      return R.drawable.bt_computer;
     case BluetoothClass.Device.Major.HEALTH:
-      classIconId = R.drawable.bt_health;
-      break;
+      return R.drawable.bt_health;
     case BluetoothClass.Device.Major.IMAGING:
-      classIconId = R.drawable.bt_imaging;
-      break;
+      return R.drawable.bt_imaging;
     case BluetoothClass.Device.Major.MISC:
-      classIconId = R.drawable.bt_misc;
-      break;
+      return R.drawable.bt_misc;
     case BluetoothClass.Device.Major.NETWORKING:
-      classIconId = R.drawable.bt_networking;
-      break;
+      return R.drawable.bt_networking;
     case BluetoothClass.Device.Major.PERIPHERAL:
-      classIconId = R.drawable.bt_peripheral;
-      break;
+      return R.drawable.bt_peripheral;
     case BluetoothClass.Device.Major.PHONE:
-      classIconId = R.drawable.bt_phone;
-      break;
+      return R.drawable.bt_phone;
     case BluetoothClass.Device.Major.TOY:
-      classIconId = R.drawable.bt_toy;
-      break;
+      return R.drawable.bt_toy;
     case BluetoothClass.Device.Major.UNCATEGORIZED:
-      classIconId = R.drawable.bt_uncategorized;
-      break;
+      return R.drawable.bt_uncategorized;
     case BluetoothClass.Device.Major.WEARABLE:
-      classIconId = R.drawable.bt_wearable;
-      break;
+      return R.drawable.bt_wearable;
     default:
       // Class is not recognised. Use the same icon as for uncategorized, and
       // log a warning.
-      Log.w(TAG, String.format("Icon for bluetooth class '%d' was not found."));
-      classIconId = R.drawable.bt_uncategorized;
+      Log.w(TAG, String.format("Icon for major bluetooth class '%d' was not found.",
+                 majorClassId));
+      return R.drawable.bt_uncategorized;
     }
-    
-    return classIconId;
+  }
+  
+  private static int getMinorIconId(int minorClassId)
+  {
+    switch (minorClassId)
+    {
+    case BluetoothClass.Device.AUDIO_VIDEO_CAMCORDER:
+      return R.drawable.bt_audio_video_camcorder;
+    case BluetoothClass.Device.AUDIO_VIDEO_HIFI_AUDIO:
+      return R.drawable.bt_audio_video_hifi_audio;
+    case BluetoothClass.Device.AUDIO_VIDEO_MICROPHONE:
+      return R.drawable.bt_audio_video_microphone;
+    case BluetoothClass.Device.AUDIO_VIDEO_PORTABLE_AUDIO:
+      return R.drawable.bt_audio_video_portable_audio;
+    case BluetoothClass.Device.AUDIO_VIDEO_VIDEO_CONFERENCING:
+      return R.drawable.bt_audio_video_video_conferencing;
+    case BluetoothClass.Device.COMPUTER_HANDHELD_PC_PDA:
+      return R.drawable.bt_computer_handheld_pc_pda;
+    case BluetoothClass.Device.COMPUTER_SERVER:
+      return R.drawable.bt_computer_server;
+    case BluetoothClass.Device.WEARABLE_HELMET:
+      return R.drawable.bt_wearable_helmet;
+    default:
+      // Class is not recognised. Use the same icon as for uncategorized, and
+      // log a warning.
+      Log.w(TAG, String.format("Icon for minor bluetooth class '%d' was not found.",
+                 minorClassId));
+      return INVALID_CLASS_ICON;
+    }
   }
 }

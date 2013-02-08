@@ -174,7 +174,8 @@ public class LiveTrackingFragment extends ListFragment
                                           "name",
                                           "mac_address",
                                           "rssi",
-                                          "major_class"},
+                                          "major_class",
+                                          "minor_class"},
                             "device_discovery.session_id = ?",
                             new String[] {Long.toString(mSessionId)},
                             null);

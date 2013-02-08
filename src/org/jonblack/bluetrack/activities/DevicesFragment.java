@@ -80,7 +80,8 @@ public class DevicesFragment extends ListFragment
                             new String[] {DeviceTable.COL_ID,
                                           "name",
                                           "mac_address",
-                                          "major_class"},
+                                          "major_class",
+                                          "minor_class"},
                             null, null, null);
   }
 
