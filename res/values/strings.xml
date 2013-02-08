@@ -27,6 +27,7 @@
   <string name="live_tracking_on_list_empty">No devices found.</string>
   <string name="live_tracking_off_list_empty">Tracking disabled.</string>
   <string name="devices_list_empty">No devices have been found.</string>
+  <string name="session_list_empty">No tracking session have been recorded.</string>
   
   <!-- Action Bar -->
   
@@ -54,5 +55,9 @@
   
   <string name="pref_tracking_title">Tracking</string>
   <string name="pref_tracking_scan_delay">%1$d seconds between scans</string>
+  
+  <!-- List -->
+  <string name="live_tracking_row_class_desc">Device class</string>
+  <string name="device_row_class_desc">Device class</string>
   
 </resources>

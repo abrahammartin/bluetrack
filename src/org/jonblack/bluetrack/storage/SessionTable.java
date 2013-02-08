@@ -53,5 +53,16 @@ public class SessionTable
   {
     Log.i(TAG, String.format("Upgrading table '%s' version from %d to %d",
                              TABLE_NAME, oldVersion, newVersion));
+    
+    switch (oldVersion)
+    {
+    case 1:
+      // No upgrade from 1 to 2
+    case 2:
+      // No upgrade from 2 to 3
+      break;
+    default:
+      assert(false);
+    }
   }
 }

@@ -27,7 +27,7 @@ public class BluetrackOpenHelper extends SQLiteOpenHelper
   private static final String TAG = "BluetrackOpenHelper";
   
   private static final String DB_NAME = "bluetrack";
-  private static final int DB_VERSION = 2;
+  private static final int DB_VERSION = 3;
   
   public BluetrackOpenHelper(Context context)
   {

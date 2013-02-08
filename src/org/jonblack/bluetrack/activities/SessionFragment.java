@@ -17,6 +17,8 @@
 
 package org.jonblack.bluetrack.activities;
 
+import org.jonblack.bluetrack.R;
+import org.jonblack.bluetrack.adapters.SessionCursorAdapter;
 import org.jonblack.bluetrack.storage.SessionTable;
 
 import android.app.ListFragment;
@@ -35,13 +37,17 @@ public class SessionFragment extends ListFragment
   /**
    * SimpleCursorAdapter used by the list view to get data.
    */
-  private SessionListCursorAdapter mAdapter;
+  private SessionCursorAdapter mAdapter;
   
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState)
   {
-    return super.onCreateView(inflater, container, savedInstanceState);
+    super.onCreateView(inflater, container, savedInstanceState);
+    
+    // Create an return the custom ListView layout which also displays an
+    // 'empty list' message.
+    return inflater.inflate(R.layout.session_list, null);
   }
   
   @Override
@@ -56,7 +62,7 @@ public class SessionFragment extends ListFragment
     super.onActivityCreated(savedInstanceState);
     
     // Configure the ListView adapter, which will connect to the database.
-    mAdapter = new SessionListCursorAdapter(getActivity(), null, 0);
+    mAdapter = new SessionCursorAdapter(getActivity(), null, 0);
     setListAdapter(mAdapter);
     
     // Prepare the loader. Either re-connect with an existing one, or start a
@@ -69,8 +75,11 @@ public class SessionFragment extends ListFragment
   {
     // Now create and return a CursorLoader that will take care of
     // creating a Cursor for the data being displayed.
-    return new CursorLoader(getActivity(), SessionTable.CONTENT_URI, null, null,
-                            null, null);
+    return new CursorLoader(getActivity(), SessionTable.CONTENT_URI,
+                            new String[] {SessionTable.COL_ID,
+                                          "start_date_time",
+                                           "end_date_time"},
+                            null, null, null);
   }
 
   @Override

@@ -923,8 +923,1604 @@ android.support.v4.widget.EdgeEffectCompatIcs -> android.support.v4.d.e:
     boolean onPull(java.lang.Object,float) -> a
     boolean onRelease(java.lang.Object) -> c
     boolean draw(java.lang.Object,android.graphics.Canvas) -> a
+org.joda.time.Chronology -> org.a.a.a:
+    org.joda.time.DateTimeZone getZone() -> a
+    org.joda.time.Chronology withUTC() -> b
+    org.joda.time.Chronology withZone(org.joda.time.DateTimeZone) -> a
+    int[] get(org.joda.time.ReadablePeriod,long,long) -> a
+    int[] get(org.joda.time.ReadablePeriod,long) -> a
+    org.joda.time.DurationField millis() -> c
+    org.joda.time.DateTimeField millisOfSecond() -> d
+    org.joda.time.DateTimeField millisOfDay() -> e
+    org.joda.time.DurationField seconds() -> f
+    org.joda.time.DateTimeField secondOfMinute() -> g
+    org.joda.time.DateTimeField secondOfDay() -> h
+    org.joda.time.DurationField minutes() -> i
+    org.joda.time.DateTimeField minuteOfHour() -> j
+    org.joda.time.DateTimeField minuteOfDay() -> k
+    org.joda.time.DurationField hours() -> l
+    org.joda.time.DateTimeField hourOfDay() -> m
+    org.joda.time.DateTimeField clockhourOfDay() -> n
+    org.joda.time.DurationField halfdays() -> o
+    org.joda.time.DateTimeField hourOfHalfday() -> p
+    org.joda.time.DateTimeField clockhourOfHalfday() -> q
+    org.joda.time.DateTimeField halfdayOfDay() -> r
+    org.joda.time.DurationField days() -> s
+    org.joda.time.DateTimeField dayOfWeek() -> t
+    org.joda.time.DateTimeField dayOfMonth() -> u
+    org.joda.time.DateTimeField dayOfYear() -> v
+    org.joda.time.DurationField weeks() -> w
+    org.joda.time.DateTimeField weekOfWeekyear() -> x
+    org.joda.time.DurationField weekyears() -> y
+    org.joda.time.DateTimeField weekyear() -> z
+    org.joda.time.DateTimeField weekyearOfCentury() -> A
+    org.joda.time.DurationField months() -> B
+    org.joda.time.DateTimeField monthOfYear() -> C
+    org.joda.time.DurationField years() -> D
+    org.joda.time.DateTimeField year() -> E
+    org.joda.time.DateTimeField yearOfEra() -> F
+    org.joda.time.DateTimeField yearOfCentury() -> G
+    org.joda.time.DurationField centuries() -> H
+    org.joda.time.DateTimeField centuryOfEra() -> I
+    org.joda.time.DurationField eras() -> J
+    org.joda.time.DateTimeField era() -> K
+org.joda.time.DateTime -> org.a.a.b:
+    org.joda.time.DateTime withChronology(org.joda.time.Chronology) -> a
+    org.joda.time.DateTime withZone(org.joda.time.DateTimeZone) -> a
+org.joda.time.DateTimeField -> org.a.a.c:
+    org.joda.time.DateTimeFieldType getType() -> a
+    java.lang.String getName() -> b
+    boolean isSupported() -> c
+    int get(long) -> a
+    java.lang.String getAsText(long,java.util.Locale) -> a
+    java.lang.String getAsText(int,java.util.Locale) -> a
+    java.lang.String getAsShortText(long,java.util.Locale) -> b
+    java.lang.String getAsShortText(int,java.util.Locale) -> b
+    long add(long,int) -> a
+    long add(long,long) -> a
+    int getDifference(long,long) -> b
+    long getDifferenceAsLong(long,long) -> c
+    long set(long,int) -> b
+    long set(long,java.lang.String,java.util.Locale) -> a
+    org.joda.time.DurationField getDurationField() -> d
+    org.joda.time.DurationField getRangeDurationField() -> e
+    boolean isLeap(long) -> b
+    org.joda.time.DurationField getLeapDurationField() -> f
+    int getMinimumValue() -> g
+    int getMaximumValue() -> h
+    int getMaximumValue(long) -> c
+    int getMaximumTextLength(java.util.Locale) -> a
+    long roundFloor(long) -> d
+    long roundCeiling(long) -> e
+    long roundHalfFloor(long) -> f
+    long roundHalfCeiling(long) -> g
+    long roundHalfEven(long) -> h
+    long remainder(long) -> i
+org.joda.time.DateTimeFieldType -> org.a.a.d:
+    org.joda.time.DateTimeFieldType ERA_TYPE -> a
+    org.joda.time.DateTimeFieldType YEAR_OF_ERA_TYPE -> b
+    org.joda.time.DateTimeFieldType CENTURY_OF_ERA_TYPE -> c
+    org.joda.time.DateTimeFieldType YEAR_OF_CENTURY_TYPE -> d
+    org.joda.time.DateTimeFieldType YEAR_TYPE -> e
+    org.joda.time.DateTimeFieldType DAY_OF_YEAR_TYPE -> f
+    org.joda.time.DateTimeFieldType MONTH_OF_YEAR_TYPE -> g
+    org.joda.time.DateTimeFieldType DAY_OF_MONTH_TYPE -> h
+    org.joda.time.DateTimeFieldType WEEKYEAR_OF_CENTURY_TYPE -> i
+    org.joda.time.DateTimeFieldType WEEKYEAR_TYPE -> j
+    org.joda.time.DateTimeFieldType WEEK_OF_WEEKYEAR_TYPE -> k
+    org.joda.time.DateTimeFieldType DAY_OF_WEEK_TYPE -> l
+    org.joda.time.DateTimeFieldType HALFDAY_OF_DAY_TYPE -> m
+    org.joda.time.DateTimeFieldType HOUR_OF_HALFDAY_TYPE -> n
+    org.joda.time.DateTimeFieldType CLOCKHOUR_OF_HALFDAY_TYPE -> o
+    org.joda.time.DateTimeFieldType CLOCKHOUR_OF_DAY_TYPE -> p
+    org.joda.time.DateTimeFieldType HOUR_OF_DAY_TYPE -> q
+    org.joda.time.DateTimeFieldType MINUTE_OF_DAY_TYPE -> r
+    org.joda.time.DateTimeFieldType MINUTE_OF_HOUR_TYPE -> s
+    org.joda.time.DateTimeFieldType SECOND_OF_DAY_TYPE -> t
+    org.joda.time.DateTimeFieldType SECOND_OF_MINUTE_TYPE -> u
+    org.joda.time.DateTimeFieldType MILLIS_OF_DAY_TYPE -> v
+    org.joda.time.DateTimeFieldType MILLIS_OF_SECOND_TYPE -> w
+    java.lang.String iName -> x
+    org.joda.time.DateTimeFieldType millisOfSecond() -> a
+    org.joda.time.DateTimeFieldType millisOfDay() -> b
+    org.joda.time.DateTimeFieldType secondOfMinute() -> c
+    org.joda.time.DateTimeFieldType secondOfDay() -> d
+    org.joda.time.DateTimeFieldType minuteOfHour() -> e
+    org.joda.time.DateTimeFieldType minuteOfDay() -> f
+    org.joda.time.DateTimeFieldType hourOfDay() -> g
+    org.joda.time.DateTimeFieldType clockhourOfDay() -> h
+    org.joda.time.DateTimeFieldType hourOfHalfday() -> i
+    org.joda.time.DateTimeFieldType clockhourOfHalfday() -> j
+    org.joda.time.DateTimeFieldType halfdayOfDay() -> k
+    org.joda.time.DateTimeFieldType dayOfWeek() -> l
+    org.joda.time.DateTimeFieldType dayOfMonth() -> m
+    org.joda.time.DateTimeFieldType dayOfYear() -> n
+    org.joda.time.DateTimeFieldType weekOfWeekyear() -> o
+    org.joda.time.DateTimeFieldType weekyear() -> p
+    org.joda.time.DateTimeFieldType weekyearOfCentury() -> q
+    org.joda.time.DateTimeFieldType monthOfYear() -> r
+    org.joda.time.DateTimeFieldType year() -> s
+    org.joda.time.DateTimeFieldType yearOfEra() -> t
+    org.joda.time.DateTimeFieldType yearOfCentury() -> u
+    org.joda.time.DateTimeFieldType centuryOfEra() -> v
+    org.joda.time.DateTimeFieldType era() -> w
+    java.lang.String getName() -> x
+    org.joda.time.DurationFieldType getDurationType() -> y
+    org.joda.time.DurationFieldType getRangeDurationType() -> z
+    org.joda.time.DateTimeField getField(org.joda.time.Chronology) -> a
+    java.lang.String toString() -> toString
+org.joda.time.DateTimeFieldType$StandardDateTimeFieldType -> org.a.a.e:
+    byte iOrdinal -> a
+    org.joda.time.DurationFieldType iUnitType -> b
+    org.joda.time.DurationFieldType iRangeType -> c
+    org.joda.time.DurationFieldType getDurationType() -> y
+    org.joda.time.DurationFieldType getRangeDurationType() -> z
+    boolean equals(java.lang.Object) -> equals
+    int hashCode() -> hashCode
+    org.joda.time.DateTimeField getField(org.joda.time.Chronology) -> a
+org.joda.time.DateTimeUtils -> org.a.a.f:
+    org.joda.time.DateTimeUtils$SystemMillisProvider SYSTEM_MILLIS_PROVIDER -> a
+    org.joda.time.DateTimeUtils$MillisProvider cMillisProvider -> b
+    long currentTimeMillis() -> a
+    long getInstantMillis(org.joda.time.ReadableInstant) -> a
+    org.joda.time.Chronology getInstantChronology(org.joda.time.ReadableInstant) -> b
+    org.joda.time.Chronology getIntervalChronology(org.joda.time.ReadableInstant,org.joda.time.ReadableInstant) -> a
+    org.joda.time.Chronology getChronology(org.joda.time.Chronology) -> a
+    org.joda.time.PeriodType getPeriodType(org.joda.time.PeriodType) -> a
+    java.text.DateFormatSymbols getDateFormatSymbols(java.util.Locale) -> a
+org.joda.time.DateTimeUtils$MillisProvider -> org.a.a.g:
+    long getMillis() -> a
+org.joda.time.DateTimeUtils$SystemMillisProvider -> org.a.a.h:
+    long getMillis() -> a
+org.joda.time.DateTimeZone -> org.a.a.i:
+    org.joda.time.DateTimeZone UTC -> a
+    org.joda.time.tz.Provider cProvider -> b
+    org.joda.time.tz.NameProvider cNameProvider -> c
+    java.util.Set cAvailableIDs -> d
+    org.joda.time.DateTimeZone cDefault -> e
+    org.joda.time.format.DateTimeFormatter cOffsetFormatter -> f
+    java.util.Map iFixedOffsetCache -> g
+    java.util.Map cZoneIdConversion -> h
+    java.lang.String iID -> i
+    org.joda.time.DateTimeZone getDefault() -> a
+    org.joda.time.DateTimeZone forID(java.lang.String) -> a
+    org.joda.time.DateTimeZone forOffsetMillis(int) -> a
+    org.joda.time.DateTimeZone forTimeZone(java.util.TimeZone) -> a
+    org.joda.time.DateTimeZone fixedOffsetZone(java.lang.String,int) -> a
+    java.util.Set getAvailableIDs() -> b
+    void setProvider0(org.joda.time.tz.Provider) -> a
+    org.joda.time.tz.Provider getDefaultProvider() -> e
+    void setNameProvider0(org.joda.time.tz.NameProvider) -> a
+    org.joda.time.tz.NameProvider getDefaultNameProvider() -> f
+    java.lang.String getConvertedId(java.lang.String) -> b
+    int parseOffset(java.lang.String) -> c
+    java.lang.String printOffset(int) -> b
+    org.joda.time.format.DateTimeFormatter offsetFormatter() -> g
+    java.lang.String getID() -> c
+    java.lang.String getNameKey(long) -> a
+    java.lang.String getShortName(long,java.util.Locale) -> a
+    java.lang.String getName(long,java.util.Locale) -> b
+    int getOffset(long) -> b
+    int getOffsetFromLocal(long) -> c
+    long convertUTCToLocal(long) -> d
+    long convertLocalToUTC(long,boolean,long) -> a
+    long convertLocalToUTC(long,boolean) -> a
+    boolean isFixed() -> d
+    long nextTransition(long) -> e
+    long previousTransition(long) -> f
+    boolean equals(java.lang.Object) -> equals
+    int hashCode() -> hashCode
+    java.lang.String toString() -> toString
+org.joda.time.DateTimeZone$1 -> org.a.a.j:
+    org.joda.time.DateTimeZone getZone() -> a
+    org.joda.time.Chronology withUTC() -> b
+    org.joda.time.Chronology withZone(org.joda.time.DateTimeZone) -> a
+    java.lang.String toString() -> toString
+org.joda.time.DurationField -> org.a.a.k:
+    org.joda.time.DurationFieldType getType() -> a
+    boolean isSupported() -> b
+    boolean isPrecise() -> c
+    long getUnitMillis() -> d
+    long add(long,int) -> a
+    long add(long,long) -> a
+    int getDifference(long,long) -> b
+    long getDifferenceAsLong(long,long) -> c
+org.joda.time.DurationFieldType -> org.a.a.l:
+    org.joda.time.DurationFieldType ERAS_TYPE -> a
+    org.joda.time.DurationFieldType CENTURIES_TYPE -> b
+    org.joda.time.DurationFieldType WEEKYEARS_TYPE -> c
+    org.joda.time.DurationFieldType YEARS_TYPE -> d
+    org.joda.time.DurationFieldType MONTHS_TYPE -> e
+    org.joda.time.DurationFieldType WEEKS_TYPE -> f
+    org.joda.time.DurationFieldType DAYS_TYPE -> g
+    org.joda.time.DurationFieldType HALFDAYS_TYPE -> h
+    org.joda.time.DurationFieldType HOURS_TYPE -> i
+    org.joda.time.DurationFieldType MINUTES_TYPE -> j
+    org.joda.time.DurationFieldType SECONDS_TYPE -> k
+    org.joda.time.DurationFieldType MILLIS_TYPE -> l
+    java.lang.String iName -> m
+    org.joda.time.DurationFieldType millis() -> a
+    org.joda.time.DurationFieldType seconds() -> b
+    org.joda.time.DurationFieldType minutes() -> c
+    org.joda.time.DurationFieldType hours() -> d
+    org.joda.time.DurationFieldType halfdays() -> e
+    org.joda.time.DurationFieldType days() -> f
+    org.joda.time.DurationFieldType weeks() -> g
+    org.joda.time.DurationFieldType weekyears() -> h
+    org.joda.time.DurationFieldType months() -> i
+    org.joda.time.DurationFieldType years() -> j
+    org.joda.time.DurationFieldType centuries() -> k
+    org.joda.time.DurationFieldType eras() -> l
+    java.lang.String getName() -> m
+    org.joda.time.DurationField getField(org.joda.time.Chronology) -> a
+    java.lang.String toString() -> toString
+org.joda.time.DurationFieldType$StandardDurationFieldType -> org.a.a.m:
+    byte iOrdinal -> m
+    boolean equals(java.lang.Object) -> equals
+    int hashCode() -> hashCode
+    org.joda.time.DurationField getField(org.joda.time.Chronology) -> a
+org.joda.time.IllegalFieldValueException -> org.a.a.n:
+    org.joda.time.DateTimeFieldType iDateTimeFieldType -> a
+    org.joda.time.DurationFieldType iDurationFieldType -> b
+    java.lang.String iFieldName -> c
+    java.lang.Number iNumberValue -> d
+    java.lang.String iStringValue -> e
+    java.lang.Number iLowerBound -> f
+    java.lang.Number iUpperBound -> g
+    java.lang.String iMessage -> h
+    java.lang.String createMessage(java.lang.String,java.lang.Number,java.lang.Number,java.lang.Number,java.lang.String) -> a
+    java.lang.String createMessage(java.lang.String,java.lang.String) -> a
+    java.lang.String getMessage() -> getMessage
+    void prependMessage(java.lang.String) -> a
+org.joda.time.Instant -> org.a.a.o:
+    long iMillis -> a
+    long getMillis() -> a
+    org.joda.time.Chronology getChronology() -> b
+org.joda.time.MutableDateTime -> org.a.a.p:
+    org.joda.time.DateTimeField iRoundingField -> a
+    int iRoundingMode -> b
+    void setMillis(long) -> a
+    org.joda.time.MutableDateTime$Property property(org.joda.time.DateTimeFieldType) -> a
+    java.lang.Object clone() -> clone
+    java.lang.String toString() -> toString
+org.joda.time.MutableDateTime$Property -> org.a.a.q:
+    org.joda.time.MutableDateTime iInstant -> a
+    org.joda.time.DateTimeField iField -> b
+    org.joda.time.DateTimeField getField() -> a
+    long getMillis() -> b
+    org.joda.time.Chronology getChronology() -> c
+    org.joda.time.MutableDateTime set(int) -> a
+org.joda.time.Period -> org.a.a.r:
+    org.joda.time.Period ZERO -> a
+org.joda.time.PeriodType -> org.a.a.s:
+    java.util.Map cTypes -> i
+    int YEAR_INDEX -> a
+    int MONTH_INDEX -> b
+    int WEEK_INDEX -> c
+    int DAY_INDEX -> d
+    int HOUR_INDEX -> e
+    int MINUTE_INDEX -> f
+    int SECOND_INDEX -> g
+    int MILLI_INDEX -> h
+    org.joda.time.PeriodType cStandard -> j
+    org.joda.time.PeriodType cTime -> k
+    java.lang.String iName -> l
+    org.joda.time.DurationFieldType[] iTypes -> m
+    int[] iIndices -> n
+    org.joda.time.PeriodType standard() -> a
+    org.joda.time.PeriodType time() -> b
+    java.lang.String getName() -> c
+    int size() -> d
+    org.joda.time.DurationFieldType getFieldType(int) -> a
+    boolean isSupported(org.joda.time.DurationFieldType) -> a
+    int indexOf(org.joda.time.DurationFieldType) -> b
+    java.lang.String toString() -> toString
+    boolean equals(java.lang.Object) -> equals
+    int hashCode() -> hashCode
+org.joda.time.ReadWritableDateTime -> org.a.a.t:
+org.joda.time.ReadWritableInstant -> org.a.a.u:
+org.joda.time.ReadableDateTime -> org.a.a.v:
+org.joda.time.ReadableInstant -> org.a.a.w:
+    long getMillis() -> a
+    org.joda.time.Chronology getChronology() -> b
+org.joda.time.ReadablePeriod -> org.a.a.x:
+    org.joda.time.PeriodType getPeriodType() -> a
+    int size() -> b
+    org.joda.time.DurationFieldType getFieldType(int) -> a
+    int getValue(int) -> b
+    int get(org.joda.time.DurationFieldType) -> a
+org.joda.time.base.AbstractDateTime -> org.a.a.a.a:
+    int getYear() -> c
+    int getWeekyear() -> d
+    java.lang.String toString(java.lang.String,java.util.Locale) -> a
+org.joda.time.base.AbstractInstant -> org.a.a.a.b:
+    boolean equals(java.lang.Object) -> equals
+    int hashCode() -> hashCode
+    int compareTo(org.joda.time.ReadableInstant) -> a
+    java.lang.String toString() -> toString
+    int compareTo(java.lang.Object) -> compareTo
+org.joda.time.base.AbstractPeriod -> org.a.a.a.c:
+    int size() -> b
+    org.joda.time.DurationFieldType getFieldType(int) -> a
+    int get(org.joda.time.DurationFieldType) -> a
+    int indexOf(org.joda.time.DurationFieldType) -> b
+    boolean equals(java.lang.Object) -> equals
+    int hashCode() -> hashCode
+    java.lang.String toString() -> toString
+    java.lang.String toString(org.joda.time.format.PeriodFormatter) -> a
+org.joda.time.base.BaseDateTime -> org.a.a.a.d:
+    long iMillis -> a
+    org.joda.time.Chronology iChronology -> b
+    org.joda.time.Chronology checkChronology(org.joda.time.Chronology) -> b
+    long checkInstant(long,org.joda.time.Chronology) -> a
+    long getMillis() -> a
+    org.joda.time.Chronology getChronology() -> b
+    void setMillis(long) -> a
+org.joda.time.base.BasePeriod -> org.a.a.a.e:
+    org.joda.time.ReadablePeriod DUMMY_PERIOD -> a
+    org.joda.time.PeriodType iType -> b
+    int[] iValues -> c
+    org.joda.time.PeriodType checkPeriodType(org.joda.time.PeriodType) -> a
+    org.joda.time.PeriodType getPeriodType() -> a
+    int getValue(int) -> b
+org.joda.time.base.BasePeriod$1 -> org.a.a.a.f:
+    int getValue(int) -> b
+    org.joda.time.PeriodType getPeriodType() -> a
+org.joda.time.chrono.AssembledChronology -> org.a.a.b.a:
+    org.joda.time.Chronology iBase -> a
+    java.lang.Object iParam -> b
+    org.joda.time.DurationField iMillis -> c
+    org.joda.time.DurationField iSeconds -> d
+    org.joda.time.DurationField iMinutes -> e
+    org.joda.time.DurationField iHours -> f
+    org.joda.time.DurationField iHalfdays -> g
+    org.joda.time.DurationField iDays -> h
+    org.joda.time.DurationField iWeeks -> i
+    org.joda.time.DurationField iWeekyears -> j
+    org.joda.time.DurationField iMonths -> k
+    org.joda.time.DurationField iYears -> l
+    org.joda.time.DurationField iCenturies -> m
+    org.joda.time.DurationField iEras -> n
+    org.joda.time.DateTimeField iMillisOfSecond -> o
+    org.joda.time.DateTimeField iMillisOfDay -> p
+    org.joda.time.DateTimeField iSecondOfMinute -> q
+    org.joda.time.DateTimeField iSecondOfDay -> r
+    org.joda.time.DateTimeField iMinuteOfHour -> s
+    org.joda.time.DateTimeField iMinuteOfDay -> t
+    org.joda.time.DateTimeField iHourOfDay -> u
+    org.joda.time.DateTimeField iClockhourOfDay -> v
+    org.joda.time.DateTimeField iHourOfHalfday -> w
+    org.joda.time.DateTimeField iClockhourOfHalfday -> x
+    org.joda.time.DateTimeField iHalfdayOfDay -> y
+    org.joda.time.DateTimeField iDayOfWeek -> z
+    org.joda.time.DateTimeField iDayOfMonth -> A
+    org.joda.time.DateTimeField iDayOfYear -> B
+    org.joda.time.DateTimeField iWeekOfWeekyear -> C
+    org.joda.time.DateTimeField iWeekyear -> D
+    org.joda.time.DateTimeField iWeekyearOfCentury -> E
+    org.joda.time.DateTimeField iMonthOfYear -> F
+    org.joda.time.DateTimeField iYear -> G
+    org.joda.time.DateTimeField iYearOfEra -> H
+    org.joda.time.DateTimeField iYearOfCentury -> I
+    org.joda.time.DateTimeField iCenturyOfEra -> J
+    org.joda.time.DateTimeField iEra -> K
+    int iBaseFlags -> L
+    org.joda.time.DateTimeZone getZone() -> a
+    org.joda.time.DurationField millis() -> c
+    org.joda.time.DateTimeField millisOfSecond() -> d
+    org.joda.time.DateTimeField millisOfDay() -> e
+    org.joda.time.DurationField seconds() -> f
+    org.joda.time.DateTimeField secondOfMinute() -> g
+    org.joda.time.DateTimeField secondOfDay() -> h
+    org.joda.time.DurationField minutes() -> i
+    org.joda.time.DateTimeField minuteOfHour() -> j
+    org.joda.time.DateTimeField minuteOfDay() -> k
+    org.joda.time.DurationField hours() -> l
+    org.joda.time.DateTimeField hourOfDay() -> m
+    org.joda.time.DateTimeField clockhourOfDay() -> n
+    org.joda.time.DurationField halfdays() -> o
+    org.joda.time.DateTimeField hourOfHalfday() -> p
+    org.joda.time.DateTimeField clockhourOfHalfday() -> q
+    org.joda.time.DateTimeField halfdayOfDay() -> r
+    org.joda.time.DurationField days() -> s
+    org.joda.time.DateTimeField dayOfWeek() -> t
+    org.joda.time.DateTimeField dayOfMonth() -> u
+    org.joda.time.DateTimeField dayOfYear() -> v
+    org.joda.time.DurationField weeks() -> w
+    org.joda.time.DateTimeField weekOfWeekyear() -> x
+    org.joda.time.DurationField weekyears() -> y
+    org.joda.time.DateTimeField weekyear() -> z
+    org.joda.time.DateTimeField weekyearOfCentury() -> A
+    org.joda.time.DurationField months() -> B
+    org.joda.time.DateTimeField monthOfYear() -> C
+    org.joda.time.DurationField years() -> D
+    org.joda.time.DateTimeField year() -> E
+    org.joda.time.DateTimeField yearOfEra() -> F
+    org.joda.time.DateTimeField yearOfCentury() -> G
+    org.joda.time.DurationField centuries() -> H
+    org.joda.time.DateTimeField centuryOfEra() -> I
+    org.joda.time.DurationField eras() -> J
+    org.joda.time.DateTimeField era() -> K
+    void assemble(org.joda.time.chrono.AssembledChronology$Fields) -> a
+    org.joda.time.Chronology getBase() -> L
+    java.lang.Object getParam() -> M
+    void setFields() -> N
+org.joda.time.chrono.AssembledChronology$Fields -> org.a.a.b.b:
+    org.joda.time.DurationField millis -> a
+    org.joda.time.DurationField seconds -> b
+    org.joda.time.DurationField minutes -> c
+    org.joda.time.DurationField hours -> d
+    org.joda.time.DurationField halfdays -> e
+    org.joda.time.DurationField days -> f
+    org.joda.time.DurationField weeks -> g
+    org.joda.time.DurationField weekyears -> h
+    org.joda.time.DurationField months -> i
+    org.joda.time.DurationField years -> j
+    org.joda.time.DurationField centuries -> k
+    org.joda.time.DurationField eras -> l
+    org.joda.time.DateTimeField millisOfSecond -> m
+    org.joda.time.DateTimeField millisOfDay -> n
+    org.joda.time.DateTimeField secondOfMinute -> o
+    org.joda.time.DateTimeField secondOfDay -> p
+    org.joda.time.DateTimeField minuteOfHour -> q
+    org.joda.time.DateTimeField minuteOfDay -> r
+    org.joda.time.DateTimeField hourOfDay -> s
+    org.joda.time.DateTimeField clockhourOfDay -> t
+    org.joda.time.DateTimeField hourOfHalfday -> u
+    org.joda.time.DateTimeField clockhourOfHalfday -> v
+    org.joda.time.DateTimeField halfdayOfDay -> w
+    org.joda.time.DateTimeField dayOfWeek -> x
+    org.joda.time.DateTimeField dayOfMonth -> y
+    org.joda.time.DateTimeField dayOfYear -> z
+    org.joda.time.DateTimeField weekOfWeekyear -> A
+    org.joda.time.DateTimeField weekyear -> B
+    org.joda.time.DateTimeField weekyearOfCentury -> C
+    org.joda.time.DateTimeField monthOfYear -> D
+    org.joda.time.DateTimeField year -> E
+    org.joda.time.DateTimeField yearOfEra -> F
+    org.joda.time.DateTimeField yearOfCentury -> G
+    org.joda.time.DateTimeField centuryOfEra -> H
+    org.joda.time.DateTimeField era -> I
+    void copyFieldsFrom(org.joda.time.Chronology) -> a
+    boolean isSupported(org.joda.time.DurationField) -> a
+    boolean isSupported(org.joda.time.DateTimeField) -> a
+org.joda.time.chrono.BaseChronology -> org.a.a.b.c:
+    int[] get(org.joda.time.ReadablePeriod,long,long) -> a
+    int[] get(org.joda.time.ReadablePeriod,long) -> a
+    org.joda.time.DurationField millis() -> c
+    org.joda.time.DateTimeField millisOfSecond() -> d
+    org.joda.time.DateTimeField millisOfDay() -> e
+    org.joda.time.DurationField seconds() -> f
+    org.joda.time.DateTimeField secondOfMinute() -> g
+    org.joda.time.DateTimeField secondOfDay() -> h
+    org.joda.time.DurationField minutes() -> i
+    org.joda.time.DateTimeField minuteOfHour() -> j
+    org.joda.time.DateTimeField minuteOfDay() -> k
+    org.joda.time.DurationField hours() -> l
+    org.joda.time.DateTimeField hourOfDay() -> m
+    org.joda.time.DateTimeField clockhourOfDay() -> n
+    org.joda.time.DurationField halfdays() -> o
+    org.joda.time.DateTimeField hourOfHalfday() -> p
+    org.joda.time.DateTimeField clockhourOfHalfday() -> q
+    org.joda.time.DateTimeField halfdayOfDay() -> r
+    org.joda.time.DurationField days() -> s
+    org.joda.time.DateTimeField dayOfWeek() -> t
+    org.joda.time.DateTimeField dayOfMonth() -> u
+    org.joda.time.DateTimeField dayOfYear() -> v
+    org.joda.time.DurationField weeks() -> w
+    org.joda.time.DateTimeField weekOfWeekyear() -> x
+    org.joda.time.DurationField weekyears() -> y
+    org.joda.time.DateTimeField weekyear() -> z
+    org.joda.time.DateTimeField weekyearOfCentury() -> A
+    org.joda.time.DurationField months() -> B
+    org.joda.time.DateTimeField monthOfYear() -> C
+    org.joda.time.DurationField years() -> D
+    org.joda.time.DateTimeField year() -> E
+    org.joda.time.DateTimeField yearOfEra() -> F
+    org.joda.time.DateTimeField yearOfCentury() -> G
+    org.joda.time.DurationField centuries() -> H
+    org.joda.time.DateTimeField centuryOfEra() -> I
+    org.joda.time.DurationField eras() -> J
+    org.joda.time.DateTimeField era() -> K
+org.joda.time.chrono.BasicChronology -> org.a.a.b.d:
+    org.joda.time.DurationField cMillisField -> a
+    org.joda.time.DurationField cSecondsField -> b
+    org.joda.time.DurationField cMinutesField -> c
+    org.joda.time.DurationField cHoursField -> d
+    org.joda.time.DurationField cHalfdaysField -> e
+    org.joda.time.DurationField cDaysField -> f
+    org.joda.time.DurationField cWeeksField -> g
+    org.joda.time.DateTimeField cMillisOfSecondField -> h
+    org.joda.time.DateTimeField cMillisOfDayField -> i
+    org.joda.time.DateTimeField cSecondOfMinuteField -> j
+    org.joda.time.DateTimeField cSecondOfDayField -> k
+    org.joda.time.DateTimeField cMinuteOfHourField -> l
+    org.joda.time.DateTimeField cMinuteOfDayField -> m
+    org.joda.time.DateTimeField cHourOfDayField -> n
+    org.joda.time.DateTimeField cHourOfHalfdayField -> o
+    org.joda.time.DateTimeField cClockhourOfDayField -> p
+    org.joda.time.DateTimeField cClockhourOfHalfdayField -> q
+    org.joda.time.DateTimeField cHalfdayOfDayField -> r
+    org.joda.time.chrono.BasicChronology$YearInfo[] iYearInfoCache -> s
+    int iMinDaysInFirstWeek -> t
+    org.joda.time.DateTimeZone getZone() -> a
+    int getMinimumDaysInFirstWeek() -> N
+    boolean equals(java.lang.Object) -> equals
+    int hashCode() -> hashCode
+    java.lang.String toString() -> toString
+    void assemble(org.joda.time.chrono.AssembledChronology$Fields) -> a
+    int getDaysInYearMax() -> O
+    int getDaysInYear(int) -> a
+    int getWeeksInYear(int) -> b
+    long getFirstWeekOfYearMillis(int) -> c
+    long getYearMillis(int) -> d
+    long getYearMonthMillis(int,int) -> a
+    long getYearMonthDayMillis(int,int,int) -> a
+    int getYear(long) -> a
+    int getMonthOfYear(long) -> b
+    int getMonthOfYear(long,int) -> a
+    int getDayOfMonth(long) -> c
+    int getDayOfMonth(long,int) -> b
+    int getDayOfMonth(long,int,int) -> a
+    int getDayOfYear(long) -> d
+    int getDayOfYear(long,int) -> c
+    int getWeekyear(long) -> e
+    int getWeekOfWeekyear(long) -> f
+    int getWeekOfWeekyear(long,int) -> d
+    int getDayOfWeek(long) -> g
+    int getMillisOfDay(long) -> h
+    int getDaysInMonthMax() -> P
+    int getDaysInMonthMax(long) -> i
+    int getDaysInMonthMaxForSet(long,int) -> e
+    long getYearDifference(long,long) -> a
+    boolean isLeapYear(int) -> e
+    int getDaysInYearMonth(int,int) -> b
+    long getTotalMillisByYearMonth(int,int) -> c
+    long calculateFirstDayOfYearMillis(int) -> f
+    int getMinYear() -> Q
+    int getMaxYear() -> R
+    int getMaxMonth() -> S
+    long getAverageMillisPerYear() -> T
+    long getAverageMillisPerYearDividedByTwo() -> U
+    long getAverageMillisPerMonth() -> V
+    long getApproxMillisAtEpochDividedByTwo() -> W
+    long setYear(long,int) -> f
+    org.joda.time.chrono.BasicChronology$YearInfo getYearInfo(int) -> g
+    org.joda.time.DurationField access$000() -> X
+    org.joda.time.DurationField access$100() -> Y
+org.joda.time.chrono.BasicChronology$HalfdayField -> org.a.a.b.e:
+    java.lang.String getAsText(int,java.util.Locale) -> a
+    long set(long,java.lang.String,java.util.Locale) -> a
+    int getMaximumTextLength(java.util.Locale) -> a
+org.joda.time.chrono.BasicChronology$YearInfo -> org.a.a.b.f:
+    int iYear -> a
+    long iFirstDayMillis -> b
+org.joda.time.chrono.BasicDayOfMonthDateTimeField -> org.a.a.b.g:
+    org.joda.time.chrono.BasicChronology iChronology -> b
+    int get(long) -> a
+    org.joda.time.DurationField getRangeDurationField() -> e
+    int getMinimumValue() -> g
+    int getMaximumValue() -> h
+    int getMaximumValue(long) -> c
+    int getMaximumValueForSet(long,int) -> c
+org.joda.time.chrono.BasicDayOfYearDateTimeField -> org.a.a.b.h:
+    org.joda.time.chrono.BasicChronology iChronology -> b
+    int get(long) -> a
+    org.joda.time.DurationField getRangeDurationField() -> e
+    int getMinimumValue() -> g
+    int getMaximumValue() -> h
+    int getMaximumValue(long) -> c
+    int getMaximumValueForSet(long,int) -> c
+org.joda.time.chrono.BasicGJChronology -> org.a.a.b.i:
+    int[] MIN_DAYS_PER_MONTH_ARRAY -> a
+    int[] MAX_DAYS_PER_MONTH_ARRAY -> b
+    long[] MIN_TOTAL_MILLIS_BY_MONTH_ARRAY -> c
+    long[] MAX_TOTAL_MILLIS_BY_MONTH_ARRAY -> d
+    int getMonthOfYear(long,int) -> a
+    int getDaysInYearMonth(int,int) -> b
+    int getDaysInMonthMaxForSet(long,int) -> e
+    long getTotalMillisByYearMonth(int,int) -> c
+    long getYearDifference(long,long) -> a
+    long setYear(long,int) -> f
+org.joda.time.chrono.BasicMonthOfYearDateTimeField -> org.a.a.b.j:
+    org.joda.time.chrono.BasicChronology iChronology -> a
+    int iMax -> c
+    int iLeapMonth -> d
+    int get(long) -> a
+    long add(long,int) -> a
+    long add(long,long) -> a
+    long getDifferenceAsLong(long,long) -> c
+    long set(long,int) -> b
+    org.joda.time.DurationField getRangeDurationField() -> e
+    boolean isLeap(long) -> b
+    org.joda.time.DurationField getLeapDurationField() -> f
+    int getMinimumValue() -> g
+    int getMaximumValue() -> h
+    long roundFloor(long) -> d
+    long remainder(long) -> i
+org.joda.time.chrono.BasicWeekOfWeekyearDateTimeField -> org.a.a.b.k:
+    org.joda.time.chrono.BasicChronology iChronology -> b
+    int get(long) -> a
+    org.joda.time.DurationField getRangeDurationField() -> e
+    long roundFloor(long) -> d
+    long roundCeiling(long) -> e
+    long remainder(long) -> i
+    int getMinimumValue() -> g
+    int getMaximumValue() -> h
+    int getMaximumValue(long) -> c
+    int getMaximumValueForSet(long,int) -> c
+org.joda.time.chrono.BasicWeekyearDateTimeField -> org.a.a.b.l:
+    org.joda.time.chrono.BasicChronology iChronology -> a
+    int get(long) -> a
+    long add(long,int) -> a
+    long add(long,long) -> a
+    long getDifferenceAsLong(long,long) -> c
+    long set(long,int) -> b
+    org.joda.time.DurationField getRangeDurationField() -> e
+    boolean isLeap(long) -> b
+    org.joda.time.DurationField getLeapDurationField() -> f
+    int getMinimumValue() -> g
+    int getMaximumValue() -> h
+    long roundFloor(long) -> d
+    long remainder(long) -> i
+org.joda.time.chrono.BasicYearDateTimeField -> org.a.a.b.m:
+    org.joda.time.chrono.BasicChronology iChronology -> a
+    int get(long) -> a
+    long add(long,int) -> a
+    long add(long,long) -> a
+    long set(long,int) -> b
+    long getDifferenceAsLong(long,long) -> c
+    org.joda.time.DurationField getRangeDurationField() -> e
+    boolean isLeap(long) -> b
+    org.joda.time.DurationField getLeapDurationField() -> f
+    int getMinimumValue() -> g
+    int getMaximumValue() -> h
+    long roundFloor(long) -> d
+    long roundCeiling(long) -> e
+    long remainder(long) -> i
+org.joda.time.chrono.GJDayOfWeekDateTimeField -> org.a.a.b.n:
+    org.joda.time.chrono.BasicChronology iChronology -> b
+    int get(long) -> a
+    java.lang.String getAsText(int,java.util.Locale) -> a
+    java.lang.String getAsShortText(int,java.util.Locale) -> b
+    int convertText(java.lang.String,java.util.Locale) -> a
+    org.joda.time.DurationField getRangeDurationField() -> e
+    int getMinimumValue() -> g
+    int getMaximumValue() -> h
+    int getMaximumTextLength(java.util.Locale) -> a
+org.joda.time.chrono.GJEraDateTimeField -> org.a.a.b.o:
+    org.joda.time.chrono.BasicChronology iChronology -> a
+    int get(long) -> a
+    java.lang.String getAsText(int,java.util.Locale) -> a
+    long set(long,int) -> b
+    long set(long,java.lang.String,java.util.Locale) -> a
+    long roundFloor(long) -> d
+    long roundCeiling(long) -> e
+    long roundHalfFloor(long) -> f
+    long roundHalfCeiling(long) -> g
+    long roundHalfEven(long) -> h
+    org.joda.time.DurationField getDurationField() -> d
+    org.joda.time.DurationField getRangeDurationField() -> e
+    int getMinimumValue() -> g
+    int getMaximumValue() -> h
+    int getMaximumTextLength(java.util.Locale) -> a
+org.joda.time.chrono.GJLocaleSymbols -> org.a.a.b.p:
+    org.joda.time.chrono.GJLocaleSymbols[] cFastCache -> a
+    java.util.WeakHashMap cCache -> b
+    java.lang.ref.WeakReference iLocale -> c
+    java.lang.String[] iEras -> d
+    java.lang.String[] iDaysOfWeek -> e
+    java.lang.String[] iShortDaysOfWeek -> f
+    java.lang.String[] iMonths -> g
+    java.lang.String[] iShortMonths -> h
+    java.lang.String[] iHalfday -> i
+    java.util.TreeMap iParseEras -> j
+    java.util.TreeMap iParseDaysOfWeek -> k
+    java.util.TreeMap iParseMonths -> l
+    int iMaxEraLength -> m
+    int iMaxDayOfWeekLength -> n
+    int iMaxShortDayOfWeekLength -> o
+    int iMaxMonthLength -> p
+    int iMaxShortMonthLength -> q
+    int iMaxHalfdayLength -> r
+    org.joda.time.chrono.GJLocaleSymbols forLocale(java.util.Locale) -> a
+    java.lang.String[] realignMonths(java.lang.String[]) -> a
+    java.lang.String[] realignDaysOfWeek(java.lang.String[]) -> b
+    void addSymbols(java.util.TreeMap,java.lang.String[],java.lang.Integer[]) -> a
+    void addNumerals(java.util.TreeMap,int,int,java.lang.Integer[]) -> a
+    int maxLength(java.lang.String[]) -> c
+    java.lang.String eraValueToText(int) -> a
+    int eraTextToValue(java.lang.String) -> a
+    int getEraMaxTextLength() -> a
+    java.lang.String monthOfYearValueToText(int) -> b
+    java.lang.String monthOfYearValueToShortText(int) -> c
+    int monthOfYearTextToValue(java.lang.String) -> b
+    int getMonthMaxTextLength() -> b
+    java.lang.String dayOfWeekValueToText(int) -> d
+    java.lang.String dayOfWeekValueToShortText(int) -> e
+    int dayOfWeekTextToValue(java.lang.String) -> c
+    int getDayOfWeekMaxTextLength() -> c
+    java.lang.String halfdayValueToText(int) -> f
+    int halfdayTextToValue(java.lang.String) -> d
+    int getHalfdayMaxTextLength() -> d
+org.joda.time.chrono.GJMonthOfYearDateTimeField -> org.a.a.b.q:
+    java.lang.String getAsText(int,java.util.Locale) -> a
+    java.lang.String getAsShortText(int,java.util.Locale) -> b
+    int convertText(java.lang.String,java.util.Locale) -> a
+    int getMaximumTextLength(java.util.Locale) -> a
+org.joda.time.chrono.GJYearOfEraDateTimeField -> org.a.a.b.r:
+    org.joda.time.chrono.BasicChronology iChronology -> a
+    int get(long) -> a
+    long add(long,int) -> a
+    long add(long,long) -> a
+    int getDifference(long,long) -> b
+    long getDifferenceAsLong(long,long) -> c
+    long set(long,int) -> b
+    int getMinimumValue() -> g
+    int getMaximumValue() -> h
+    long roundFloor(long) -> d
+    long roundCeiling(long) -> e
+    long remainder(long) -> i
+org.joda.time.chrono.GregorianChronology -> org.a.a.b.s:
+    org.joda.time.chrono.GregorianChronology INSTANCE_UTC -> a
+    java.util.Map cCache -> b
+    org.joda.time.chrono.GregorianChronology getInstanceUTC() -> Z
+    org.joda.time.chrono.GregorianChronology getInstance(org.joda.time.DateTimeZone) -> b
+    org.joda.time.chrono.GregorianChronology getInstance(org.joda.time.DateTimeZone,int) -> a
+    org.joda.time.Chronology withUTC() -> b
+    org.joda.time.Chronology withZone(org.joda.time.DateTimeZone) -> a
+    void assemble(org.joda.time.chrono.AssembledChronology$Fields) -> a
+    boolean isLeapYear(int) -> e
+    long calculateFirstDayOfYearMillis(int) -> f
+    int getMinYear() -> Q
+    int getMaxYear() -> R
+    long getAverageMillisPerYear() -> T
+    long getAverageMillisPerYearDividedByTwo() -> U
+    long getAverageMillisPerMonth() -> V
+    long getApproxMillisAtEpochDividedByTwo() -> W
+org.joda.time.chrono.ISOChronology -> org.a.a.b.t:
+    org.joda.time.chrono.ISOChronology INSTANCE_UTC -> a
+    org.joda.time.chrono.ISOChronology[] cFastCache -> b
+    java.util.Map cCache -> c
+    org.joda.time.chrono.ISOChronology getInstanceUTC() -> N
+    org.joda.time.chrono.ISOChronology getInstance() -> O
+    org.joda.time.chrono.ISOChronology getInstance(org.joda.time.DateTimeZone) -> b
+    org.joda.time.Chronology withUTC() -> b
+    org.joda.time.Chronology withZone(org.joda.time.DateTimeZone) -> a
+    java.lang.String toString() -> toString
+    void assemble(org.joda.time.chrono.AssembledChronology$Fields) -> a
+    boolean equals(java.lang.Object) -> equals
+    int hashCode() -> hashCode
+org.joda.time.chrono.ISOYearOfEraDateTimeField -> org.a.a.b.u:
+    org.joda.time.DateTimeField INSTANCE -> a
+    int get(long) -> a
+    long add(long,int) -> a
+    long add(long,long) -> a
+    int getDifference(long,long) -> b
+    long getDifferenceAsLong(long,long) -> c
+    long set(long,int) -> b
+    int getMinimumValue() -> g
+    int getMaximumValue() -> h
+    long roundFloor(long) -> d
+    long roundCeiling(long) -> e
+    long remainder(long) -> i
+org.joda.time.chrono.ZonedChronology -> org.a.a.b.v:
+    org.joda.time.chrono.ZonedChronology getInstance(org.joda.time.Chronology,org.joda.time.DateTimeZone) -> a
+    boolean useTimeArithmetic(org.joda.time.DurationField) -> a
+    org.joda.time.DateTimeZone getZone() -> a
+    org.joda.time.Chronology withUTC() -> b
+    org.joda.time.Chronology withZone(org.joda.time.DateTimeZone) -> a
+    void assemble(org.joda.time.chrono.AssembledChronology$Fields) -> a
+    org.joda.time.DurationField convertField(org.joda.time.DurationField,java.util.HashMap) -> a
+    org.joda.time.DateTimeField convertField(org.joda.time.DateTimeField,java.util.HashMap) -> a
+    boolean equals(java.lang.Object) -> equals
+    int hashCode() -> hashCode
+    java.lang.String toString() -> toString
+org.joda.time.chrono.ZonedChronology$ZonedDateTimeField -> org.a.a.b.w:
+    org.joda.time.DateTimeField iField -> a
+    org.joda.time.DateTimeZone iZone -> b
+    org.joda.time.DurationField iDurationField -> c
+    boolean iTimeField -> d
+    org.joda.time.DurationField iRangeDurationField -> e
+    org.joda.time.DurationField iLeapDurationField -> f
+    int get(long) -> a
+    java.lang.String getAsText(long,java.util.Locale) -> a
+    java.lang.String getAsShortText(long,java.util.Locale) -> b
+    java.lang.String getAsText(int,java.util.Locale) -> a
+    java.lang.String getAsShortText(int,java.util.Locale) -> b
+    long add(long,int) -> a
+    long add(long,long) -> a
+    long set(long,int) -> b
+    long set(long,java.lang.String,java.util.Locale) -> a
+    int getDifference(long,long) -> b
+    long getDifferenceAsLong(long,long) -> c
+    org.joda.time.DurationField getDurationField() -> d
+    org.joda.time.DurationField getRangeDurationField() -> e
+    boolean isLeap(long) -> b
+    org.joda.time.DurationField getLeapDurationField() -> f
+    long roundFloor(long) -> d
+    long roundCeiling(long) -> e
+    long remainder(long) -> i
+    int getMinimumValue() -> g
+    int getMaximumValue() -> h
+    int getMaximumValue(long) -> c
+    int getMaximumTextLength(java.util.Locale) -> a
+    int getOffsetToAdd(long) -> j
+org.joda.time.chrono.ZonedChronology$ZonedDurationField -> org.a.a.b.x:
+    org.joda.time.DurationField iField -> a
+    boolean iTimeField -> b
+    org.joda.time.DateTimeZone iZone -> c
+    boolean isPrecise() -> c
+    long getUnitMillis() -> d
+    long add(long,int) -> a
+    long add(long,long) -> a
+    int getDifference(long,long) -> b
+    long getDifferenceAsLong(long,long) -> c
+    int getOffsetToAdd(long) -> a
+    int getOffsetFromLocalToSubtract(long) -> b
+org.joda.time.field.AbstractReadableInstantFieldProperty -> org.a.a.c.a:
+    org.joda.time.DateTimeField getField() -> a
+    org.joda.time.DateTimeFieldType getFieldType() -> d
+    java.lang.String getName() -> e
+    long getMillis() -> b
+    org.joda.time.Chronology getChronology() -> c
+    int get() -> f
+    java.lang.String getAsText(java.util.Locale) -> a
+    java.lang.String getAsShortText(java.util.Locale) -> b
+    int getMinimumValueOverall() -> g
+    int getMaximumValueOverall() -> h
+    int getMaximumTextLength(java.util.Locale) -> c
+    boolean equals(java.lang.Object) -> equals
+    int hashCode() -> hashCode
+    java.lang.String toString() -> toString
+org.joda.time.field.BaseDateTimeField -> org.a.a.c.b:
+    org.joda.time.DateTimeFieldType iType -> a
+    org.joda.time.DateTimeFieldType getType() -> a
+    java.lang.String getName() -> b
+    boolean isSupported() -> c
+    int get(long) -> a
+    java.lang.String getAsText(long,java.util.Locale) -> a
+    java.lang.String getAsText(int,java.util.Locale) -> a
+    java.lang.String getAsShortText(long,java.util.Locale) -> b
+    java.lang.String getAsShortText(int,java.util.Locale) -> b
+    long add(long,int) -> a
+    long add(long,long) -> a
+    int getDifference(long,long) -> b
+    long getDifferenceAsLong(long,long) -> c
+    long set(long,int) -> b
+    long set(long,java.lang.String,java.util.Locale) -> a
+    int convertText(java.lang.String,java.util.Locale) -> a
+    org.joda.time.DurationField getDurationField() -> d
+    boolean isLeap(long) -> b
+    org.joda.time.DurationField getLeapDurationField() -> f
+    int getMaximumValue() -> h
+    int getMaximumValue(long) -> c
+    int getMaximumTextLength(java.util.Locale) -> a
+    long roundFloor(long) -> d
+    long roundCeiling(long) -> e
+    long roundHalfFloor(long) -> f
+    long roundHalfCeiling(long) -> g
+    long roundHalfEven(long) -> h
+    long remainder(long) -> i
+    java.lang.String toString() -> toString
+org.joda.time.field.BaseDurationField -> org.a.a.c.c:
+    org.joda.time.DurationFieldType iType -> a
+    org.joda.time.DurationFieldType getType() -> a
+    java.lang.String getName() -> e
+    boolean isSupported() -> b
+    int getDifference(long,long) -> b
+    int compareTo(org.joda.time.DurationField) -> a
+    java.lang.String toString() -> toString
+    int compareTo(java.lang.Object) -> compareTo
+org.joda.time.field.DecoratedDateTimeField -> org.a.a.c.d:
+    org.joda.time.DateTimeField iField -> a
+    org.joda.time.DateTimeField getWrappedField() -> i
+    int get(long) -> a
+    long set(long,int) -> b
+    org.joda.time.DurationField getDurationField() -> d
+    org.joda.time.DurationField getRangeDurationField() -> e
+    int getMinimumValue() -> g
+    int getMaximumValue() -> h
+    long roundFloor(long) -> d
+org.joda.time.field.DecoratedDurationField -> org.a.a.c.e:
+    org.joda.time.DurationField iField -> a
+    org.joda.time.DurationField getWrappedField() -> f
+    boolean isPrecise() -> c
+    long add(long,int) -> a
+    long add(long,long) -> a
+    long getDifferenceAsLong(long,long) -> c
+    long getUnitMillis() -> d
+org.joda.time.field.DividedDateTimeField -> org.a.a.c.f:
+    int iDivisor -> a
+    org.joda.time.DurationField iDurationField -> b
+    int iMin -> c
+    int iMax -> d
+    int get(long) -> a
+    long add(long,int) -> a
+    long add(long,long) -> a
+    int getDifference(long,long) -> b
+    long getDifferenceAsLong(long,long) -> c
+    long set(long,int) -> b
+    org.joda.time.DurationField getDurationField() -> d
+    int getMinimumValue() -> g
+    int getMaximumValue() -> h
+    long roundFloor(long) -> d
+    long remainder(long) -> i
+    int getRemainder(int) -> a
+org.joda.time.field.FieldUtils -> org.a.a.c.g:
+    int safeAdd(int,int) -> a
+    long safeAdd(long,long) -> a
+    long safeSubtract(long,long) -> b
+    long safeMultiply(long,int) -> a
+    long safeMultiply(long,long) -> c
+    int safeToInt(long) -> a
+    void verifyValueBounds(org.joda.time.DateTimeField,int,int,int) -> a
+    boolean equals(java.lang.Object,java.lang.Object) -> a
+org.joda.time.field.ImpreciseDateTimeField -> org.a.a.c.h:
+    long iUnitMillis -> b
+    org.joda.time.DurationField iDurationField -> a
+    long add(long,int) -> a
+    long add(long,long) -> a
+    int getDifference(long,long) -> b
+    long getDifferenceAsLong(long,long) -> c
+    org.joda.time.DurationField getDurationField() -> d
+org.joda.time.field.ImpreciseDateTimeField$LinkedDurationField -> org.a.a.c.i:
+    org.joda.time.field.ImpreciseDateTimeField this$0 -> a
+    boolean isPrecise() -> c
+    long getUnitMillis() -> d
+    long add(long,int) -> a
+    long add(long,long) -> a
+    int getDifference(long,long) -> b
+    long getDifferenceAsLong(long,long) -> c
+org.joda.time.field.MillisDurationField -> org.a.a.c.j:
+    org.joda.time.DurationField INSTANCE -> a
+    org.joda.time.DurationFieldType getType() -> a
+    boolean isSupported() -> b
+    boolean isPrecise() -> c
+    long getUnitMillis() -> d
+    long add(long,int) -> a
+    long add(long,long) -> a
+    int getDifference(long,long) -> b
+    long getDifferenceAsLong(long,long) -> c
+    int compareTo(org.joda.time.DurationField) -> a
+    boolean equals(java.lang.Object) -> equals
+    int hashCode() -> hashCode
+    java.lang.String toString() -> toString
+    int compareTo(java.lang.Object) -> compareTo
+org.joda.time.field.OffsetDateTimeField -> org.a.a.c.k:
+    int iOffset -> a
+    int iMin -> b
+    int iMax -> c
+    int get(long) -> a
+    long add(long,int) -> a
+    long add(long,long) -> a
+    long set(long,int) -> b
+    boolean isLeap(long) -> b
+    org.joda.time.DurationField getLeapDurationField() -> f
+    int getMinimumValue() -> g
+    int getMaximumValue() -> h
+    long roundFloor(long) -> d
+    long roundCeiling(long) -> e
+    long roundHalfFloor(long) -> f
+    long roundHalfCeiling(long) -> g
+    long roundHalfEven(long) -> h
+    long remainder(long) -> i
+org.joda.time.field.PreciseDateTimeField -> org.a.a.c.l:
+    int iRange -> b
+    org.joda.time.DurationField iRangeField -> c
+    int get(long) -> a
+    long set(long,int) -> b
+    org.joda.time.DurationField getRangeDurationField() -> e
+    int getMaximumValue() -> h
+org.joda.time.field.PreciseDurationDateTimeField -> org.a.a.c.m:
+    long iUnitMillis -> a
+    org.joda.time.DurationField iUnitField -> b
+    long set(long,int) -> b
+    long roundFloor(long) -> d
+    long roundCeiling(long) -> e
+    long remainder(long) -> i
+    org.joda.time.DurationField getDurationField() -> d
+    int getMinimumValue() -> g
+    long getUnitMillis() -> i
+    int getMaximumValueForSet(long,int) -> c
+org.joda.time.field.PreciseDurationField -> org.a.a.c.n:
+    long iUnitMillis -> a
+    boolean isPrecise() -> c
+    long getUnitMillis() -> d
+    long add(long,int) -> a
+    long add(long,long) -> a
+    long getDifferenceAsLong(long,long) -> c
+    boolean equals(java.lang.Object) -> equals
+    int hashCode() -> hashCode
+org.joda.time.field.RemainderDateTimeField -> org.a.a.c.o:
+    int iDivisor -> a
+    org.joda.time.DurationField iRangeField -> b
+    int get(long) -> a
+    long set(long,int) -> b
+    org.joda.time.DurationField getRangeDurationField() -> e
+    int getMinimumValue() -> g
+    int getMaximumValue() -> h
+    long roundFloor(long) -> d
+    long roundCeiling(long) -> e
+    long roundHalfFloor(long) -> f
+    long roundHalfCeiling(long) -> g
+    long roundHalfEven(long) -> h
+    long remainder(long) -> i
+    int getDivided(int) -> a
+org.joda.time.field.ScaledDurationField -> org.a.a.c.p:
+    int iScalar -> a
+    long add(long,int) -> a
+    long add(long,long) -> a
+    int getDifference(long,long) -> b
+    long getDifferenceAsLong(long,long) -> c
+    long getUnitMillis() -> d
+    boolean equals(java.lang.Object) -> equals
+    int hashCode() -> hashCode
+org.joda.time.field.UnsupportedDateTimeField -> org.a.a.c.q:
+    java.util.HashMap cCache -> a
+    org.joda.time.DateTimeFieldType iType -> b
+    org.joda.time.DurationField iDurationField -> c
+    org.joda.time.field.UnsupportedDateTimeField getInstance(org.joda.time.DateTimeFieldType,org.joda.time.DurationField) -> a
+    org.joda.time.DateTimeFieldType getType() -> a
+    java.lang.String getName() -> b
+    boolean isSupported() -> c
+    int get(long) -> a
+    java.lang.String getAsText(long,java.util.Locale) -> a
+    java.lang.String getAsText(int,java.util.Locale) -> a
+    java.lang.String getAsShortText(long,java.util.Locale) -> b
+    java.lang.String getAsShortText(int,java.util.Locale) -> b
+    long add(long,int) -> a
+    long add(long,long) -> a
+    int getDifference(long,long) -> b
+    long getDifferenceAsLong(long,long) -> c
+    long set(long,int) -> b
+    long set(long,java.lang.String,java.util.Locale) -> a
+    org.joda.time.DurationField getDurationField() -> d
+    org.joda.time.DurationField getRangeDurationField() -> e
+    boolean isLeap(long) -> b
+    org.joda.time.DurationField getLeapDurationField() -> f
+    int getMinimumValue() -> g
+    int getMaximumValue() -> h
+    int getMaximumValue(long) -> c
+    int getMaximumTextLength(java.util.Locale) -> a
+    long roundFloor(long) -> d
+    long roundCeiling(long) -> e
+    long roundHalfFloor(long) -> f
+    long roundHalfCeiling(long) -> g
+    long roundHalfEven(long) -> h
+    long remainder(long) -> i
+    java.lang.String toString() -> toString
+    java.lang.UnsupportedOperationException unsupported() -> i
+org.joda.time.field.UnsupportedDurationField -> org.a.a.c.r:
+    java.util.HashMap cCache -> a
+    org.joda.time.DurationFieldType iType -> b
+    org.joda.time.field.UnsupportedDurationField getInstance(org.joda.time.DurationFieldType) -> a
+    org.joda.time.DurationFieldType getType() -> a
+    java.lang.String getName() -> e
+    boolean isSupported() -> b
+    boolean isPrecise() -> c
+    long add(long,int) -> a
+    long add(long,long) -> a
+    int getDifference(long,long) -> b
+    long getDifferenceAsLong(long,long) -> c
+    long getUnitMillis() -> d
+    int compareTo(org.joda.time.DurationField) -> a
+    boolean equals(java.lang.Object) -> equals
+    int hashCode() -> hashCode
+    java.lang.String toString() -> toString
+    java.lang.UnsupportedOperationException unsupported() -> f
+    int compareTo(java.lang.Object) -> compareTo
+org.joda.time.field.ZeroIsMaxDateTimeField -> org.a.a.c.s:
+    int get(long) -> a
+    long add(long,int) -> a
+    long add(long,long) -> a
+    int getDifference(long,long) -> b
+    long getDifferenceAsLong(long,long) -> c
+    long set(long,int) -> b
+    boolean isLeap(long) -> b
+    org.joda.time.DurationField getLeapDurationField() -> f
+    int getMinimumValue() -> g
+    int getMaximumValue() -> h
+    int getMaximumValue(long) -> c
+    long roundFloor(long) -> d
+    long roundCeiling(long) -> e
+    long roundHalfFloor(long) -> f
+    long roundHalfCeiling(long) -> g
+    long roundHalfEven(long) -> h
+    long remainder(long) -> i
+org.joda.time.format.DateTimeFormat -> org.a.a.d.a:
+    java.util.Map cPatternedCache -> a
+    org.joda.time.format.DateTimeFormatter[] cStyleCache -> b
+    org.joda.time.format.DateTimeFormatter forPattern(java.lang.String) -> a
+    void parsePatternTo(org.joda.time.format.DateTimeFormatterBuilder,java.lang.String) -> a
+    java.lang.String parseToken(java.lang.String,int[]) -> a
+    boolean isNumericToken(java.lang.String) -> b
+    org.joda.time.format.DateTimeFormatter createFormatterForPattern(java.lang.String) -> c
+org.joda.time.format.DateTimeFormatter -> org.a.a.d.b:
+    org.joda.time.format.DateTimePrinter iPrinter -> a
+    org.joda.time.format.DateTimeParser iParser -> b
+    java.util.Locale iLocale -> c
+    boolean iOffsetParsed -> d
+    org.joda.time.Chronology iChrono -> e
+    org.joda.time.DateTimeZone iZone -> f
+    java.lang.Integer iPivotYear -> g
+    int iDefaultYear -> h
+    org.joda.time.format.DateTimePrinter getPrinter() -> a
+    org.joda.time.format.DateTimeParser getParser() -> b
+    org.joda.time.format.DateTimeFormatter withLocale(java.util.Locale) -> a
+    java.util.Locale getLocale() -> c
+    org.joda.time.format.DateTimeFormatter withChronology(org.joda.time.Chronology) -> a
+    void printTo(java.lang.StringBuffer,org.joda.time.ReadableInstant) -> a
+    java.lang.String print(org.joda.time.ReadableInstant) -> a
+    void printTo(java.lang.StringBuffer,long,org.joda.time.Chronology) -> a
+    org.joda.time.format.DateTimePrinter requirePrinter() -> d
+    long parseMillis(java.lang.String) -> a
+    org.joda.time.DateTime parseDateTime(java.lang.String) -> b
+    org.joda.time.format.DateTimeParser requireParser() -> e
+    org.joda.time.Chronology selectChronology(org.joda.time.Chronology) -> b
+org.joda.time.format.DateTimeFormatterBuilder -> org.a.a.d.c:
+    java.util.ArrayList iElementPairs -> a
+    java.lang.Object iFormatter -> b
+    org.joda.time.format.DateTimeFormatter toFormatter() -> a
+    org.joda.time.format.DateTimeFormatterBuilder append(org.joda.time.format.DateTimeFormatter) -> a
+    org.joda.time.format.DateTimeFormatterBuilder append0(java.lang.Object) -> a
+    org.joda.time.format.DateTimeFormatterBuilder append0(org.joda.time.format.DateTimePrinter,org.joda.time.format.DateTimeParser) -> a
+    org.joda.time.format.DateTimeFormatterBuilder appendLiteral(char) -> a
+    org.joda.time.format.DateTimeFormatterBuilder appendLiteral(java.lang.String) -> a
+    org.joda.time.format.DateTimeFormatterBuilder appendDecimal(org.joda.time.DateTimeFieldType,int,int) -> a
+    org.joda.time.format.DateTimeFormatterBuilder appendSignedDecimal(org.joda.time.DateTimeFieldType,int,int) -> b
+    org.joda.time.format.DateTimeFormatterBuilder appendText(org.joda.time.DateTimeFieldType) -> a
+    org.joda.time.format.DateTimeFormatterBuilder appendShortText(org.joda.time.DateTimeFieldType) -> b
+    org.joda.time.format.DateTimeFormatterBuilder appendFraction(org.joda.time.DateTimeFieldType,int,int) -> c
+    org.joda.time.format.DateTimeFormatterBuilder appendFractionOfSecond(int,int) -> a
+    org.joda.time.format.DateTimeFormatterBuilder appendSecondOfMinute(int) -> a
+    org.joda.time.format.DateTimeFormatterBuilder appendMinuteOfHour(int) -> b
+    org.joda.time.format.DateTimeFormatterBuilder appendHourOfDay(int) -> c
+    org.joda.time.format.DateTimeFormatterBuilder appendClockhourOfDay(int) -> d
+    org.joda.time.format.DateTimeFormatterBuilder appendHourOfHalfday(int) -> e
+    org.joda.time.format.DateTimeFormatterBuilder appendClockhourOfHalfday(int) -> f
+    org.joda.time.format.DateTimeFormatterBuilder appendDayOfWeek(int) -> g
+    org.joda.time.format.DateTimeFormatterBuilder appendDayOfMonth(int) -> h
+    org.joda.time.format.DateTimeFormatterBuilder appendDayOfYear(int) -> i
+    org.joda.time.format.DateTimeFormatterBuilder appendWeekOfWeekyear(int) -> j
+    org.joda.time.format.DateTimeFormatterBuilder appendWeekyear(int,int) -> b
+    org.joda.time.format.DateTimeFormatterBuilder appendMonthOfYear(int) -> k
+    org.joda.time.format.DateTimeFormatterBuilder appendYear(int,int) -> c
+    org.joda.time.format.DateTimeFormatterBuilder appendTwoDigitYear(int,boolean) -> a
+    org.joda.time.format.DateTimeFormatterBuilder appendTwoDigitWeekyear(int,boolean) -> b
+    org.joda.time.format.DateTimeFormatterBuilder appendYearOfEra(int,int) -> d
+    org.joda.time.format.DateTimeFormatterBuilder appendCenturyOfEra(int,int) -> e
+    org.joda.time.format.DateTimeFormatterBuilder appendHalfdayOfDayText() -> b
+    org.joda.time.format.DateTimeFormatterBuilder appendDayOfWeekText() -> c
+    org.joda.time.format.DateTimeFormatterBuilder appendDayOfWeekShortText() -> d
+    org.joda.time.format.DateTimeFormatterBuilder appendMonthOfYearText() -> e
+    org.joda.time.format.DateTimeFormatterBuilder appendMonthOfYearShortText() -> f
+    org.joda.time.format.DateTimeFormatterBuilder appendEraText() -> g
+    org.joda.time.format.DateTimeFormatterBuilder appendTimeZoneName() -> h
+    org.joda.time.format.DateTimeFormatterBuilder appendTimeZoneShortName() -> i
+    org.joda.time.format.DateTimeFormatterBuilder appendTimeZoneId() -> j
+    org.joda.time.format.DateTimeFormatterBuilder appendTimeZoneOffset(java.lang.String,boolean,int,int) -> a
+    org.joda.time.format.DateTimeFormatterBuilder appendTimeZoneOffset(java.lang.String,java.lang.String,boolean,int,int) -> a
+    java.lang.Object getFormatter() -> k
+    boolean isPrinter(java.lang.Object) -> b
+    boolean isParser(java.lang.Object) -> c
+    void appendUnknownString(java.lang.StringBuffer,int) -> a
+    void printUnknownString(java.io.Writer,int) -> a
+org.joda.time.format.DateTimeFormatterBuilder$CharacterLiteral -> org.a.a.d.d:
+    char iValue -> a
+    int estimatePrintedLength() -> a
+    void printTo(java.lang.StringBuffer,long,org.joda.time.Chronology,int,org.joda.time.DateTimeZone,java.util.Locale) -> a
+    int estimateParsedLength() -> b
+    int parseInto(org.joda.time.format.DateTimeParserBucket,java.lang.String,int) -> a
+org.joda.time.format.DateTimeFormatterBuilder$Composite -> org.a.a.d.e:
+    org.joda.time.format.DateTimePrinter[] iPrinters -> a
+    org.joda.time.format.DateTimeParser[] iParsers -> b
+    int iPrintedLengthEstimate -> c
+    int iParsedLengthEstimate -> d
+    int estimatePrintedLength() -> a
+    void printTo(java.lang.StringBuffer,long,org.joda.time.Chronology,int,org.joda.time.DateTimeZone,java.util.Locale) -> a
+    int estimateParsedLength() -> b
+    int parseInto(org.joda.time.format.DateTimeParserBucket,java.lang.String,int) -> a
+    boolean isPrinter() -> c
+    boolean isParser() -> d
+    void decompose(java.util.List,java.util.List,java.util.List) -> a
+    void addArrayToList(java.util.List,java.lang.Object[]) -> a
+org.joda.time.format.DateTimeFormatterBuilder$Fraction -> org.a.a.d.f:
+    org.joda.time.DateTimeFieldType iFieldType -> c
+    int iMinDigits -> a
+    int iMaxDigits -> b
+    int estimatePrintedLength() -> a
+    void printTo(java.lang.StringBuffer,long,org.joda.time.Chronology,int,org.joda.time.DateTimeZone,java.util.Locale) -> a
+    void printTo(java.lang.StringBuffer,java.io.Writer,long,org.joda.time.Chronology) -> a
+    long[] getFractionData(long,org.joda.time.DateTimeField) -> a
+    int estimateParsedLength() -> b
+    int parseInto(org.joda.time.format.DateTimeParserBucket,java.lang.String,int) -> a
+org.joda.time.format.DateTimeFormatterBuilder$NumberFormatter -> org.a.a.d.g:
+    org.joda.time.DateTimeFieldType iFieldType -> a
+    int iMaxParsedDigits -> b
+    boolean iSigned -> c
+    int estimateParsedLength() -> b
+    int parseInto(org.joda.time.format.DateTimeParserBucket,java.lang.String,int) -> a
+org.joda.time.format.DateTimeFormatterBuilder$PaddedNumber -> org.a.a.d.h:
+    int iMinPrintedDigits -> d
+    int estimatePrintedLength() -> a
+    void printTo(java.lang.StringBuffer,long,org.joda.time.Chronology,int,org.joda.time.DateTimeZone,java.util.Locale) -> a
+org.joda.time.format.DateTimeFormatterBuilder$StringLiteral -> org.a.a.d.i:
+    java.lang.String iValue -> a
+    int estimatePrintedLength() -> a
+    void printTo(java.lang.StringBuffer,long,org.joda.time.Chronology,int,org.joda.time.DateTimeZone,java.util.Locale) -> a
+    int estimateParsedLength() -> b
+    int parseInto(org.joda.time.format.DateTimeParserBucket,java.lang.String,int) -> a
+org.joda.time.format.DateTimeFormatterBuilder$TextField -> org.a.a.d.j:
+    java.util.Map cParseCache -> a
+    org.joda.time.DateTimeFieldType iFieldType -> b
+    boolean iShort -> c
+    int estimatePrintedLength() -> a
+    void printTo(java.lang.StringBuffer,long,org.joda.time.Chronology,int,org.joda.time.DateTimeZone,java.util.Locale) -> a
+    java.lang.String print(long,org.joda.time.Chronology,java.util.Locale) -> a
+    int estimateParsedLength() -> b
+    int parseInto(org.joda.time.format.DateTimeParserBucket,java.lang.String,int) -> a
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneId -> org.a.a.d.k:
+    org.joda.time.format.DateTimeFormatterBuilder$TimeZoneId INSTANCE -> a
+    java.util.Set ALL_IDS -> b
+    int MAX_LENGTH -> c
+    org.joda.time.format.DateTimeFormatterBuilder$TimeZoneId[] $VALUES -> d
+    org.joda.time.format.DateTimeFormatterBuilder$TimeZoneId[] values() -> values
+    org.joda.time.format.DateTimeFormatterBuilder$TimeZoneId valueOf(java.lang.String) -> valueOf
+    int estimatePrintedLength() -> a
+    void printTo(java.lang.StringBuffer,long,org.joda.time.Chronology,int,org.joda.time.DateTimeZone,java.util.Locale) -> a
+    int estimateParsedLength() -> b
+    int parseInto(org.joda.time.format.DateTimeParserBucket,java.lang.String,int) -> a
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneName -> org.a.a.d.l:
+    java.util.Map iParseLookup -> a
+    int iType -> b
+    int estimatePrintedLength() -> a
+    void printTo(java.lang.StringBuffer,long,org.joda.time.Chronology,int,org.joda.time.DateTimeZone,java.util.Locale) -> a
+    java.lang.String print(long,org.joda.time.DateTimeZone,java.util.Locale) -> a
+    int estimateParsedLength() -> b
+    int parseInto(org.joda.time.format.DateTimeParserBucket,java.lang.String,int) -> a
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset -> org.a.a.d.m:
+    java.lang.String iZeroOffsetPrintText -> a
+    java.lang.String iZeroOffsetParseText -> b
+    boolean iShowSeparators -> c
+    int iMinFields -> d
+    int iMaxFields -> e
+    int estimatePrintedLength() -> a
+    void printTo(java.lang.StringBuffer,long,org.joda.time.Chronology,int,org.joda.time.DateTimeZone,java.util.Locale) -> a
+    int estimateParsedLength() -> b
+    int parseInto(org.joda.time.format.DateTimeParserBucket,java.lang.String,int) -> a
+    int digitCount(java.lang.String,int,int) -> a
+org.joda.time.format.DateTimeFormatterBuilder$TwoDigitYear -> org.a.a.d.n:
+    org.joda.time.DateTimeFieldType iType -> a
+    int iPivot -> b
+    boolean iLenientParse -> c
+    int estimateParsedLength() -> b
+    int parseInto(org.joda.time.format.DateTimeParserBucket,java.lang.String,int) -> a
+    int estimatePrintedLength() -> a
+    void printTo(java.lang.StringBuffer,long,org.joda.time.Chronology,int,org.joda.time.DateTimeZone,java.util.Locale) -> a
+    int getTwoDigitYear(long,org.joda.time.Chronology) -> a
+org.joda.time.format.DateTimeFormatterBuilder$UnpaddedNumber -> org.a.a.d.o:
+    int estimatePrintedLength() -> a
+    void printTo(java.lang.StringBuffer,long,org.joda.time.Chronology,int,org.joda.time.DateTimeZone,java.util.Locale) -> a
+org.joda.time.format.DateTimeParser -> org.a.a.d.p:
+    int estimateParsedLength() -> b
+    int parseInto(org.joda.time.format.DateTimeParserBucket,java.lang.String,int) -> a
+org.joda.time.format.DateTimeParserBucket -> org.a.a.d.q:
+    org.joda.time.Chronology iChrono -> a
+    long iMillis -> b
+    org.joda.time.DateTimeZone iZone -> c
+    java.lang.Integer iOffset -> d
+    java.util.Locale iLocale -> e
+    java.lang.Integer iPivotYear -> f
+    int iDefaultYear -> g
+    org.joda.time.format.DateTimeParserBucket$SavedField[] iSavedFields -> h
+    int iSavedFieldsCount -> i
+    boolean iSavedFieldsShared -> j
+    java.lang.Object iSavedState -> k
+    org.joda.time.Chronology getChronology() -> a
+    java.util.Locale getLocale() -> b
+    org.joda.time.DateTimeZone getZone() -> c
+    void setZone(org.joda.time.DateTimeZone) -> a
+    java.lang.Integer getOffsetInteger() -> d
+    void setOffset(java.lang.Integer) -> a
+    java.lang.Integer getPivotYear() -> e
+    void saveField(org.joda.time.DateTimeField,int) -> a
+    void saveField(org.joda.time.DateTimeFieldType,int) -> a
+    void saveField(org.joda.time.DateTimeFieldType,java.lang.String,java.util.Locale) -> a
+    void saveField(org.joda.time.format.DateTimeParserBucket$SavedField) -> a
+    long computeMillis(boolean,java.lang.String) -> a
+    void sort(org.joda.time.format.DateTimeParserBucket$SavedField[],int) -> a
+    int compareReverse(org.joda.time.DurationField,org.joda.time.DurationField) -> a
+org.joda.time.format.DateTimeParserBucket$SavedField -> org.a.a.d.r:
+    org.joda.time.DateTimeField iField -> a
+    int iValue -> b
+    java.lang.String iText -> c
+    java.util.Locale iLocale -> d
+    long set(long,boolean) -> a
+    int compareTo(org.joda.time.format.DateTimeParserBucket$SavedField) -> a
+    int compareTo(java.lang.Object) -> compareTo
+org.joda.time.format.DateTimePrinter -> org.a.a.d.s:
+    int estimatePrintedLength() -> a
+    void printTo(java.lang.StringBuffer,long,org.joda.time.Chronology,int,org.joda.time.DateTimeZone,java.util.Locale) -> a
+org.joda.time.format.FormatUtils -> org.a.a.d.t:
+    double LOG_10 -> a
+    void appendPaddedInteger(java.lang.StringBuffer,int,int) -> a
+    void appendUnpaddedInteger(java.lang.StringBuffer,int) -> a
+    int calculateDigitCount(long) -> a
+    int parseTwoDigits(java.lang.String,int) -> a
+    java.lang.String createErrorMessage(java.lang.String,int) -> b
+org.joda.time.format.ISODateTimeFormat -> org.a.a.d.u:
+    org.joda.time.format.DateTimeFormatter ye -> a
+    org.joda.time.format.DateTimeFormatter mye -> b
+    org.joda.time.format.DateTimeFormatter dme -> c
+    org.joda.time.format.DateTimeFormatter hde -> d
+    org.joda.time.format.DateTimeFormatter mhe -> e
+    org.joda.time.format.DateTimeFormatter sme -> f
+    org.joda.time.format.DateTimeFormatter fse -> g
+    org.joda.time.format.DateTimeFormatter ze -> h
+    org.joda.time.format.DateTimeFormatter lte -> i
+    org.joda.time.format.DateTimeFormatter ymd -> j
+    org.joda.time.format.DateTimeFormatter hmsf -> k
+    org.joda.time.format.DateTimeFormatter t -> l
+    org.joda.time.format.DateTimeFormatter tt -> m
+    org.joda.time.format.DateTimeFormatter dt -> n
+    org.joda.time.format.DateTimeFormatter date() -> a
+    org.joda.time.format.DateTimeFormatter time() -> b
+    org.joda.time.format.DateTimeFormatter tTime() -> c
+    org.joda.time.format.DateTimeFormatter dateTime() -> d
+    org.joda.time.format.DateTimeFormatter yearMonthDay() -> e
+    org.joda.time.format.DateTimeFormatter hourMinuteSecondFraction() -> f
+    org.joda.time.format.DateTimeFormatter yearElement() -> g
+    org.joda.time.format.DateTimeFormatter monthElement() -> h
+    org.joda.time.format.DateTimeFormatter dayOfMonthElement() -> i
+    org.joda.time.format.DateTimeFormatter literalTElement() -> j
+    org.joda.time.format.DateTimeFormatter hourElement() -> k
+    org.joda.time.format.DateTimeFormatter minuteElement() -> l
+    org.joda.time.format.DateTimeFormatter secondElement() -> m
+    org.joda.time.format.DateTimeFormatter fractionElement() -> n
+    org.joda.time.format.DateTimeFormatter offsetElement() -> o
+org.joda.time.format.ISOPeriodFormat -> org.a.a.d.v:
+    org.joda.time.format.PeriodFormatter cStandard -> a
+    org.joda.time.format.PeriodFormatter standard() -> a
+org.joda.time.format.PeriodFormat -> org.a.a.d.w:
+    java.util.concurrent.ConcurrentMap FORMATTERS -> a
+    org.joda.time.format.PeriodFormatter getDefault() -> a
+    org.joda.time.format.PeriodFormatter wordBased(java.util.Locale) -> a
+org.joda.time.format.PeriodFormatter -> org.a.a.d.x:
+    org.joda.time.format.PeriodPrinter iPrinter -> a
+    org.joda.time.format.PeriodParser iParser -> b
+    java.util.Locale iLocale -> c
+    org.joda.time.PeriodType iParseType -> d
+    org.joda.time.format.PeriodPrinter getPrinter() -> a
+    org.joda.time.format.PeriodParser getParser() -> b
+    java.lang.String print(org.joda.time.ReadablePeriod) -> a
+    void checkPrinter() -> c
+    void checkPeriod(org.joda.time.ReadablePeriod) -> b
+org.joda.time.format.PeriodFormatterBuilder -> org.a.a.d.y:
+    int iMinPrintedDigits -> a
+    int iPrintZeroSetting -> b
+    int iMaxParsedDigits -> c
+    boolean iRejectSignedValues -> d
+    org.joda.time.format.PeriodFormatterBuilder$PeriodFieldAffix iPrefix -> e
+    java.util.List iElementPairs -> f
+    boolean iNotPrinter -> g
+    boolean iNotParser -> h
+    org.joda.time.format.PeriodFormatterBuilder$FieldFormatter[] iFieldFormatters -> i
+    org.joda.time.format.PeriodFormatter toFormatter() -> a
+    void clear() -> b
+    org.joda.time.format.PeriodFormatterBuilder appendLiteral(java.lang.String) -> a
+    org.joda.time.format.PeriodFormatterBuilder appendYears() -> c
+    org.joda.time.format.PeriodFormatterBuilder appendMonths() -> d
+    org.joda.time.format.PeriodFormatterBuilder appendWeeks() -> e
+    org.joda.time.format.PeriodFormatterBuilder appendDays() -> f
+    org.joda.time.format.PeriodFormatterBuilder appendHours() -> g
+    org.joda.time.format.PeriodFormatterBuilder appendMinutes() -> h
+    org.joda.time.format.PeriodFormatterBuilder appendSeconds() -> i
+    org.joda.time.format.PeriodFormatterBuilder appendSecondsWithOptionalMillis() -> j
+    org.joda.time.format.PeriodFormatterBuilder appendMillis() -> k
+    void appendField(int) -> a
+    void appendField(int,int) -> a
+    org.joda.time.format.PeriodFormatterBuilder appendSuffix(java.lang.String) -> b
+    org.joda.time.format.PeriodFormatterBuilder appendSuffix(java.lang.String,java.lang.String) -> a
+    org.joda.time.format.PeriodFormatterBuilder appendSuffix(org.joda.time.format.PeriodFormatterBuilder$PeriodFieldAffix) -> a
+    org.joda.time.format.PeriodFormatterBuilder appendSeparatorIfFieldsAfter(java.lang.String) -> c
+    org.joda.time.format.PeriodFormatterBuilder appendSeparator(java.lang.String,java.lang.String,java.lang.String[]) -> a
+    org.joda.time.format.PeriodFormatterBuilder appendSeparator(java.lang.String,java.lang.String,java.lang.String[],boolean,boolean) -> a
+    void clearPrefix() -> l
+    org.joda.time.format.PeriodFormatterBuilder append0(org.joda.time.format.PeriodPrinter,org.joda.time.format.PeriodParser) -> a
+    org.joda.time.format.PeriodFormatter toFormatter(java.util.List,boolean,boolean) -> a
+    java.lang.Object[] createComposite(java.util.List) -> a
+org.joda.time.format.PeriodFormatterBuilder$Composite -> org.a.a.d.z:
+    org.joda.time.format.PeriodPrinter[] iPrinters -> a
+    org.joda.time.format.PeriodParser[] iParsers -> b
+    int countFieldsToPrint(org.joda.time.ReadablePeriod,int,java.util.Locale) -> a
+    int calculatePrintedLength(org.joda.time.ReadablePeriod,java.util.Locale) -> a
+    void printTo(java.lang.StringBuffer,org.joda.time.ReadablePeriod,java.util.Locale) -> a
+    void decompose(java.util.List,java.util.List,java.util.List) -> a
+    void addArrayToList(java.util.List,java.lang.Object[]) -> a
+org.joda.time.format.PeriodFormatterBuilder$CompositeAffix -> org.a.a.d.aa:
+    org.joda.time.format.PeriodFormatterBuilder$PeriodFieldAffix iLeft -> a
+    org.joda.time.format.PeriodFormatterBuilder$PeriodFieldAffix iRight -> b
+    int calculatePrintedLength(int) -> a
+    void printTo(java.lang.StringBuffer,int) -> a
+org.joda.time.format.PeriodFormatterBuilder$FieldFormatter -> org.a.a.d.ab:
+    int iMinPrintedDigits -> a
+    int iPrintZeroSetting -> b
+    int iMaxParsedDigits -> c
+    boolean iRejectSignedValues -> d
+    int iFieldType -> e
+    org.joda.time.format.PeriodFormatterBuilder$FieldFormatter[] iFieldFormatters -> f
+    org.joda.time.format.PeriodFormatterBuilder$PeriodFieldAffix iPrefix -> g
+    org.joda.time.format.PeriodFormatterBuilder$PeriodFieldAffix iSuffix -> h
+    int countFieldsToPrint(org.joda.time.ReadablePeriod,int,java.util.Locale) -> a
+    int calculatePrintedLength(org.joda.time.ReadablePeriod,java.util.Locale) -> a
+    void printTo(java.lang.StringBuffer,org.joda.time.ReadablePeriod,java.util.Locale) -> a
+    long getFieldValue(org.joda.time.ReadablePeriod) -> a
+    boolean isZero(org.joda.time.ReadablePeriod) -> b
+    boolean isSupported(org.joda.time.PeriodType,int) -> a
+    int getFieldType() -> a
+org.joda.time.format.PeriodFormatterBuilder$Literal -> org.a.a.d.ac:
+    org.joda.time.format.PeriodFormatterBuilder$Literal EMPTY -> a
+    java.lang.String iText -> b
+    int countFieldsToPrint(org.joda.time.ReadablePeriod,int,java.util.Locale) -> a
+    int calculatePrintedLength(org.joda.time.ReadablePeriod,java.util.Locale) -> a
+    void printTo(java.lang.StringBuffer,org.joda.time.ReadablePeriod,java.util.Locale) -> a
+org.joda.time.format.PeriodFormatterBuilder$PeriodFieldAffix -> org.a.a.d.ad:
+    int calculatePrintedLength(int) -> a
+    void printTo(java.lang.StringBuffer,int) -> a
+org.joda.time.format.PeriodFormatterBuilder$PluralAffix -> org.a.a.d.ae:
+    java.lang.String iSingularText -> a
+    java.lang.String iPluralText -> b
+    int calculatePrintedLength(int) -> a
+    void printTo(java.lang.StringBuffer,int) -> a
+org.joda.time.format.PeriodFormatterBuilder$Separator -> org.a.a.d.af:
+    java.lang.String iText -> a
+    java.lang.String iFinalText -> b
+    java.lang.String[] iParsedForms -> c
+    boolean iUseBefore -> d
+    boolean iUseAfter -> e
+    org.joda.time.format.PeriodPrinter iBeforePrinter -> f
+    org.joda.time.format.PeriodPrinter iAfterPrinter -> g
+    org.joda.time.format.PeriodParser iBeforeParser -> h
+    org.joda.time.format.PeriodParser iAfterParser -> i
+    int countFieldsToPrint(org.joda.time.ReadablePeriod,int,java.util.Locale) -> a
+    int calculatePrintedLength(org.joda.time.ReadablePeriod,java.util.Locale) -> a
+    void printTo(java.lang.StringBuffer,org.joda.time.ReadablePeriod,java.util.Locale) -> a
+    org.joda.time.format.PeriodFormatterBuilder$Separator finish(org.joda.time.format.PeriodPrinter,org.joda.time.format.PeriodParser) -> a
+    org.joda.time.format.PeriodParser access$000(org.joda.time.format.PeriodFormatterBuilder$Separator) -> a
+    org.joda.time.format.PeriodPrinter access$100(org.joda.time.format.PeriodFormatterBuilder$Separator) -> b
+org.joda.time.format.PeriodFormatterBuilder$SimpleAffix -> org.a.a.d.ag:
+    java.lang.String iText -> a
+    int calculatePrintedLength(int) -> a
+    void printTo(java.lang.StringBuffer,int) -> a
+org.joda.time.format.PeriodParser -> org.a.a.d.ah:
+org.joda.time.format.PeriodPrinter -> org.a.a.d.ai:
+    int calculatePrintedLength(org.joda.time.ReadablePeriod,java.util.Locale) -> a
+    int countFieldsToPrint(org.joda.time.ReadablePeriod,int,java.util.Locale) -> a
+    void printTo(java.lang.StringBuffer,org.joda.time.ReadablePeriod,java.util.Locale) -> a
+org.joda.time.tz.CachedDateTimeZone -> org.a.a.e.a:
+    int cInfoCacheMask -> b
+    org.joda.time.DateTimeZone iZone -> c
+    org.joda.time.tz.CachedDateTimeZone$Info[] iInfoCache -> d
+    org.joda.time.tz.CachedDateTimeZone forZone(org.joda.time.DateTimeZone) -> a
+    java.lang.String getNameKey(long) -> a
+    int getOffset(long) -> b
+    boolean isFixed() -> d
+    long nextTransition(long) -> e
+    long previousTransition(long) -> f
+    int hashCode() -> hashCode
+    boolean equals(java.lang.Object) -> equals
+    org.joda.time.tz.CachedDateTimeZone$Info getInfo(long) -> g
+    org.joda.time.tz.CachedDateTimeZone$Info createInfo(long) -> h
+org.joda.time.tz.CachedDateTimeZone$Info -> org.a.a.e.b:
+    long iPeriodStart -> a
+    org.joda.time.DateTimeZone iZoneRef -> b
+    org.joda.time.tz.CachedDateTimeZone$Info iNextInfo -> c
+    java.lang.String iNameKey -> d
+    int iOffset -> e
+    int iStandardOffset -> f
+    java.lang.String getNameKey(long) -> a
+    int getOffset(long) -> b
+org.joda.time.tz.DateTimeZoneBuilder -> org.a.a.e.c:
+    org.joda.time.DateTimeZone readFrom(java.io.InputStream,java.lang.String) -> a
+    org.joda.time.DateTimeZone readFrom(java.io.DataInput,java.lang.String) -> a
+    long readMillis(java.io.DataInput) -> a
+org.joda.time.tz.DateTimeZoneBuilder$DSTZone -> org.a.a.e.d:
+    int iStandardOffset -> b
+    org.joda.time.tz.DateTimeZoneBuilder$Recurrence iStartRecurrence -> c
+    org.joda.time.tz.DateTimeZoneBuilder$Recurrence iEndRecurrence -> d
+    org.joda.time.tz.DateTimeZoneBuilder$DSTZone readFrom(java.io.DataInput,java.lang.String) -> a
+    java.lang.String getNameKey(long) -> a
+    int getOffset(long) -> b
+    boolean isFixed() -> d
+    long nextTransition(long) -> e
+    long previousTransition(long) -> f
+    boolean equals(java.lang.Object) -> equals
+    org.joda.time.tz.DateTimeZoneBuilder$Recurrence findMatchingRecurrence(long) -> g
+org.joda.time.tz.DateTimeZoneBuilder$OfYear -> org.a.a.e.e:
+    char iMode -> a
+    int iMonthOfYear -> b
+    int iDayOfMonth -> c
+    int iDayOfWeek -> d
+    boolean iAdvance -> e
+    int iMillisOfDay -> f
+    org.joda.time.tz.DateTimeZoneBuilder$OfYear readFrom(java.io.DataInput) -> a
+    long next(long,int,int) -> a
+    long previous(long,int,int) -> b
+    boolean equals(java.lang.Object) -> equals
+    long setDayOfMonthNext(org.joda.time.Chronology,long) -> a
+    long setDayOfMonthPrevious(org.joda.time.Chronology,long) -> b
+    long setDayOfMonth(org.joda.time.Chronology,long) -> c
+    long setDayOfWeek(org.joda.time.Chronology,long) -> d
+org.joda.time.tz.DateTimeZoneBuilder$PrecalculatedZone -> org.a.a.e.f:
+    long[] iTransitions -> b
+    int[] iWallOffsets -> c
+    int[] iStandardOffsets -> d
+    java.lang.String[] iNameKeys -> e
+    org.joda.time.tz.DateTimeZoneBuilder$DSTZone iTailZone -> f
+    org.joda.time.tz.DateTimeZoneBuilder$PrecalculatedZone readFrom(java.io.DataInput,java.lang.String) -> a
+    java.lang.String getNameKey(long) -> a
+    int getOffset(long) -> b
+    boolean isFixed() -> d
+    long nextTransition(long) -> e
+    long previousTransition(long) -> f
+    boolean equals(java.lang.Object) -> equals
+org.joda.time.tz.DateTimeZoneBuilder$Recurrence -> org.a.a.e.g:
+    org.joda.time.tz.DateTimeZoneBuilder$OfYear iOfYear -> a
+    java.lang.String iNameKey -> b
+    int iSaveMillis -> c
+    org.joda.time.tz.DateTimeZoneBuilder$Recurrence readFrom(java.io.DataInput) -> a
+    long next(long,int,int) -> a
+    long previous(long,int,int) -> b
+    java.lang.String getNameKey() -> a
+    int getSaveMillis() -> b
+    boolean equals(java.lang.Object) -> equals
+org.joda.time.tz.DefaultNameProvider -> org.a.a.e.h:
+    java.util.HashMap iByLocaleCache -> a
+    java.lang.String getShortName(java.util.Locale,java.lang.String,java.lang.String) -> a
+    java.lang.String getName(java.util.Locale,java.lang.String,java.lang.String) -> b
+    java.lang.String[] getNameSet(java.util.Locale,java.lang.String,java.lang.String) -> c
+    java.util.HashMap createCache() -> a
+org.joda.time.tz.FixedDateTimeZone -> org.a.a.e.i:
+    java.lang.String iNameKey -> b
+    int iWallOffset -> c
+    int iStandardOffset -> d
+    java.lang.String getNameKey(long) -> a
+    int getOffset(long) -> b
+    int getOffsetFromLocal(long) -> c
+    boolean isFixed() -> d
+    long nextTransition(long) -> e
+    long previousTransition(long) -> f
+    boolean equals(java.lang.Object) -> equals
+    int hashCode() -> hashCode
+org.joda.time.tz.NameProvider -> org.a.a.e.j:
+    java.lang.String getShortName(java.util.Locale,java.lang.String,java.lang.String) -> a
+    java.lang.String getName(java.util.Locale,java.lang.String,java.lang.String) -> b
+org.joda.time.tz.Provider -> org.a.a.e.k:
+    org.joda.time.DateTimeZone getZone(java.lang.String) -> a
+    java.util.Set getAvailableIDs() -> a
+org.joda.time.tz.UTCProvider -> org.a.a.e.l:
+    org.joda.time.DateTimeZone getZone(java.lang.String) -> a
+    java.util.Set getAvailableIDs() -> a
+org.joda.time.tz.ZoneInfoProvider -> org.a.a.e.m:
+    java.io.File iFileDir -> a
+    java.lang.String iResourcePath -> b
+    java.lang.ClassLoader iLoader -> c
+    java.util.Map iZoneInfoMap -> d
+    org.joda.time.DateTimeZone getZone(java.lang.String) -> a
+    java.util.Set getAvailableIDs() -> a
+    void uncaughtException(java.lang.Exception) -> a
+    java.io.InputStream openResource(java.lang.String) -> b
+    org.joda.time.DateTimeZone loadZoneData(java.lang.String) -> c
+    java.util.Map loadZoneInfoMap(java.io.InputStream) -> a
+    void readZoneInfoMap(java.io.DataInputStream,java.util.Map) -> a
+org.jonblack.bluetrack.BluetoothClassLookup -> org.jonblack.bluetrack.a:
+    boolean $assertionsDisabled -> a
+    int getIconId(int,int) -> a
+    int getMajorIconId(int) -> a
+    int getMinorIconId(int) -> b
 org.jonblack.bluetrack.activities.DevicesFragment -> org.jonblack.bluetrack.activities.a:
-    android.widget.SimpleCursorAdapter mAdapter -> a
+    org.jonblack.bluetrack.adapters.DeviceCursorAdapter mAdapter -> a
     android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     void onDestroyView() -> onDestroyView
     void onActivityCreated(android.os.Bundle) -> onActivityCreated
@@ -936,7 +2532,7 @@ org.jonblack.bluetrack.activities.LiveTrackingFragment -> org.jonblack.bluetrack
     android.content.Intent mBluetoothLogServiceIntent -> b
     boolean mTracking -> c
     long mSessionId -> d
-    android.widget.SimpleCursorAdapter mAdapter -> e
+    org.jonblack.bluetrack.adapters.LiveTrackingCursorAdapter mAdapter -> e
     android.content.BroadcastReceiver mBtStateChangedReceiver -> f
     boolean $assertionsDisabled -> a
     android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
@@ -978,7 +2574,7 @@ org.jonblack.bluetrack.activities.MainActivity$TabListener -> org.jonblack.bluet
     void onTabUnselected(android.app.ActionBar$Tab,android.app.FragmentTransaction) -> onTabUnselected
     void onTabReselected(android.app.ActionBar$Tab,android.app.FragmentTransaction) -> onTabReselected
 org.jonblack.bluetrack.activities.SessionFragment -> org.jonblack.bluetrack.activities.f:
-    android.widget.SimpleCursorAdapter mAdapter -> a
+    org.jonblack.bluetrack.adapters.SessionCursorAdapter mAdapter -> a
     android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     void onDestroyView() -> onDestroyView
     void onActivityCreated(android.os.Bundle) -> onActivityCreated
@@ -986,13 +2582,30 @@ org.jonblack.bluetrack.activities.SessionFragment -> org.jonblack.bluetrack.acti
     void onLoadFinished(android.content.Loader,android.database.Cursor) -> a
     void onLoaderReset(android.content.Loader) -> onLoaderReset
     void onLoadFinished(android.content.Loader,java.lang.Object) -> onLoadFinished
+org.jonblack.bluetrack.activities.SettingsActivity -> org.jonblack.bluetrack.activities.SettingsActivity:
+    void onCreate(android.os.Bundle) -> onCreate
+org.jonblack.bluetrack.activities.SettingsFragment -> org.jonblack.bluetrack.activities.g:
+    android.preference.EditTextPreference mScanDelayPreference -> a
+    void onCreate(android.os.Bundle) -> onCreate
+    void onResume() -> onResume
+    void onPause() -> onPause
+    void onSharedPreferenceChanged(android.content.SharedPreferences,java.lang.String) -> onSharedPreferenceChanged
+org.jonblack.bluetrack.adapters.DeviceCursorAdapter -> org.jonblack.bluetrack.a.a:
+    void bindView(android.view.View,android.content.Context,android.database.Cursor) -> bindView
+    android.view.View newView(android.content.Context,android.database.Cursor,android.view.ViewGroup) -> newView
+org.jonblack.bluetrack.adapters.LiveTrackingCursorAdapter -> org.jonblack.bluetrack.a.b:
+    void bindView(android.view.View,android.content.Context,android.database.Cursor) -> bindView
+    android.view.View newView(android.content.Context,android.database.Cursor,android.view.ViewGroup) -> newView
+org.jonblack.bluetrack.adapters.SessionCursorAdapter -> org.jonblack.bluetrack.a.c:
+    boolean $assertionsDisabled -> a
+    android.view.View newView(android.content.Context,android.database.Cursor,android.view.ViewGroup) -> newView
+    void bindView(android.view.View,android.content.Context,android.database.Cursor) -> bindView
 org.jonblack.bluetrack.services.BluetoothLogService -> org.jonblack.bluetrack.services.BluetoothLogService:
-    int PERIODIC_EVENT_TIMEOUT -> b
-    android.os.Handler mPeriodicEventHandler -> c
-    android.bluetooth.BluetoothAdapter mLocalBtAdapter -> d
-    long mSessionId -> e
-    android.content.BroadcastReceiver mBtDiscoveryReceiver -> f
-    java.lang.Runnable doPeriodicTask -> g
+    android.os.Handler mPeriodicEventHandler -> b
+    android.bluetooth.BluetoothAdapter mLocalBtAdapter -> c
+    long mSessionId -> d
+    android.content.BroadcastReceiver mBtDiscoveryReceiver -> e
+    java.lang.Runnable doPeriodicTask -> f
     boolean $assertionsDisabled -> a
     void onCreate() -> onCreate
     void onDestroy() -> onDestroy
@@ -1003,10 +2616,11 @@ org.jonblack.bluetrack.services.BluetoothLogService -> org.jonblack.bluetrack.se
     long access$2(org.jonblack.bluetrack.services.BluetoothLogService) -> c
     android.bluetooth.BluetoothAdapter access$3(org.jonblack.bluetrack.services.BluetoothLogService) -> d
 org.jonblack.bluetrack.services.BluetoothLogService$1 -> org.jonblack.bluetrack.services.a:
+    java.util.Date discoveryDate -> b
     org.jonblack.bluetrack.services.BluetoothLogService this$0 -> a
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
-    long addDevice(android.bluetooth.BluetoothDevice) -> a
-    void addDeviceDiscovery(long) -> a
+    long addDevice(android.bluetooth.BluetoothDevice,android.bluetooth.BluetoothClass) -> a
+    void addDeviceDiscovery(long,short) -> a
 org.jonblack.bluetrack.services.BluetoothLogService$2 -> org.jonblack.bluetrack.services.b:
     org.jonblack.bluetrack.services.BluetoothLogService this$0 -> a
     void run() -> run
@@ -1028,11 +2642,13 @@ org.jonblack.bluetrack.storage.DeviceDiscoveryTable -> org.jonblack.bluetrack.st
     boolean $assertionsDisabled -> b
     void onCreate(android.database.sqlite.SQLiteDatabase) -> a
     void onUpgrade(android.database.sqlite.SQLiteDatabase,int,int) -> a
+    void upgradeF1T2(android.database.sqlite.SQLiteDatabase) -> b
 org.jonblack.bluetrack.storage.DeviceTable -> org.jonblack.bluetrack.storage.c:
     android.net.Uri CONTENT_URI -> a
     boolean $assertionsDisabled -> b
     void onCreate(android.database.sqlite.SQLiteDatabase) -> a
     void onUpgrade(android.database.sqlite.SQLiteDatabase,int,int) -> a
+    void upgradeF2T3(android.database.sqlite.SQLiteDatabase) -> b
 org.jonblack.bluetrack.storage.SessionTable -> org.jonblack.bluetrack.storage.d:
     android.net.Uri CONTENT_URI -> a
     boolean $assertionsDisabled -> b
