@@ -22,11 +22,14 @@ public class DeviceCursorAdapter extends CursorAdapter
   @Override
   public void bindView(View view, Context context, Cursor cursor)
   {
-    ImageView ivClass = (ImageView) view.findViewById(R.id.device_row_class);
-    int idClass = cursor.getColumnIndexOrThrow("major_class");
-    final int majorClass = cursor.getInt(idClass);
+    int colIdMajorClass = cursor.getColumnIndexOrThrow("major_class");
+    final int majorClass = cursor.getInt(colIdMajorClass);
+    int colIdMinorClass = cursor.getColumnIndexOrThrow("minor_class");
+    final int minorClass = cursor.getInt(colIdMinorClass);
     
-    int classIconId = BluetoothClassLookup.getMajorIconId(majorClass);
+    int classIconId = BluetoothClassLookup.getIconId(majorClass, minorClass);
+    
+    ImageView ivClass = (ImageView) view.findViewById(R.id.device_row_class);
     ivClass.setImageResource(classIconId);
     
     TextView tvMac = (TextView) view.findViewById(R.id.device_row_mac);
