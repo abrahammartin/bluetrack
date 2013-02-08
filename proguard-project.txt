@@ -24,3 +24,7 @@
     public static *** d(...);
     public static *** v(...);
 }
+
+# Disable joda-time warnings; should use joda-convert as well I suppose.
+-dontwarn org.joda.convert.FromString
+-dontwarn org.joda.convert.ToString

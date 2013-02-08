@@ -45,13 +45,49 @@ android.support.v4.view.ViewPager: void setPageMarginDrawable(int)
 android.support.v4.view.ViewPager: void setScrollingCacheEnabled(boolean)
 android.support.v4.view.ViewPager$SavedState
 android.support.v4.view.ViewPager$SavedState: android.os.Parcelable$Creator CREATOR
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneId: org.joda.time.format.DateTimeFormatterBuilder$TimeZoneId[] values()
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneId: org.joda.time.format.DateTimeFormatterBuilder$TimeZoneId valueOf(java.lang.String)
+org.jonblack.bluetrack.R$drawable: int bt_audio_video
+org.jonblack.bluetrack.R$drawable: int bt_audio_video_camcorder
+org.jonblack.bluetrack.R$drawable: int bt_audio_video_hifi_audio
+org.jonblack.bluetrack.R$drawable: int bt_audio_video_microphone
+org.jonblack.bluetrack.R$drawable: int bt_audio_video_portable_audio
+org.jonblack.bluetrack.R$drawable: int bt_audio_video_video_conferencing
+org.jonblack.bluetrack.R$drawable: int bt_computer
+org.jonblack.bluetrack.R$drawable: int bt_computer_handheld_pc_pda
+org.jonblack.bluetrack.R$drawable: int bt_computer_server
+org.jonblack.bluetrack.R$drawable: int bt_health
+org.jonblack.bluetrack.R$drawable: int bt_imaging
+org.jonblack.bluetrack.R$drawable: int bt_misc
+org.jonblack.bluetrack.R$drawable: int bt_networking
+org.jonblack.bluetrack.R$drawable: int bt_peripheral
+org.jonblack.bluetrack.R$drawable: int bt_phone
+org.jonblack.bluetrack.R$drawable: int bt_toy
+org.jonblack.bluetrack.R$drawable: int bt_uncategorized
+org.jonblack.bluetrack.R$drawable: int bt_wearable
+org.jonblack.bluetrack.R$drawable: int bt_wearable_helmet
 org.jonblack.bluetrack.R$drawable: int logo
+org.jonblack.bluetrack.R$id: int device_row_class
+org.jonblack.bluetrack.R$id: int device_row_mac
+org.jonblack.bluetrack.R$id: int device_row_name
+org.jonblack.bluetrack.R$id: int live_tracking_row_class
+org.jonblack.bluetrack.R$id: int live_tracking_row_mac
+org.jonblack.bluetrack.R$id: int live_tracking_row_name
+org.jonblack.bluetrack.R$id: int live_tracking_signal_strength
+org.jonblack.bluetrack.R$id: int menu_settings
 org.jonblack.bluetrack.R$id: int menu_toggle_tracking
+org.jonblack.bluetrack.R$id: int session_row_duration
+org.jonblack.bluetrack.R$id: int session_row_start_date_time
 org.jonblack.bluetrack.R$id: int tab_fragment_container
-org.jonblack.bluetrack.R$layout: int devices_list
+org.jonblack.bluetrack.R$layout: int device_list
+org.jonblack.bluetrack.R$layout: int device_list_row
 org.jonblack.bluetrack.R$layout: int live_tracking_list
+org.jonblack.bluetrack.R$layout: int live_tracking_list_row
 org.jonblack.bluetrack.R$layout: int main_activity
+org.jonblack.bluetrack.R$layout: int session_list
+org.jonblack.bluetrack.R$layout: int session_list_row
 org.jonblack.bluetrack.R$menu: int action_bar
+org.jonblack.bluetrack.R$string: int ab_settings
 org.jonblack.bluetrack.R$string: int ab_start_tracking
 org.jonblack.bluetrack.R$string: int ab_stop_tracking
 org.jonblack.bluetrack.R$string: int ab_tab_devices
@@ -59,16 +95,25 @@ org.jonblack.bluetrack.R$string: int ab_tab_live_tracking
 org.jonblack.bluetrack.R$string: int ab_tab_sessions
 org.jonblack.bluetrack.R$string: int app_name
 org.jonblack.bluetrack.R$string: int button_exit
+org.jonblack.bluetrack.R$string: int device_row_class_desc
+org.jonblack.bluetrack.R$string: int devices_list_empty
 org.jonblack.bluetrack.R$string: int error_bluetooth_not_supported
 org.jonblack.bluetrack.R$string: int live_tracking_off_list_empty
 org.jonblack.bluetrack.R$string: int live_tracking_on_list_empty
+org.jonblack.bluetrack.R$string: int live_tracking_row_class_desc
 org.jonblack.bluetrack.R$string: int notification_tracking
+org.jonblack.bluetrack.R$string: int pref_tracking_scan_delay
+org.jonblack.bluetrack.R$string: int pref_tracking_title
+org.jonblack.bluetrack.R$string: int session_list_empty
 org.jonblack.bluetrack.R$string: int toast_tracking_started
 org.jonblack.bluetrack.R$string: int toast_tracking_stopped
 org.jonblack.bluetrack.R$style: int AppBaseTheme
 org.jonblack.bluetrack.R$style: int AppTheme
+org.jonblack.bluetrack.R$xml: int preferences
 org.jonblack.bluetrack.activities.MainActivity
 org.jonblack.bluetrack.activities.MainActivity: MainActivity()
+org.jonblack.bluetrack.activities.SettingsActivity
+org.jonblack.bluetrack.activities.SettingsActivity: SettingsActivity()
 org.jonblack.bluetrack.services.BluetoothLogService
 org.jonblack.bluetrack.services.BluetoothLogService: BluetoothLogService()
 org.jonblack.bluetrack.storage.BluetrackContentProvider
