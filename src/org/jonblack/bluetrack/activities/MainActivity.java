@@ -20,12 +20,12 @@ package org.jonblack.bluetrack.activities;
 
 import org.jonblack.bluetrack.R;
 
-import android.app.ActionBar;
-import android.app.ActionBar.Tab;
-import android.app.Activity;
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.ActionBar.Tab;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import android.app.AlertDialog;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -35,7 +35,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 
-public class MainActivity extends Activity
+public class MainActivity extends SherlockFragmentActivity
 {
   private static final String TAG = "MainActivity";
   
@@ -80,7 +80,7 @@ public class MainActivity extends Activity
     
     Resources r = getResources();
     
-    ActionBar actionBar = getActionBar();
+    ActionBar actionBar = getSupportActionBar();
     actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
     
     ActionBar.Tab tab1 = actionBar.newTab().setText(r.getText(R.string.ab_tab_live_tracking));
@@ -116,7 +116,7 @@ public class MainActivity extends Activity
   {
     super.onSaveInstanceState(outState);
     
-    ActionBar actionBar = getActionBar();
+    ActionBar actionBar = getSupportActionBar();
     outState.putInt("selectedTabIdx", actionBar.getSelectedNavigationIndex());
   }
   
@@ -128,7 +128,7 @@ public class MainActivity extends Activity
     // Restore selected tab
     Log.d(TAG, "Restoring selected tab.");
     int selectedTabIdx = savedInstanceState.getInt("selectedTabIdx", 0);
-    getActionBar().setSelectedNavigationItem(selectedTabIdx);
+    getSupportActionBar().setSelectedNavigationItem(selectedTabIdx);
   }
   
   /**
@@ -147,17 +147,17 @@ public class MainActivity extends Activity
   // See http://developer.android.com/reference/android/app/ActionBar.html#newTab%28%29
   public static class TabListener<T extends Fragment> implements ActionBar.TabListener
   {
-    private final Activity mActivity;
+    private final SherlockFragmentActivity mActivity;
     private final String mTag;
     private final Class<T> mClass;
     private final Bundle mArgs;
     private Fragment mFragment;
     
-    public TabListener(Activity activity, String tag, Class<T> clz) {
+    public TabListener(SherlockFragmentActivity activity, String tag, Class<T> clz) {
         this(activity, tag, clz, null);
     }
     
-    public TabListener(Activity activity, String tag, Class<T> clz, Bundle args)
+    public TabListener(SherlockFragmentActivity activity, String tag, Class<T> clz, Bundle args)
     {
       mActivity = activity;
       mTag = tag;
@@ -167,10 +167,10 @@ public class MainActivity extends Activity
       // Check to see if we already have a fragment for this tab, probably
       // from a previously saved state.  If so, deactivate it, because our
       // initial state is that a tab isn't shown.
-      mFragment = mActivity.getFragmentManager().findFragmentByTag(mTag);
+      mFragment = mActivity.getSupportFragmentManager().findFragmentByTag(mTag);
       if (mFragment != null && !mFragment.isDetached())
       {
-        FragmentTransaction ft = mActivity.getFragmentManager().beginTransaction();
+        FragmentTransaction ft = mActivity.getSupportFragmentManager().beginTransaction();
         ft.detach(mFragment);
         ft.commit();
       }

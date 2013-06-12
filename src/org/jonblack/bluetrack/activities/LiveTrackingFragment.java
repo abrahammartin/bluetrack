@@ -28,18 +28,18 @@ import org.jonblack.bluetrack.storage.DeviceTable;
 import org.jonblack.bluetrack.storage.SessionTable;
 
 import android.app.Activity;
-import android.app.ListFragment;
-import android.app.LoaderManager;
+import android.support.v4.app.ListFragment;
+import android.support.v4.app.LoaderManager;
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.CursorLoader;
+import android.support.v4.content.CursorLoader;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.Loader;
+import android.support.v4.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -239,7 +239,7 @@ public class LiveTrackingFragment extends ListFragment
     toast.show();
     
     // Cause the action bar menu to be updated so the button text can change.
-    getActivity().invalidateOptionsMenu();
+    // getActivity().invalidateOptionsMenu();
     
     // Prepare the loader. Either re-connect with an existing one, or start a
     // new one.
@@ -270,7 +270,7 @@ public class LiveTrackingFragment extends ListFragment
     }
     
     // Cause the action bar menu to be updated so the button text can change.
-    getActivity().invalidateOptionsMenu();
+    // getActivity().invalidateOptionsMenu();
     
     // Set the empty list view text
     TextView tv = (TextView) getActivity().findViewById(android.R.id.empty);

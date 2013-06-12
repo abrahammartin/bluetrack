@@ -123,7 +123,7 @@ public class BluetrackContentProvider extends ContentProvider
       throw new IllegalArgumentException("Unknown URI: " + uri);
     }
     
-    String sql = qb.buildQuery(projection, selection, null, null, sortOrder,
+    String sql = qb.buildQuery(projection, selection, null, null, null, sortOrder,
                                null);
     Log.v(TAG, "SQL: " + sql);
     
