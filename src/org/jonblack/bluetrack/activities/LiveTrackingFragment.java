@@ -28,7 +28,6 @@ import org.jonblack.bluetrack.storage.DeviceTable;
 import org.jonblack.bluetrack.storage.SessionTable;
 
 import android.app.Activity;
-import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
@@ -45,15 +44,18 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+
+import com.actionbarsherlock.app.SherlockListFragment;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class LiveTrackingFragment extends ListFragment
+public class LiveTrackingFragment extends SherlockListFragment
                                   implements LoaderManager.LoaderCallbacks<Cursor>
 {
   private static final String TAG = "LiveTrackingFragment";
@@ -237,10 +239,7 @@ public class LiveTrackingFragment extends ListFragment
                                  getString(R.string.toast_tracking_started),
                                  Toast.LENGTH_SHORT);
     toast.show();
-    
-    // Cause the action bar menu to be updated so the button text can change.
-    // getActivity().invalidateOptionsMenu();
-    
+        
     // Prepare the loader. Either re-connect with an existing one, or start a
     // new one.
     getLoaderManager().initLoader(0, null, this);
@@ -261,17 +260,14 @@ public class LiveTrackingFragment extends ListFragment
     if (mTracking)
     {
       Log.d(TAG, "Stopping BluetoothLogService.");
-      getActivity().stopService(mBluetoothLogServiceIntent);
+      ((SherlockFragmentActivity) getActivity()).stopService(mBluetoothLogServiceIntent);
       
       Toast toast = Toast.makeText(getActivity(),
                                    getString(R.string.toast_tracking_stopped),
                                    Toast.LENGTH_SHORT);
       toast.show();
     }
-    
-    // Cause the action bar menu to be updated so the button text can change.
-    // getActivity().invalidateOptionsMenu();
-    
+        
     // Set the empty list view text
     TextView tv = (TextView) getActivity().findViewById(android.R.id.empty);
     tv.setText(R.string.live_tracking_off_list_empty);
@@ -280,18 +276,16 @@ public class LiveTrackingFragment extends ListFragment
     finalizeSession();
     
     // Destroy the loader. This is no longer needed.
-    getLoaderManager(). destroyLoader(0);
+    getLoaderManager().destroyLoader(0);
     
     mTracking = false;
   }
   
-  @Override
   public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
   {
     inflater.inflate(R.menu.action_bar, menu);
   }
   
-  @Override
   public void onPrepareOptionsMenu(Menu menu)
   {
     // Set the button text depending on the service state.
@@ -306,7 +300,6 @@ public class LiveTrackingFragment extends ListFragment
     }
   }
   
-  @Override
   public boolean onOptionsItemSelected(MenuItem item)
   {
     // TODO: Bit odd that the LiveTrackingFragment is responsible for this.
@@ -335,6 +328,10 @@ public class LiveTrackingFragment extends ListFragment
           startBluetoothLogService();
         }
       }
+      
+      // Cause the action bar menu to be updated so the button text can change.    
+      ((SherlockFragmentActivity) getActivity()).invalidateOptionsMenu();
+      
       break;
     case R.id.menu_settings:
       Intent intent = new Intent(getActivity(), SettingsActivity.class);

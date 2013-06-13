@@ -21,7 +21,8 @@ import org.jonblack.bluetrack.R;
 import org.jonblack.bluetrack.adapters.DeviceCursorAdapter;
 import org.jonblack.bluetrack.storage.DeviceTable;
 
-import android.support.v4.app.ListFragment;
+import com.actionbarsherlock.app.SherlockListFragment;
+
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -31,7 +32,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class DevicesFragment extends ListFragment
+public class DevicesFragment extends SherlockListFragment
                              implements LoaderManager.LoaderCallbacks<Cursor>
 {
   /**

@@ -143,7 +143,7 @@ public class MainActivity extends SherlockFragmentActivity
     setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     startActivity(setIntent);
   }
-  
+    
   // See http://developer.android.com/reference/android/app/ActionBar.html#newTab%28%29
   public static class TabListener<T extends Fragment> implements ActionBar.TabListener
   {
@@ -200,5 +200,6 @@ public class MainActivity extends SherlockFragmentActivity
     public void onTabReselected(Tab tab, FragmentTransaction ft)
     {
     }
+    
   }
 }

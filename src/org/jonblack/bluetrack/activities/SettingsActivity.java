@@ -2,14 +2,15 @@ package org.jonblack.bluetrack.activities;
 
 import org.jonblack.bluetrack.R;
 
+import com.actionbarsherlock.app.SherlockPreferenceActivity;
+
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 
-public class SettingsActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener
+public class SettingsActivity extends SherlockPreferenceActivity implements OnSharedPreferenceChangeListener
 {
 	  private EditTextPreference mScanDelayPreference;
 	  
