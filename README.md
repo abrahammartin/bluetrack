@@ -7,7 +7,7 @@ devices, which overtime might reveal interesting patterns.
 Install
 =======
 
-Legacy Bluetrack can be download from github and compiled with Eclipse. It requires Android SDK API 10.
+Legacy Bluetrack can be download from github and compiled with Eclipse. It requires Android SDK API 10 and the actionbarsherlock library (http://actionbarsherlock.com/) inside the project as a dependency.
 
 Bugs and Feature requests
 =========================
@@ -21,7 +21,7 @@ https://github.com/abrahammartin/legacy_bluetrack.
 Copyright and Licensing
 =======================
 
-Legacy Bluetrack and Bluetrack is licensed under the GPL3. For more information, see LICENSE.
+Legacy Bluetrack and Bluetrack are licensed under the GPL3. For more information, see LICENSE.
 
 The following icons are from the Gnome desktop project and used according to
 the terms of the GPL:
