@@ -16,7 +16,7 @@ Please submit all bugs and feature requests via the github project page at
 https://github.com/jonblack/bluetrack.
 
 Bugs of the legacy version to:
-https://github.com/abrahammartin/bluetrack.
+https://github.com/abrahammartin/legacy_bluetrack.
 
 Copyright and Licensing
 =======================
