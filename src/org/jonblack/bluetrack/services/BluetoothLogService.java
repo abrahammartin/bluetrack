@@ -167,7 +167,7 @@ public class BluetoothLogService extends Service
         // Reset the periodic handler
         Log.d(TAG, String.format("Set handler to discover again in %d ms.",
                                  scanDelay * 1000));
-        mPeriodicEventHandler.postDelayed(doPeriodicTask, scanDelay * 5000);
+        mPeriodicEventHandler.postDelayed(doPeriodicTask, scanDelay * 1000);
         
         // Reset the discovery date
         discoveryDate = null;

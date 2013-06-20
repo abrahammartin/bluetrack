@@ -42,6 +42,7 @@ import android.support.v4.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 
@@ -84,6 +85,11 @@ public class LiveTrackingFragment extends SherlockListFragment
    * LiveTrackingCursorAdapter used by the list view to get data.
    */
   private LiveTrackingCursorAdapter mAdapter;
+
+  /**
+   * PowerManager WakeLock used to prevent device going to sleep
+   */
+  private PowerManager.WakeLock wl;
   
   /**
    * Receiver used when bluetooth device status has changed.
@@ -134,6 +140,9 @@ public class LiveTrackingFragment extends SherlockListFragment
     Log.d(TAG, "onActivityCreated");
     
     super.onActivityCreated(savedInstanceState);
+    
+    PowerManager pm = (PowerManager) getActivity().getSystemService(Context.POWER_SERVICE);
+    wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "Bluetrack");
     
     // Restore state
     if (savedInstanceState != null)
@@ -249,6 +258,8 @@ public class LiveTrackingFragment extends SherlockListFragment
     tv.setText(R.string.live_tracking_on_list_empty);
     
     mTracking = true;
+    
+    wl.acquire();
   }
   
   /**
@@ -279,6 +290,8 @@ public class LiveTrackingFragment extends SherlockListFragment
     getLoaderManager().destroyLoader(0);
     
     mTracking = false;
+    
+    wl.release();
   }
   
   public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
